@@ -1,0 +1,18 @@
+{
+  "schema_version": "agentspectesting.given-evidence-source-selection/v0.2",
+  "selection_id": "tau_airline_source_v2_boundary_pilot",
+  "packet_ids": [
+    "GIVEN-SOURCE-V2::aa1f039e44b8a54d::S01",
+    "GIVEN-SOURCE-V2::526a44955a505212::S01",
+    "GIVEN-SOURCE-V2::2f723f14538c85d6::S01",
+    "GIVEN-SOURCE-V2::e5a91e44f2c9303c::S01",
+    "GIVEN-SOURCE-V2::e60dbb9af1156966::S01",
+    "GIVEN-SOURCE-V2::be5d69bc5bc088be::S01",
+    "GIVEN-SOURCE-V2::a1da4c9520259e3c::S01",
+    "GIVEN-SOURCE-V2::8109ed8f3a976806::S01",
+    "GIVEN-SOURCE-V2::026a047fa3fef269::S01",
+    "GIVEN-SOURCE-V2::6cb9f347b0c1ade8::S01",
+    "GIVEN-SOURCE-V2::787fe6fb9ead2de1::S01",
+    "GIVEN-SOURCE-V2::0e647afce85764b2::S01"
+  ]
+}

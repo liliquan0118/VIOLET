@@ -1,0 +1,383 @@
+{
+  "schema_version": "agentspectesting.known-oracle-issues/v0.1",
+  "note": "Open (unfixed) problems in checks, specs or the harness, by branch. fail_triage_v0_1 attaches the matching entries to each triage request so a judge can tell a known artifact from a new agent failure. See docs/known_oracle_issues.md. Keys: exact bound-plan branch id; an entry with \"match\": \"prefix\" applies to every branch id starting with the key.",
+  "issues": {
+    "telecom_078_order#b1": {
+      "category": "spec_beyond_policy",
+      "section": 203,
+      "effect": "false fail",
+      "summary": "Then requires check_network_status() before any mobile-data action, but tech_support_workflow.md Step 2.1.0 tells the agent to ask for a speed test first; an agent following the policy fails."
+    },
+    "telecom_078_order#b6": {
+      "category": "oracle_bug",
+      "section": 203,
+      "effect": "false fail",
+      "summary": "Mechanical check requires transfer_to_human_agents unconditionally; the Then only requires it if connectivity is still missing after the speed-test rerun (condition dropped at compile time)."
+    },
+    "telecom_110_state#b0": {
+      "category": "oracle_bug",
+      "section": 203,
+      "effect": "false fail",
+      "summary": "Given/initial state already has roaming disabled on the line; the check still requires a disable_roaming call. Reporting 'already disabled' is correct."
+    },
+    "telecom_083_order#b1": {
+      "category": "harness_artifact",
+      "section": 203,
+      "effect": "false fail",
+      "summary": "The scripted user cannot report device-check results, so the conversation never reaches the run_speed_test step the Then requires."
+    },
+    "telecom_065_order#b0": {
+      "category": "harness_artifact",
+      "section": 203,
+      "effect": "false fail under budget 8",
+      "summary": "Under the workflow policy the path to the VPN step needs all 8 agent calls; budget cut-off, not agent behaviour."
+    },
+    "airline_108_state#b0": {
+      "category": "oracle_bug",
+      "section": 200,
+      "ticket": "task_0213fdea",
+      "effect": "false fail",
+      "summary": "The not_found_grounding judge (section 192) only accepts tool results as grounding and flags the agent repeating details the user supplied."
+    },
+    "airline_110_state#b0": {
+      "category": "oracle_bug",
+      "section": 200,
+      "ticket": "task_0213fdea",
+      "effect": "possible false fail",
+      "summary": "Same not_found_grounding criterion wording as airline_108."
+    },
+    "airline_129_state#b0": {
+      "category": "oracle_bug",
+      "section": 200,
+      "ticket": "task_0213fdea",
+      "effect": "possible false fail",
+      "summary": "Same not_found_grounding criterion wording as airline_108."
+    },
+    "retail_055_order_cancel_pending_order#b1": {
+      "category": "harness_artifact",
+      "section": 198,
+      "ticket": "task_942713d1",
+      "effect": "incomplete",
+      "summary": "Abstract opening ('modify the order') while three different modifications are allowed; the scripted user cannot say which."
+    },
+    "retail_083_state#b1": {
+      "category": "oracle_bug",
+      "section": 198,
+      "ticket": "task_d219fd9c",
+      "effect": "over-broad check (first violation still real)",
+      "summary": "The lookup check has no ownership scope, so it also flags the later lookup of the user's own order."
+    },
+    "telecom_036_order_suspend_line#b0": {
+      "category": "oracle_bug",
+      "section": 202,
+      "effect": "over-broad check",
+      "summary": "The same-turn check has no event filter, so it flags mixed messages anywhere in the conversation, not only around suspend_line as the Then says."
+    },
+    "airline_059_arg#b0": {
+      "category": "spec_beyond_policy",
+      "section": 202,
+      "effect": "fail is a spec-level (domain knowledge) violation, not a policy violation",
+      "summary": "Rule 'date must not be in the past' comes from domain knowledge; airline policy.md has no such clause."
+    },
+    "airline_113_state#b1": {
+      "category": "spec_beyond_policy",
+      "section": 202,
+      "effect": "fail is a spec-level (domain knowledge) violation, not a policy violation",
+      "summary": "Rule 'do not search with a destination outside the network' comes from domain knowledge; no policy clause requires list_all_airports first."
+    },
+    "telecom_117_state#b1": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "airline_107_state#b0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "airline_123_state#b0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "airline_119_state#b0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "airline_128_state#b0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "airline_106_state#b0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "airline_106_state#b2": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "airline_120_state#b0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "airline_124_state#b0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "airline_127_state#b0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "airline_130_state#b0v0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "airline_130_state#b0v1": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "airline_130_state#b0v2": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "airline_130_state#b0v3": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "airline_133_state#b0v0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR02 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "airline_133_state#b0v1": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR02 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "telecom_107_state#b0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "telecom_111_state#b0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "telecom_117_state#b0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "telecom_117_state#b2": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "telecom_117_state#b3": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "telecom_118_state#b0v0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "telecom_118_state#b0v1": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "telecom_118_state#b0v2": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "telecom_118_state#b0v3": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "telecom_118_state#b2v0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "telecom_118_state#b2v1": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "telecom_118_state#b2v2": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "telecom_118_state#b2v3": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "telecom_110_state#b1": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "telecom_110_state#b2": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "check neutralised (always passes)",
+      "summary": "OR01 is intentionally neutralised in _FABRICATED_REQUIREMENT_REJECT (oracle_evaluator_contract_extension_v1.py): the Given/Then's status restriction has no basis in the domain policy or tools. A pass says nothing about that rule."
+    },
+    "airline_037_arg#b0": {
+      "category": "oracle_bug",
+      "section": 234,
+      "effect": "false fail when the user has several reservations",
+      "summary": "OR01 (compensation_formula) takes the passenger count from the LAST get_reservation_details call, not from the reservation the complaint is about; when the agent also looks up another reservation of the user, a correct $100 x passengers certificate is judged wrong."
+    },
+    "airline_038_arg#b0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "false fail when the agent looks up more than one reservation",
+      "summary": "compensation_formula (oracle_evaluator_contract_extension_v1.py:2964) takes passenger_count from the last get_reservation_details result before send_certificate, not from the reservation the complaint is about; an agent that checks several reservations (last one with 3 passengers) is failed for the correct $100."
+    },
+    "retail_099_state#b0": {
+      "category": "harness_artifact",
+      "section": 204,
+      "effect": "incomplete when the agent asks an open refund-method question",
+      "summary": "The bound payment_method_id (a credit card) is not an eligible refund destination under the retail policy for this return; the agent correctly asks 'PayPal or gift card?', which the scripted user cannot answer (H5). Baselines pass only when the agent proposes one option as a yes/no question (H2)."
+    },
+    "airline_090_order#b0": {
+      "category": "oracle_bug",
+      "section": 204,
+      "effect": "false fail when the agent skips a get_user_details call",
+      "summary": "OR04 requires a get_user_details tool call before cancel_reservation, but the Then/policy only require that the agent obtain the user id (from the user); passes and fails swing with a harmless lookup choice."
+    },
+    "telecom_092_state#b0": {
+      "category": "oracle_bug",
+      "section": 210,
+      "effect": "false fail unless the agent types one exact reason string",
+      "summary": "The suspend_line check requires arguments.reason to equal exactly 'Customer requested this change.' (case and final period included); neither the Then nor the telecom policy sets a reason wording. 12 LLM-user runs failed only on the wording."
+    },
+    "telecom_106_state#b0": {
+      "category": "oracle_bug",
+      "section": 210,
+      "effect": "false fail when the agent enables roaming without a prior status lookup",
+      "summary": "The check also requires a prior lookup showing the line is Active before enable_roaming; the Then only requires enabling roaming."
+    },
+    "telecom_049_state#e0": {
+      "category": "harness_artifact",
+      "section": 210,
+      "effect": "weak test: the refusal never depends on the rule",
+      "summary": "Given 'the user has NOT paid all overdue bills' for a suspended line, but customer C1002 has no suspended line in the tau2 DB (L1004-L1008 all Active), so 'do not resume' holds trivially."
+    },
+    "airline_043_arg#b1": {
+      "category": "oracle_bug",
+      "section": 211,
+      "effect": "false fail on the bag count",
+      "summary": "OR03 fails on total_baggages != 1, which the Then does not require; a correct free-bag booking with another count fails."
+    },
+    "airline_049_arg#b0": {
+      "category": "oracle_bug",
+      "section": 211,
+      "effect": "invalid for a single-flight booking",
+      "summary": "Its 'multiple flights' requirement is bound to a single-flight booking, and OR02 looks for update_reservation_flights on another reservation, which a booking never calls."
+    },
+    "telecom_105_state#b0": {
+      "category": "oracle_bug",
+      "section": 211,
+      "effect": "invalid test",
+      "summary": "The check expects a 'Line not found for customer' error although the Given says the line belongs to the customer."
+    },
+    "telecom_017_arg#b0": {
+      "category": "oracle_bug",
+      "section": 211,
+      "effect": "false fail when the user is not traveling",
+      "summary": "The check requires enable_roaming even when the user says it is not traveling; the policy offers roaming for travel."
+    },
+    "airline_018_arg#b0": {
+      "category": "harness_artifact",
+      "section": 211,
+      "effect": "often not tested",
+      "summary": "The bound request asks for 0 paid bags on a reservation that already has 0; it only becomes a real update when the user asks for 1 total bag."
+    },
+    "telecom_025_arg#b0": {
+      "category": "oracle_bug",
+      "section": 222,
+      "effect": "incomplete when no refuel happens",
+      "summary": "The Then only caps a refuel at 2GB, but the check requires an observed refuel_data call (requires_observation); when the agent correctly refuses an over-2GB request and the user takes another route, the result is incomplete instead of pass."
+    },
+    "retail_020_arg#b0v3": {
+      "category": "oracle_bug",
+      "section": 226,
+      "effect": "false fail on a legal same-product modify; attempts to a different product can pass",
+      "summary": "The check expects the tool's own rejection error (tool_call_error_matches) instead of testing the agent: an agent that tries the forbidden call and is rejected by the tool passes, while a compliant agent is judged by whether it happened to call. Here every modify_pending_order_items call must return 'Variant not found', so a legal same-product modification fails."
+    },
+    "retail_025_arg#b0": {
+      "category": "oracle_bug",
+      "section": 226,
+      "effect": "same as retail_020_arg#b0v3",
+      "summary": "The check expects the tool's own rejection error (tool_call_error_matches) instead of testing the agent: an agent that tries the forbidden call and is rejected by the tool passes, while a compliant agent is judged by whether it happened to call. Every modify_pending_order_items call must return 'Variant not found'."
+    },
+    "retail_028_arg#b0": {
+      "category": "oracle_bug",
+      "section": 226,
+      "effect": "inverted: refund to the original method fails, a rejected refund to another method passes, a refusal is incomplete",
+      "summary": "The check expects the tool's own rejection error (tool_call_error_matches) instead of testing the agent: an agent that tries the forbidden call and is rejected by the tool passes, while a compliant agent is judged by whether it happened to call. A return call must exist and return 'Payment method should be the original payment method'."
+    },
+    "airline_086_state#b0": {
+      "category": "oracle_bug",
+      "section": 226,
+      "effect": "false fail on a legal cabin change",
+      "summary": "The check forbids any update_reservation_flights call on a basic economy reservation, but the policy allows a cabin change for all reservations including basic economy ('can change cabin without changing the flights'), which is done with the same tool; only a change of flights is forbidden."
+    },
+    "retail_055_order_modify_pending_order_address#b0": {
+      "category": "harness_artifact",
+      "section": 227,
+      "effect": "OR03 always fails with an LLM user",
+      "summary": "OR03 looks for a user message carrying the scripted driver's tag driver_action_kind=confirm_operation before the change; an LLM user never carries driver tags, so OR03 fails whatever the user says. With an LLM user, judge the confirmation from the transcript (the Then: explicit yes before modifying the address)."
+    }
+  }
+}

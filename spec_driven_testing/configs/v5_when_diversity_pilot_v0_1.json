@@ -1,0 +1,12 @@
+{
+  "schema_version": "agentspectesting.v5-when-kind-expansion-selection/v0.1",
+  "branch_ids": [
+    "airline_011_arg#b0",
+    "airline_098_state#e0",
+    "airline_110_state#b0"
+  ],
+  "max_calls": 3,
+  "selection_purpose": "Small source-reviewed sample beyond the repeatedly used cancellation branch; selection is not a semantic label or statistical representativeness claim.",
+  "reuse_reviewed_branches": false,
+  "automatic_followup_calls": false
+}

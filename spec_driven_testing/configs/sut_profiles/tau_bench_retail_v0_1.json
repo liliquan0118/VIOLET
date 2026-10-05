@@ -1,0 +1,78 @@
+{
+  "schema_version": "agentspectesting.sut-adapter-profile/v0.1",
+  "profile_id": "tau-bench-retail/v0.1",
+  "sut": "tau_bench",
+  "domain": "retail",
+  "fixture_operations": [
+    "enumerate_entities",
+    "read_initial_state",
+    "construct_initial_state_patch",
+    "validate_tau_task"
+  ],
+  "observable_channels": [
+    "environment_snapshot",
+    "tool_call",
+    "tool_result",
+    "user_message",
+    "assistant_message",
+    "terminal_state"
+  ],
+  "controllable_channels": [
+    "initial_state_patch",
+    "user_message"
+  ],
+  "runtime_observation_catalog": {
+    "fact_request_phrases": {
+      "order_id": [
+        "could you provide the order id, it starts with a # like #W0000000",
+        "can you confirm the order number for me",
+        "what's the order id you'd like to cancel or modify",
+        "please share the order id, for example #W0000000"
+      ],
+      "payment_method_id": [
+        "which payment method would you like to use for this",
+        "how would you like to receive the refund for the price difference, gift card or the original payment method",
+        "can you tell me which payment method on file to charge or refund",
+        "which of your payment methods, such as your gift card or credit card, should I use"
+      ],
+      "user_id": [
+        "could you provide your user id",
+        "can I get the email associated with your account to verify your identity",
+        "could you give me your first and last name along with your zip code so I can verify your identity",
+        "what is your user id, for example 'sara_doe_496'"
+      ]
+    },
+    "confirmation_request_phrases": [
+      "let me list the details of this action, can you confirm these are correct and reply yes to proceed",
+      "to confirm, you'd like me to go ahead with this, is that correct",
+      "shall I proceed with this change",
+      "can you confirm you'd like me to proceed with this action",
+      "please reply yes so I can proceed with the update"
+    ],
+    "refusal_phrases": [
+      "I'm sorry, this order is not pending, so it can't be cancelled or modified",
+      "I can't process this because the order hasn't been delivered yet",
+      "that reason isn't one I can accept, it must be either 'no longer needed' or 'ordered by mistake'",
+      "I'm unable to help with an order that isn't associated with your account",
+      "I'm sorry, but this request is outside of what I'm able to do for you"
+    ],
+    "transfer_phrases": [
+      "you are being transferred to a human agent. please hold on.",
+      "let me transfer you to a human agent for this",
+      "this is outside what I can help with, so I'll connect you with a human agent",
+      "I'll transfer you to a human representative for further assistance",
+      "I'm not able to handle this request, let me get you connected to a human agent"
+    ]
+  },
+  "scalar_resolutions": {
+    "duration": {
+      "value": 1,
+      "unit": "second",
+      "basis": "tau_bench_retail_timestamp_serialization"
+    }
+  },
+  "fixture_binding_catalog": {
+    "observation_bindings": [],
+    "semantic_predicate_bindings": []
+  }
+}

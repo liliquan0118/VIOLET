@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.then-atomization-response-set/v0.1",
+  "title": "Saved Responses for GWT Then Atomization",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "responses"],
+  "properties": {
+    "schema_version": {"const": "agentspectesting.then-atomization-response-set/v0.1"},
+    "responses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["branch_id", "source_alignment", "predicate_partition", "claim_inventory"],
+        "properties": {
+          "branch_id": {"type": "string", "minLength": 1},
+          "source_alignment": {"type": "object"},
+          "predicate_partition": {"type": "object"},
+          "claim_inventory": {"type": "object"}
+        }
+      }
+    }
+  }
+}

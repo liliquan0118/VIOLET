@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.driver-action/v0.1",
+  "title": "AgentSpecTesting DriverAction",
+  "type": "object",
+  "required": ["schema_version", "action_kind", "fact_names"],
+  "properties": {
+    "schema_version": {"const": "agentspectesting.driver-action/v0.1"},
+    "action_kind": {
+      "enum": [
+        "request_target_operation",
+        "provide_user_id",
+        "provide_reservation_id",
+        "provide_operation_reason",
+        "provide_initial_request_bundle",
+        "provide_request_and_first_fact",
+        "provide_remaining_facts",
+        "confirm_operation",
+        "wait_for_agent",
+        "stop"
+      ]
+    },
+    "fact_names": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": false
+}

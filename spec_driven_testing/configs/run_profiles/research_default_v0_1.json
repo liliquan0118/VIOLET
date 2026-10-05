@@ -1,0 +1,11 @@
+{
+  "schema_version": "agentspectesting.run-configuration/v0.1",
+  "configuration_id": "research-default/v0.1",
+  "budgets": {
+    "max_fixture_candidates": 100,
+    "max_state_patches": 5,
+    "max_dialogue_turns": 12,
+    "max_recovery_actions": 2,
+    "max_model_calls": 30
+  }
+}

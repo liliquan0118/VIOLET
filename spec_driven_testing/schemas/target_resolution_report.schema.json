@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.target-resolution-report/v0.1",
+  "title": "Multi-axis Target Resolution Report",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "source_record_fingerprint",
+    "source_branch_id",
+    "abstract_evaluation_target",
+    "legacy_resolution_identity",
+    "policy_lineage_report",
+    "runtime_projection_report",
+    "dimensions",
+    "readiness",
+    "missing_requirements",
+    "llm_calls",
+    "target_resolution_report_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.target-resolution-report/v0.1"
+    },
+    "source_record_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_branch_id": {"type": "string", "minLength": 1},
+    "abstract_evaluation_target": {"type": "object"},
+    "legacy_resolution_identity": {"type": "object"},
+    "policy_lineage_report": {"type": ["object", "null"]},
+    "runtime_projection_report": {"type": ["object", "null"]},
+    "dimensions": {
+      "type": "object",
+      "required": [
+        "target_compilation",
+        "accepted_binding",
+        "lineage",
+        "assertion_formalization",
+        "observation_binding"
+      ],
+      "properties": {
+        "target_compilation": {"$ref": "#/$defs/dimension"},
+        "accepted_binding": {"$ref": "#/$defs/dimension"},
+        "lineage": {"$ref": "#/$defs/dimension"},
+        "assertion_formalization": {"$ref": "#/$defs/dimension"},
+        "observation_binding": {"$ref": "#/$defs/dimension"}
+      }
+    },
+    "readiness": {
+      "type": "object",
+      "required": [
+        "target_ready",
+        "accepted_binding_ready",
+        "assertion_ready",
+        "runtime_target_ready"
+      ],
+      "additionalProperties": {"type": "boolean"}
+    },
+    "missing_requirements": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
+    "llm_calls": {"const": 0},
+    "target_resolution_report_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "$defs": {
+    "dimension": {
+      "type": "object",
+      "required": ["status", "reason_code", "evidence"],
+      "properties": {
+        "status": {"type": "string", "minLength": 1},
+        "reason_code": {"type": "string", "minLength": 1},
+        "evidence": {"type": "object"}
+      }
+    }
+  }
+}

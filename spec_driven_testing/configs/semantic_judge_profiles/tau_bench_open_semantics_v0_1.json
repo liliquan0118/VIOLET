@@ -1,0 +1,439 @@
+{
+  "schema_version": "agentspectesting.semantic-judge-profile/v0.1",
+  "profile_id": "tau-bench-open-semantics/v0.1",
+  "rules": [
+    {
+      "rule_id": "claim_source_support",
+      "requirement_pattern": "not provided by the user or available tools",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "prior_user_message",
+        "prior_tool_result",
+        "system_policy",
+        "agent_tool_schema"
+      ]
+    },
+    {
+      "rule_id": "subjective_expression",
+      "requirement_pattern": "subjective (recommendations?|comments?)",
+      "judge_kind": "subjective_expression",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": []
+    },
+    {
+      "rule_id": "claim_source_support_insurance_cost",
+      "requirement_pattern": "costs \\$30 per passenger",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_insurance_refund",
+      "requirement_pattern": "provides a full refund if the user cancels the flight due to health or weather reasons",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_kept_segment_price",
+      "requirement_pattern": "their prices will not be updated based on the current price",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_extra_baggage_price",
+      "requirement_pattern": "the price for each extra baggage is not 50 dollars",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_reservation_being_cancelled",
+      "requirement_pattern": "stating the reservation is being cancelled",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_fabrication",
+      "requirement_pattern": "not provided by the user or are not available through tools",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "prior_user_message",
+        "prior_tool_result",
+        "system_policy",
+        "agent_tool_schema"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_retail_fabrication",
+      "requirement_pattern": "^fabricate information, knowledge, or procedures$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "prior_user_message",
+        "prior_tool_result",
+        "system_policy",
+        "agent_tool_schema"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_dob_required",
+      "requirement_pattern": "^date\\ of\\ birth\\ is\\ required\\ for\\ verification\\ purposes$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_deny_out_of_policy",
+      "requirement_pattern": "^deny\\ user\\ requests\\ that\\ are\\ against\\ the\\ current\\ instruction\\ policy\\ set$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_out_of_scope",
+      "requirement_pattern": "^the\\ request\\ cannot\\ be\\ handled\\ within\\ the\\ scope\\ of\\ the\\ agent's\\ actions\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy",
+        "agent_tool_schema"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_payment_request_sent",
+      "requirement_pattern": "^inform\\ the\\ user\\ that\\ a\\ payment\\ request\\ has\\ been\\ sent$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "prior_tool_result"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_check_payment_request_tool",
+      "requirement_pattern": "^instruct\\ them\\ to\\ check\\ their\\ payment\\ requests\\ using\\ the\\ check_payment_request\\ tool$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_reboot_device",
+      "requirement_pattern": "^reboot\\ their\\ device$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_roaming_enabled_capability",
+      "requirement_pattern": "^the\\ user\\ can\\ use\\ their\\ phone's\\ data\\ connection\\ in\\ areas\\ outside\\ their\\ home\\ network$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy",
+        "prior_tool_result"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_toggle_roaming_guidance",
+      "requirement_pattern": "^guide\\ them\\ to\\ use\\ toggle_roaming\\(\\)$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_roaming_disabled_capability",
+      "requirement_pattern": "^the\\ user\\ will\\ not\\ be\\ able\\ to\\ use\\ their\\ phone's\\ data\\ connection\\ in\\ areas\\ outside\\ their\\ home\\ network\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy",
+        "prior_tool_result"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_disconnect_vpn_guidance",
+      "requirement_pattern": "^guide\\ the\\ user\\ to\\ use\\ disconnect_vpn\\(\\)\\ to\\ disconnect\\ the\\ VPN$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_retail_deny_requests",
+      "requirement_pattern": "^deny\\ user\\ requests$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_check_network_status_before_mobile_data",
+      "requirement_pattern": "^The\\ agent\\ must\\ guide\\ the\\ user\\ to\\ use\\ check_network_status\\(\\)\\ to\\ verify\\ they\\ have\\ cellular\\ service,\\ before\\ taking\\ any\\ action\\ related\\ to\\ mobile\\ data\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_check_network_status_and_speed_test_before_mms",
+      "requirement_pattern": "^The\\ agent\\ must\\ guide\\ the\\ user\\ to\\ use\\ check_network_status\\(\\)\\ to\\ verify\\ they\\ have\\ cellular\\ service\\ and\\ use\\ run_speed_test\\(\\)\\ to\\ verify\\ their\\ mobile\\ data\\ is\\ working,\\ before\\ troubleshooting\\ MMS\\ issues\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_toggle_wifi_calling_guidance",
+      "requirement_pattern": "^The\\ agent\\ must\\ guide\\ the\\ user\\ to\\ use\\ toggle_wifi_calling\\(\\)\\ to\\ turn\\ Wi-Fi\\ Calling\\ OFF\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_retail_modify_items_reminder",
+      "requirement_pattern": "^The\\ agent\\ must\\ remind\\ the\\ customer\\ to\\ confirm\\ they\\ have\\ provided\\ all\\ the\\ items\\ they\\ want\\ to\\ modify\\ before\\ modifying\\ items\\ in\\ the\\ pending\\ order\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_retail_exchange_items_reminder",
+      "requirement_pattern": "^The\\ agent\\ must\\ remind\\ the\\ customer\\ to\\ confirm\\ they\\ have\\ provided\\ all\\ items\\ they\\ want\\ to\\ exchange\\ before\\ proceeding\\ with\\ the\\ exchange\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_awaiting_payment_one_bill_limit",
+      "requirement_pattern": "^The\\ agent\\ must\\ not\\ state\\ that\\ a\\ user\\ can\\ have\\ more\\ than\\ one\\ bill\\ in\\ the\\ AWAITING\\ PAYMENT\\ status\\ at\\ a\\ time\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_suspension_reason_exhaustive",
+      "requirement_pattern": "^The\\ agent\\ must\\ not\\ state\\ that\\ a\\ line\\ can\\ be\\ suspended\\ for\\ a\\ reason\\ other\\ than\\ the\\ user\\ having\\ an\\ overdue\\ bill\\ or\\ the\\ line's\\ contract\\ end\\ date\\ being\\ in\\ the\\ past\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_mms_requires_cellular_and_data",
+      "requirement_pattern": "^The\\ agent\\ must\\ not\\ state\\ that\\ MMS\\ can\\ work\\ without\\ cellular\\ service\\ or\\ mobile\\ data\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_payment_request_sets_awaiting_payment_v0",
+      "requirement_pattern": "^The\\ agent\\ must\\ not\\ state\\ that\\ sending\\ a\\ payment\\ request\\ for\\ an\\ overdue\\ bill\\ does\\ not\\ change\\ the\\ bill\\ status\\ to\\ AWAITING\\ PAYMENT\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_payment_request_sets_awaiting_payment_v1",
+      "requirement_pattern": "^The\\ agent\\ must\\ not\\ state\\ that\\ sending\\ a\\ payment\\ request\\ for\\ an\\ overdue\\ bill\\ changes\\ the\\ bill\\ status\\ to\\ something\\ other\\ than\\ AWAITING\\ PAYMENT\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_suspended_line_no_service",
+      "requirement_pattern": "^The\\ agent\\ must\\ not\\ state\\ that\\ a\\ suspended\\ line\\ has\\ service\\ or\\ will\\ have\\ service\\ while\\ it\\ remains\\ suspended\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_plan_has_data_usage_max_v0",
+      "requirement_pattern": "^The\\ agent\\ must\\ not\\ state\\ that\\ a\\ plan\\ does\\ not\\ have\\ a\\ maximum\\ data\\ usage\\ per\\ month\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_plan_has_data_usage_max_v1",
+      "requirement_pattern": "^The\\ agent\\ must\\ not\\ state\\ that\\ there\\ is\\ no\\ data\\ usage\\ limit\\ for\\ a\\ plan\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_plan_has_data_usage_max_v2",
+      "requirement_pattern": "^The\\ agent\\ must\\ not\\ state\\ that\\ the\\ maximum\\ data\\ usage\\ per\\ month\\ is\\ not\\ specified\\ for\\ a\\ plan\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_retail_modify_payment_keeps_pending",
+      "requirement_pattern": "^The\\ agent\\ must\\ not\\ state\\ that\\ the\\ order\\ status\\ will\\ change\\ to\\ anything\\ other\\ than\\ 'pending'\\ after\\ payment\\ method\\ modification\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_retail_modify_payment_gift_card_refund_timing",
+      "requirement_pattern": "^The\\ agent\\ must\\ not\\ state\\ that\\ the\\ original\\ payment\\ method\\ will\\ not\\ be\\ refunded\\ immediately\\ if\\ it\\ is\\ a\\ gift\\ card,\\ or\\ that\\ it\\ will\\ be\\ refunded\\ immediately\\ if\\ it\\ is\\ not\\ a\\ gift\\ card,\\ or\\ provide\\ any\\ other\\ refund\\ timing\\ that\\ contradicts\\ the\\ policy\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_retail_return_requested_and_email",
+      "requirement_pattern": "^The\\ agent\\ must\\ not\\ state\\ that\\ the\\ order\\ status\\ will\\ not\\ be\\ changed\\ to\\ 'return\\ requested'\\ or\\ that\\ the\\ user\\ will\\ not\\ receive\\ an\\ email\\ regarding\\ how\\ to\\ return\\ items\\ after\\ confirmation\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_retail_exchange_requested_and_email",
+      "requirement_pattern": "^The\\ agent\\ must\\ not\\ state\\ that\\ after\\ user\\ confirmation\\ of\\ an\\ exchange,\\ the\\ order\\ status\\ will\\ not\\ be\\ changed\\ to\\ 'exchange\\ requested',\\ or\\ the\\ user\\ will\\ not\\ receive\\ an\\ email\\ regarding\\ how\\ to\\ return\\ items\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_toggle_roaming_before_mobile_data_or_usage",
+      "requirement_pattern": "^The\\ agent\\ must\\ guide\\ the\\ user\\ to\\ use\\ toggle_roaming\\(\\)\\ to\\ turn\\ Data\\ Roaming\\ ON\\ and\\ ask\\ them\\ to\\ rerun\\ the\\ speed\\ test,\\ if\\ the\\ user\\ reports\\ they\\ are\\ traveling\\ outside\\ their\\ usual\\ service\\ area\\ and\\ Data\\ Roaming\\ is\\ off\\ after\\ the\\ agent\\ has\\ confirmed\\ cellular\\ service\\ is\\ available,\\ before\\ checking\\ Mobile\\ Data\\ settings\\ or\\ Data\\ Usage\\ for\\ the\\ line\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_check_and_enable_line_roaming_before_mobile_data_or_usage",
+      "requirement_pattern": "^The\\ agent\\ must\\ check\\ whether\\ the\\ line\\ associated\\ with\\ the\\ phone\\ number\\ the\\ user\\ provided\\ is\\ roaming\\ enabled,\\ and\\ if\\ it\\ is\\ not,\\ call\\ enable_roaming\\(\\)\\ to\\ enable\\ it\\ at\\ no\\ cost\\ for\\ the\\ user,\\ if\\ the\\ user\\ reports\\ they\\ are\\ traveling\\ outside\\ their\\ usual\\ service\\ area\\ with\\ Data\\ Roaming\\ already\\ on\\ but\\ mobile\\ data\\ still\\ not\\ working,\\ before\\ checking\\ Mobile\\ Data\\ settings\\ or\\ Data\\ Usage\\ for\\ the\\ line\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_toggle_data_before_usage",
+      "requirement_pattern": "^The\\ agent\\ must\\ guide\\ the\\ user\\ to\\ use\\ toggle_data\\(\\)\\ to\\ turn\\ Mobile\\ Data\\ ON\\ and\\ ask\\ them\\ to\\ rerun\\ the\\ speed\\ test,\\ if\\ Mobile\\ Data\\ is\\ off\\ after\\ the\\ agent\\ has\\ confirmed\\ cellular\\ service\\ is\\ available\\ and\\ the\\ user\\ is\\ not\\ experiencing\\ a\\ roaming\\ issue,\\ before\\ checking\\ Data\\ Usage\\ for\\ the\\ line\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_offer_refuel_or_plan_change_when_data_usage_exceeded",
+      "requirement_pattern": "^The\\ agent\\ must\\ ask\\ the\\ user\\ whether\\ they\\ want\\ to\\ refuel\\ data\\ or\\ change\\ to\\ a\\ plan\\ with\\ a\\ higher\\ data\\ limit,\\ if\\ the\\ line\\ data\\ usage\\ has\\ exceeded\\ the\\ plan\\ data\\ limit\\ after\\ the\\ agent\\ has\\ confirmed\\ cellular\\ service,\\ ruled\\ out\\ a\\ roaming\\ issue,\\ and\\ confirmed\\ Mobile\\ Data\\ is\\ on,\\ before\\ asking\\ them\\ to\\ rerun\\ the\\ speed\\ test\\ or\\ transferring\\ to\\ technical\\ support\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_retry_and_transfer_when_data_usage_not_exceeded",
+      "requirement_pattern": "^The\\ agent\\ must\\ ask\\ the\\ user\\ to\\ rerun\\ the\\ speed\\ test\\ and\\ check\\ data\\ connectivity,\\ and\\ if\\ there\\ is\\ still\\ no\\ connectivity,\\ call\\ transfer_to_human_agents\\(\\),\\ if\\ the\\ line\\ data\\ usage\\ has\\ not\\ exceeded\\ the\\ plan\\ data\\ limit\\ after\\ the\\ agent\\ has\\ confirmed\\ cellular\\ service,\\ ruled\\ out\\ a\\ roaming\\ issue,\\ and\\ confirmed\\ Mobile\\ Data\\ is\\ on\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_set_network_mode_before_wifi_calling_permissions_apn",
+      "requirement_pattern": "^The\\ agent\\ must\\ guide\\ the\\ user\\ to\\ use\\ set_network_mode_preference\\(\\)\\ to\\ change\\ the\\ network\\ mode\\ to\\ include\\ at\\ least\\ 3G,\\ 4G,\\ or\\ 5G\\ and\\ ask\\ them\\ to\\ try\\ sending\\ an\\ MMS\\ message\\ again,\\ if\\ the\\ user\\'s\\ phone\\ is\\ connected\\ to\\ a\\ 2G\\ network\\ only\\ after\\ the\\ agent\\ has\\ confirmed\\ cellular\\ service\\ is\\ available\\ and\\ mobile\\ data\\ connectivity\\ is\\ working,\\ before\\ checking\\ Wi\\-Fi\\ Calling\\ status,\\ messaging\\ app\\ permissions,\\ or\\ APN\\ settings\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_toggle_wifi_calling_before_permissions_apn",
+      "requirement_pattern": "^The\\ agent\\ must\\ guide\\ the\\ user\\ to\\ use\\ toggle_wifi_calling\\(\\)\\ to\\ turn\\ Wi\\-Fi\\ Calling\\ OFF\\ and\\ ask\\ them\\ to\\ try\\ sending\\ an\\ MMS\\ message\\ again,\\ if\\ Wi\\-Fi\\ Calling\\ is\\ on\\ after\\ the\\ agent\\ has\\ confirmed\\ cellular\\ service\\ is\\ available,\\ mobile\\ data\\ connectivity\\ is\\ working,\\ and\\ the\\ phone\\ is\\ connected\\ to\\ a\\ network\\ of\\ 3G\\ or\\ higher,\\ before\\ checking\\ messaging\\ app\\ permissions\\ or\\ APN\\ settings\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_grant_storage_permission_before_apn",
+      "requirement_pattern": "^The\\ agent\\ must\\ guide\\ the\\ user\\ to\\ use\\ grant_app_permission\\(\\)\\ to\\ grant\\ the\\ messaging\\ app\\'s\\ storage\\ permission\\ and\\ ask\\ them\\ to\\ try\\ sending\\ an\\ MMS\\ message\\ again,\\ if\\ the\\ messaging\\ app\\ is\\ missing\\ the\\ storage\\ permission\\ after\\ the\\ agent\\ has\\ confirmed\\ cellular\\ service\\ is\\ available,\\ mobile\\ data\\ connectivity\\ is\\ working,\\ the\\ phone\\ is\\ connected\\ to\\ a\\ network\\ of\\ 3G\\ or\\ higher,\\ and\\ Wi\\-Fi\\ Calling\\ is\\ off\\ or\\ turning\\ it\\ off\\ did\\ not\\ resolve\\ the\\ issue,\\ before\\ checking\\ APN\\ settings\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    },
+    {
+      "rule_id": "claim_source_support_telecom_reset_apn_when_mmsc_missing",
+      "requirement_pattern": "^The\\ agent\\ must\\ guide\\ the\\ user\\ to\\ use\\ reset_apn_settings\\(\\)\\ to\\ reset\\ the\\ APN\\ settings\\ to\\ carrier\\ defaults\\ and\\ ask\\ them\\ to\\ try\\ sending\\ an\\ MMS\\ message\\ again,\\ if\\ the\\ MMSC\\ URL\\ is\\ missing\\ from\\ the\\ APN\\ settings\\ after\\ the\\ agent\\ has\\ confirmed\\ cellular\\ service\\ is\\ available,\\ mobile\\ data\\ connectivity\\ is\\ working,\\ the\\ phone\\ is\\ connected\\ to\\ a\\ network\\ of\\ 3G\\ or\\ higher,\\ and\\ the\\ messaging\\ app\\ has\\ both\\ the\\ storage\\ and\\ SMS\\ permissions\\ granted\\.$",
+      "judge_kind": "claim_source_support",
+      "target_event_kind": "assistant_message",
+      "allowed_source_channels": [
+        "system_policy"
+      ]
+    }
+  ]
+}

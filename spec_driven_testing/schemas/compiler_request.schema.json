@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.compiler-request/v0.1",
+  "title": "AgentSpecTesting Compiler Request",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "request_id",
+    "domain",
+    "source_anchor",
+    "test_intent",
+    "environment_capabilities",
+    "variation_policy",
+    "budget"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.compiler-request/v0.1"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_anchor": {
+      "type": "object"
+    },
+    "test_intent": {
+      "type": "object",
+      "required": [
+        "primary_target"
+      ],
+      "properties": {
+        "primary_target": {
+          "$ref": "#/$defs/target"
+        },
+        "contrast_targets": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/target"
+              },
+              {
+                "type": "object",
+                "required": [
+                  "target_name"
+                ]
+              }
+            ]
+          }
+        },
+        "isolation_policy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "failure_hypotheses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "boundary_refinements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "refinement_id",
+              "target_name",
+              "offset_seconds_from_threshold"
+            ],
+            "properties": {
+              "refinement_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "target_name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "offset_seconds_from_threshold": {
+                "type": "number"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "environment_capabilities": {
+      "type": "object"
+    },
+    "variation_policy": {
+      "type": "object"
+    },
+    "budget": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "target": {
+      "type": "object",
+      "required": [
+        "coverage_cell_id",
+        "focus_predicate_ref",
+        "desired_truth",
+        "desired_policy_decision"
+      ],
+      "properties": {
+        "target_name": {
+          "type": "string"
+        },
+        "coverage_cell_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "focus_predicate_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "desired_truth": {
+          "type": "boolean"
+        },
+        "desired_policy_decision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

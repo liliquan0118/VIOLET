@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.runtime-observation/v0.1",
+  "title": "AgentSpecTesting RuntimeObservation",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": ["event_kind", "content"],
+      "properties": {
+        "event_kind": {"const": "assistant_message"},
+        "content": {"type": "string"}
+      }
+    },
+    {
+      "type": "object",
+      "required": ["event_kind", "tool_name", "arguments"],
+      "properties": {
+        "event_kind": {"const": "assistant_tool_call"},
+        "tool_name": {"type": "string", "minLength": 1},
+        "arguments": {"type": ["object", "string"]}
+      }
+    },
+    {
+      "type": "object",
+      "required": ["event_kind", "tool_name", "arguments", "success"],
+      "properties": {
+        "event_kind": {"const": "tool_result"},
+        "tool_name": {"type": "string", "minLength": 1},
+        "arguments": {"type": ["object", "string"]},
+        "success": {"type": "boolean"}
+      }
+    },
+    {
+      "type": "object",
+      "required": ["event_kind"],
+      "properties": {
+        "event_kind": {"const": "assistant_turn_completed"}
+      }
+    },
+    {
+      "type": "object",
+      "required": ["event_kind", "reason"],
+      "properties": {
+        "event_kind": {"const": "terminal_state"},
+        "reason": {"type": "string", "minLength": 1}
+      }
+    }
+  ]
+}

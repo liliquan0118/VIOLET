@@ -1,0 +1,28 @@
+{
+  "schema_version": "agentspectesting.oracle-expectation-policy/v0.1",
+  "policy_id": "tau-bench-task-completion/v0.1",
+  "modality_prefixes": {
+    "forbidden": [
+      "The agent must not "
+    ],
+    "required": [
+      "The agent must "
+    ],
+    "permitted": [
+      "The agent may "
+    ]
+  },
+  "request_detection": {
+    "explicit_markers": [
+      "requests to ",
+      "request to ",
+      "asks to ",
+      "asks the agent to "
+    ],
+    "action_alignment": "tool_name_tokens_subset_of_when"
+  },
+  "permission_resolution": {
+    "aligned_explicit_request": "required",
+    "otherwise": "non_decisive"
+  }
+}

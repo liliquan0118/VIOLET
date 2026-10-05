@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.compiler-request/v0.3",
+  "title": "Source-only AgentSpecTesting Compiler Request",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "selected_spec_ref"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.compiler-request/v0.3"
+    },
+    "selected_spec_ref": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "workbook",
+        "sheet",
+        "row",
+        "branch_id"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "agentspectesting.selected-spec-ref/v0.1"
+        },
+        "workbook": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sheet": {
+          "type": "string",
+          "minLength": 1
+        },
+        "row": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "branch_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

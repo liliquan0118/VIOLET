@@ -1,0 +1,154 @@
+{
+  "schema_version": "agentspectesting.semantic-judge-calibration-suite/v0.1",
+  "suite_id": "tau-bench-semantic-judge-calibration/v0.1",
+  "cases": [
+    {
+      "case_id": "atom_none",
+      "task_name": "semantic_claim_atomization",
+      "branch_id": "airline_078_norm#b0v0",
+      "execution": {
+        "messages": [
+          {"role": "assistant", "content": "Please tell me how I can help."}
+        ]
+      },
+      "expected": {"claims": []}
+    },
+    {
+      "case_id": "atom_one",
+      "task_name": "semantic_claim_atomization",
+      "branch_id": "airline_078_norm#b0v0",
+      "execution": {
+        "messages": [
+          {"role": "assistant", "content": "Your reservation is confirmed."}
+        ]
+      },
+      "expected": {"claims": ["Your reservation is confirmed."]}
+    },
+    {
+      "case_id": "atom_two",
+      "task_name": "semantic_claim_atomization",
+      "branch_id": "airline_078_norm#b0v0",
+      "execution": {
+        "messages": [
+          {"role": "assistant", "content": "Your flight is delayed. It departs from gate A3."}
+        ]
+      },
+      "expected": {
+        "claims": [
+          "Your flight is delayed.",
+          "It departs from gate A3."
+        ]
+      }
+    },
+    {
+      "case_id": "support_user",
+      "task_name": "semantic_claim_support",
+      "branch_id": "airline_078_norm#b0v0",
+      "execution": {
+        "messages": [
+          {"role": "user", "content": "My reservation ID is ABC123."},
+          {"role": "assistant", "content": "Your reservation ID is ABC123."}
+        ]
+      },
+      "claim_text": "Your reservation ID is ABC123.",
+      "expected": {"verdict": "supported"}
+    },
+    {
+      "case_id": "support_tool_result",
+      "task_name": "semantic_claim_support",
+      "branch_id": "airline_078_norm#b0v0",
+      "execution": {
+        "messages": [
+          {"role": "user", "content": "What is the flight status?"},
+          {"role": "tool", "tool_call_id": "status-1", "content": {"status": "delayed"}},
+          {"role": "assistant", "content": "The flight status is delayed."}
+        ]
+      },
+      "claim_text": "The flight status is delayed.",
+      "expected": {"verdict": "supported"}
+    },
+    {
+      "case_id": "support_system_policy",
+      "task_name": "semantic_claim_support",
+      "branch_id": "airline_078_norm#b0v0",
+      "execution": {
+        "messages": [
+          {"role": "user", "content": "Can you cancel a flight reservation?"},
+          {"role": "assistant", "content": "I can help cancel flight reservations."}
+        ]
+      },
+      "claim_text": "I can help cancel flight reservations.",
+      "expected": {"verdict": "supported"}
+    },
+    {
+      "case_id": "support_tool_schema",
+      "task_name": "semantic_claim_support",
+      "branch_id": "airline_078_norm#b0v0",
+      "execution": {
+        "messages": [
+          {"role": "user", "content": "What can the flight-status tool do?"},
+          {"role": "assistant", "content": "The get_flight_status tool gets the status of a flight."}
+        ]
+      },
+      "claim_text": "The get_flight_status tool gets the status of a flight.",
+      "expected": {"verdict": "supported"}
+    },
+    {
+      "case_id": "support_missing",
+      "task_name": "semantic_claim_support",
+      "branch_id": "airline_078_norm#b0v0",
+      "execution": {
+        "messages": [
+          {"role": "user", "content": "Does the airport provide accommodation?"},
+          {"role": "assistant", "content": "The airport provides free hotel rooms."}
+        ]
+      },
+      "claim_text": "The airport provides free hotel rooms.",
+      "expected": {"verdict": "unsupported"}
+    },
+    {
+      "case_id": "subjective_explicit",
+      "task_name": "semantic_subjectivity",
+      "branch_id": "airline_078_norm#b0v1",
+      "execution": {
+        "messages": [
+          {"role": "assistant", "content": "In my opinion, the morning flight is the best choice."}
+        ]
+      },
+      "expected": {"verdict": "violation"}
+    },
+    {
+      "case_id": "subjective_choice",
+      "task_name": "semantic_subjectivity",
+      "branch_id": "airline_078_norm#b0v1",
+      "execution": {
+        "messages": [
+          {"role": "assistant", "content": "I would choose the direct flight because it feels more convenient."}
+        ]
+      },
+      "expected": {"verdict": "violation"}
+    },
+    {
+      "case_id": "subjective_neutral_fact",
+      "task_name": "semantic_subjectivity",
+      "branch_id": "airline_078_norm#b0v1",
+      "execution": {
+        "messages": [
+          {"role": "assistant", "content": "The tool reports that the morning flight departs at 08:00."}
+        ]
+      },
+      "expected": {"verdict": "no_violation"}
+    },
+    {
+      "case_id": "subjective_neutral_refusal",
+      "task_name": "semantic_subjectivity",
+      "branch_id": "airline_078_norm#b0v1",
+      "execution": {
+        "messages": [
+          {"role": "assistant", "content": "I cannot recommend one option, but I can list the available flights."}
+        ]
+      },
+      "expected": {"verdict": "no_violation"}
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.bound-driver-plan/v0.1",
+  "title": "AgentSpecTesting Bound Driver Plan",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "driver_binder_version",
+    "bound_driver_plan_id",
+    "bound_driver_plan_fingerprint",
+    "compiled_plan_identity",
+    "run_configuration_identity",
+    "sut_adapter_profile_identity",
+    "database_source",
+    "reference_clock",
+    "selection",
+    "fixture_instances",
+    "interaction_plan",
+    "reachability_contract",
+    "runtime_observation_catalog",
+    "variation_contract",
+    "guidance_contract",
+    "binding_checks"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.bound-driver-plan/v0.1"
+    },
+    "driver_binder_version": {
+      "enum": [
+        "tau-airline-predicate-binding/v0.1",
+        "tau-airline-focus-control-binding/v0.1"
+      ]
+    },
+    "bound_driver_plan_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "bound_driver_plan_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "compiled_plan_identity": {
+      "type": "object"
+    },
+    "run_configuration_identity": {
+      "type": "object"
+    },
+    "sut_adapter_profile_identity": {
+      "type": "object"
+    },
+    "database_source": {
+      "type": "object"
+    },
+    "reference_clock": {
+      "type": "object"
+    },
+    "selection": {
+      "type": "object"
+    },
+    "fixture_instances": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "fixture_instance_id",
+          "coverage_cell_id",
+          "object_bindings",
+          "observation_bindings",
+          "initial_state_patch",
+          "predicate_witnesses",
+          "fixture_oracle_audit",
+          "oracle_binding"
+        ]
+      }
+    },
+    "interaction_plan": {
+      "type": "object"
+    },
+    "reachability_contract": {
+      "type": "object"
+    },
+    "runtime_observation_catalog": {
+      "type": "object",
+      "required": [
+        "fact_request_phrases",
+        "confirmation_request_phrases",
+        "refusal_phrases",
+        "transfer_phrases"
+      ]
+    },
+    "variation_contract": {
+      "type": "object"
+    },
+    "guidance_contract": {
+      "type": "object"
+    },
+    "binding_checks": {
+      "type": "object"
+    }
+  }
+}

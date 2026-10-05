@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.compiler-profile/v0.1",
+  "title": "AgentSpecTesting Compiler Method Profile",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "profile_id",
+    "experiment_policy",
+    "probe_policy",
+    "hypothesis_policy",
+    "mutation_policy",
+    "guidance_policy"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.compiler-profile/v0.1"
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "experiment_policy": {
+      "type": "object"
+    },
+    "probe_policy": {
+      "type": "object"
+    },
+    "hypothesis_policy": {
+      "type": "object"
+    },
+    "mutation_policy": {
+      "type": "object"
+    },
+    "guidance_policy": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}

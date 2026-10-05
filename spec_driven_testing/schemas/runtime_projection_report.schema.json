@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.runtime-projection-report/v0.1",
+  "title": "Policy-scoped Runtime Projection Report",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "source_record_fingerprint",
+    "source_branch_id",
+    "policy_lineage_report_fingerprint",
+    "status",
+    "candidates",
+    "rejected_candidates",
+    "adjudication",
+    "llm_calls",
+    "runtime_projection_report_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.runtime-projection-report/v0.1"
+    },
+    "source_record_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_branch_id": {"type": "string", "minLength": 1},
+    "policy_lineage_report_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "status": {
+      "enum": [
+        "not_applicable",
+        "runtime_projection_missing",
+        "operation_scope_conflict",
+        "path_only",
+        "requires_atomic_binding",
+        "resolved_atomic",
+        "resolved_unique",
+        "resolved_composite",
+        "resolved_alternative",
+        "invalid_source_branch",
+        "assertion_scope_conflict",
+        "condition_scope_conflict",
+        "ambiguous"
+      ]
+    },
+    "candidates": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
+    "rejected_candidates": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
+    "adjudication": {
+      "type": "object",
+      "required": ["status", "reason_codes"],
+      "properties": {
+        "status": {"type": "string", "minLength": 1},
+        "reason_codes": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "llm_calls": {"const": 0},
+    "runtime_projection_report_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

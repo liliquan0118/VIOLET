@@ -1,0 +1,1209 @@
+{
+  "flight_count": 300,
+  "schedule": {
+    "HAT001": {
+      "scheduled_arrival_time_est": "07:00:00",
+      "scheduled_departure_time_est": "06:00:00"
+    },
+    "HAT002": {
+      "scheduled_arrival_time_est": "01:30:00+1",
+      "scheduled_departure_time_est": "21:00:00"
+    },
+    "HAT003": {
+      "scheduled_arrival_time_est": "09:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT004": {
+      "scheduled_arrival_time_est": "16:00:00",
+      "scheduled_departure_time_est": "14:00:00"
+    },
+    "HAT005": {
+      "scheduled_arrival_time_est": "17:00:00",
+      "scheduled_departure_time_est": "13:00:00"
+    },
+    "HAT006": {
+      "scheduled_arrival_time_est": "08:30:00",
+      "scheduled_departure_time_est": "03:00:00"
+    },
+    "HAT007": {
+      "scheduled_arrival_time_est": "16:00:00",
+      "scheduled_departure_time_est": "12:00:00"
+    },
+    "HAT008": {
+      "scheduled_arrival_time_est": "16:00:00",
+      "scheduled_departure_time_est": "11:00:00"
+    },
+    "HAT009": {
+      "scheduled_arrival_time_est": "19:00:00",
+      "scheduled_departure_time_est": "17:00:00"
+    },
+    "HAT010": {
+      "scheduled_arrival_time_est": "20:30:00",
+      "scheduled_departure_time_est": "19:00:00"
+    },
+    "HAT011": {
+      "scheduled_arrival_time_est": "15:00:00",
+      "scheduled_departure_time_est": "13:00:00"
+    },
+    "HAT012": {
+      "scheduled_arrival_time_est": "17:30:00",
+      "scheduled_departure_time_est": "12:00:00"
+    },
+    "HAT013": {
+      "scheduled_arrival_time_est": "22:30:00",
+      "scheduled_departure_time_est": "19:00:00"
+    },
+    "HAT014": {
+      "scheduled_arrival_time_est": "20:00:00",
+      "scheduled_departure_time_est": "17:00:00"
+    },
+    "HAT015": {
+      "scheduled_arrival_time_est": "03:00:00",
+      "scheduled_departure_time_est": "01:00:00"
+    },
+    "HAT016": {
+      "scheduled_arrival_time_est": "11:00:00",
+      "scheduled_departure_time_est": "10:00:00"
+    },
+    "HAT017": {
+      "scheduled_arrival_time_est": "13:30:00",
+      "scheduled_departure_time_est": "10:00:00"
+    },
+    "HAT018": {
+      "scheduled_arrival_time_est": "18:30:00",
+      "scheduled_departure_time_est": "16:00:00"
+    },
+    "HAT019": {
+      "scheduled_arrival_time_est": "20:00:00",
+      "scheduled_departure_time_est": "15:00:00"
+    },
+    "HAT020": {
+      "scheduled_arrival_time_est": "23:00:00",
+      "scheduled_departure_time_est": "22:00:00"
+    },
+    "HAT021": {
+      "scheduled_arrival_time_est": "01:00:00+1",
+      "scheduled_departure_time_est": "19:00:00"
+    },
+    "HAT022": {
+      "scheduled_arrival_time_est": "15:00:00",
+      "scheduled_departure_time_est": "12:00:00"
+    },
+    "HAT023": {
+      "scheduled_arrival_time_est": "20:00:00",
+      "scheduled_departure_time_est": "14:00:00"
+    },
+    "HAT024": {
+      "scheduled_arrival_time_est": "03:30:00",
+      "scheduled_departure_time_est": "02:00:00"
+    },
+    "HAT025": {
+      "scheduled_arrival_time_est": "07:30:00",
+      "scheduled_departure_time_est": "04:00:00"
+    },
+    "HAT026": {
+      "scheduled_arrival_time_est": "22:00:00",
+      "scheduled_departure_time_est": "16:00:00"
+    },
+    "HAT027": {
+      "scheduled_arrival_time_est": "14:00:00",
+      "scheduled_departure_time_est": "13:00:00"
+    },
+    "HAT028": {
+      "scheduled_arrival_time_est": "08:30:00",
+      "scheduled_departure_time_est": "05:00:00"
+    },
+    "HAT029": {
+      "scheduled_arrival_time_est": "04:00:00",
+      "scheduled_departure_time_est": "03:00:00"
+    },
+    "HAT030": {
+      "scheduled_arrival_time_est": "00:00:00+1",
+      "scheduled_departure_time_est": "20:00:00"
+    },
+    "HAT031": {
+      "scheduled_arrival_time_est": "13:00:00",
+      "scheduled_departure_time_est": "10:00:00"
+    },
+    "HAT032": {
+      "scheduled_arrival_time_est": "13:00:00",
+      "scheduled_departure_time_est": "11:00:00"
+    },
+    "HAT033": {
+      "scheduled_arrival_time_est": "02:00:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT034": {
+      "scheduled_arrival_time_est": "08:30:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT035": {
+      "scheduled_arrival_time_est": "19:00:00",
+      "scheduled_departure_time_est": "15:00:00"
+    },
+    "HAT036": {
+      "scheduled_arrival_time_est": "16:00:00",
+      "scheduled_departure_time_est": "13:00:00"
+    },
+    "HAT037": {
+      "scheduled_arrival_time_est": "19:00:00",
+      "scheduled_departure_time_est": "15:00:00"
+    },
+    "HAT038": {
+      "scheduled_arrival_time_est": "10:00:00",
+      "scheduled_departure_time_est": "06:00:00"
+    },
+    "HAT039": {
+      "scheduled_arrival_time_est": "03:00:00+1",
+      "scheduled_departure_time_est": "22:00:00"
+    },
+    "HAT040": {
+      "scheduled_arrival_time_est": "02:30:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT041": {
+      "scheduled_arrival_time_est": "12:30:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT042": {
+      "scheduled_arrival_time_est": "12:00:00",
+      "scheduled_departure_time_est": "06:00:00"
+    },
+    "HAT043": {
+      "scheduled_arrival_time_est": "17:00:00",
+      "scheduled_departure_time_est": "15:00:00"
+    },
+    "HAT044": {
+      "scheduled_arrival_time_est": "22:30:00",
+      "scheduled_departure_time_est": "20:00:00"
+    },
+    "HAT045": {
+      "scheduled_arrival_time_est": "02:00:00+1",
+      "scheduled_departure_time_est": "23:00:00"
+    },
+    "HAT046": {
+      "scheduled_arrival_time_est": "02:00:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT047": {
+      "scheduled_arrival_time_est": "15:30:00",
+      "scheduled_departure_time_est": "13:00:00"
+    },
+    "HAT048": {
+      "scheduled_arrival_time_est": "23:30:00",
+      "scheduled_departure_time_est": "19:00:00"
+    },
+    "HAT049": {
+      "scheduled_arrival_time_est": "19:00:00",
+      "scheduled_departure_time_est": "17:00:00"
+    },
+    "HAT050": {
+      "scheduled_arrival_time_est": "02:00:00+1",
+      "scheduled_departure_time_est": "21:00:00"
+    },
+    "HAT051": {
+      "scheduled_arrival_time_est": "05:30:00",
+      "scheduled_departure_time_est": "01:00:00"
+    },
+    "HAT052": {
+      "scheduled_arrival_time_est": "07:00:00",
+      "scheduled_departure_time_est": "03:00:00"
+    },
+    "HAT053": {
+      "scheduled_arrival_time_est": "18:00:00",
+      "scheduled_departure_time_est": "16:00:00"
+    },
+    "HAT054": {
+      "scheduled_arrival_time_est": "11:00:00",
+      "scheduled_departure_time_est": "08:00:00"
+    },
+    "HAT055": {
+      "scheduled_arrival_time_est": "18:00:00",
+      "scheduled_departure_time_est": "14:00:00"
+    },
+    "HAT056": {
+      "scheduled_arrival_time_est": "09:00:00",
+      "scheduled_departure_time_est": "06:00:00"
+    },
+    "HAT057": {
+      "scheduled_arrival_time_est": "09:30:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT058": {
+      "scheduled_arrival_time_est": "21:00:00",
+      "scheduled_departure_time_est": "18:00:00"
+    },
+    "HAT059": {
+      "scheduled_arrival_time_est": "09:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT060": {
+      "scheduled_arrival_time_est": "17:00:00",
+      "scheduled_departure_time_est": "14:00:00"
+    },
+    "HAT061": {
+      "scheduled_arrival_time_est": "04:00:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT062": {
+      "scheduled_arrival_time_est": "02:30:00+1",
+      "scheduled_departure_time_est": "22:00:00"
+    },
+    "HAT063": {
+      "scheduled_arrival_time_est": "21:30:00",
+      "scheduled_departure_time_est": "18:00:00"
+    },
+    "HAT064": {
+      "scheduled_arrival_time_est": "16:00:00",
+      "scheduled_departure_time_est": "14:00:00"
+    },
+    "HAT065": {
+      "scheduled_arrival_time_est": "09:30:00",
+      "scheduled_departure_time_est": "08:00:00"
+    },
+    "HAT066": {
+      "scheduled_arrival_time_est": "01:30:00+1",
+      "scheduled_departure_time_est": "21:00:00"
+    },
+    "HAT067": {
+      "scheduled_arrival_time_est": "03:00:00+1",
+      "scheduled_departure_time_est": "23:00:00"
+    },
+    "HAT068": {
+      "scheduled_arrival_time_est": "14:30:00",
+      "scheduled_departure_time_est": "11:00:00"
+    },
+    "HAT069": {
+      "scheduled_arrival_time_est": "12:00:00",
+      "scheduled_departure_time_est": "06:00:00"
+    },
+    "HAT070": {
+      "scheduled_arrival_time_est": "03:00:00+1",
+      "scheduled_departure_time_est": "23:00:00"
+    },
+    "HAT071": {
+      "scheduled_arrival_time_est": "01:00:00+1",
+      "scheduled_departure_time_est": "22:00:00"
+    },
+    "HAT072": {
+      "scheduled_arrival_time_est": "13:00:00",
+      "scheduled_departure_time_est": "09:00:00"
+    },
+    "HAT073": {
+      "scheduled_arrival_time_est": "10:00:00",
+      "scheduled_departure_time_est": "06:00:00"
+    },
+    "HAT074": {
+      "scheduled_arrival_time_est": "11:00:00",
+      "scheduled_departure_time_est": "05:00:00"
+    },
+    "HAT075": {
+      "scheduled_arrival_time_est": "14:00:00",
+      "scheduled_departure_time_est": "10:00:00"
+    },
+    "HAT076": {
+      "scheduled_arrival_time_est": "16:30:00",
+      "scheduled_departure_time_est": "13:00:00"
+    },
+    "HAT077": {
+      "scheduled_arrival_time_est": "09:00:00",
+      "scheduled_departure_time_est": "05:00:00"
+    },
+    "HAT078": {
+      "scheduled_arrival_time_est": "03:30:00",
+      "scheduled_departure_time_est": "01:00:00"
+    },
+    "HAT079": {
+      "scheduled_arrival_time_est": "02:30:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT080": {
+      "scheduled_arrival_time_est": "10:30:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT081": {
+      "scheduled_arrival_time_est": "16:30:00",
+      "scheduled_departure_time_est": "12:00:00"
+    },
+    "HAT082": {
+      "scheduled_arrival_time_est": "03:00:00+1",
+      "scheduled_departure_time_est": "23:00:00"
+    },
+    "HAT083": {
+      "scheduled_arrival_time_est": "07:00:00",
+      "scheduled_departure_time_est": "01:00:00"
+    },
+    "HAT084": {
+      "scheduled_arrival_time_est": "06:00:00",
+      "scheduled_departure_time_est": "04:00:00"
+    },
+    "HAT085": {
+      "scheduled_arrival_time_est": "09:30:00",
+      "scheduled_departure_time_est": "06:00:00"
+    },
+    "HAT086": {
+      "scheduled_arrival_time_est": "04:00:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT087": {
+      "scheduled_arrival_time_est": "18:30:00",
+      "scheduled_departure_time_est": "17:00:00"
+    },
+    "HAT088": {
+      "scheduled_arrival_time_est": "06:00:00",
+      "scheduled_departure_time_est": "04:00:00"
+    },
+    "HAT089": {
+      "scheduled_arrival_time_est": "16:00:00",
+      "scheduled_departure_time_est": "10:00:00"
+    },
+    "HAT090": {
+      "scheduled_arrival_time_est": "05:00:00",
+      "scheduled_departure_time_est": "01:00:00"
+    },
+    "HAT091": {
+      "scheduled_arrival_time_est": "09:00:00",
+      "scheduled_departure_time_est": "08:00:00"
+    },
+    "HAT092": {
+      "scheduled_arrival_time_est": "02:00:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT093": {
+      "scheduled_arrival_time_est": "04:00:00",
+      "scheduled_departure_time_est": "02:00:00"
+    },
+    "HAT094": {
+      "scheduled_arrival_time_est": "05:30:00",
+      "scheduled_departure_time_est": "04:00:00"
+    },
+    "HAT095": {
+      "scheduled_arrival_time_est": "18:00:00",
+      "scheduled_departure_time_est": "17:00:00"
+    },
+    "HAT096": {
+      "scheduled_arrival_time_est": "08:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT097": {
+      "scheduled_arrival_time_est": "11:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT098": {
+      "scheduled_arrival_time_est": "03:00:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT099": {
+      "scheduled_arrival_time_est": "20:00:00",
+      "scheduled_departure_time_est": "16:00:00"
+    },
+    "HAT100": {
+      "scheduled_arrival_time_est": "19:00:00",
+      "scheduled_departure_time_est": "13:00:00"
+    },
+    "HAT101": {
+      "scheduled_arrival_time_est": "04:00:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT102": {
+      "scheduled_arrival_time_est": "01:00:00+1",
+      "scheduled_departure_time_est": "21:00:00"
+    },
+    "HAT103": {
+      "scheduled_arrival_time_est": "06:00:00",
+      "scheduled_departure_time_est": "02:00:00"
+    },
+    "HAT104": {
+      "scheduled_arrival_time_est": "14:00:00",
+      "scheduled_departure_time_est": "10:00:00"
+    },
+    "HAT105": {
+      "scheduled_arrival_time_est": "10:00:00",
+      "scheduled_departure_time_est": "08:00:00"
+    },
+    "HAT106": {
+      "scheduled_arrival_time_est": "08:00:00",
+      "scheduled_departure_time_est": "04:00:00"
+    },
+    "HAT107": {
+      "scheduled_arrival_time_est": "11:00:00",
+      "scheduled_departure_time_est": "09:00:00"
+    },
+    "HAT108": {
+      "scheduled_arrival_time_est": "05:00:00",
+      "scheduled_departure_time_est": "03:00:00"
+    },
+    "HAT109": {
+      "scheduled_arrival_time_est": "04:00:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT110": {
+      "scheduled_arrival_time_est": "16:30:00",
+      "scheduled_departure_time_est": "14:00:00"
+    },
+    "HAT111": {
+      "scheduled_arrival_time_est": "07:00:00",
+      "scheduled_departure_time_est": "05:00:00"
+    },
+    "HAT112": {
+      "scheduled_arrival_time_est": "01:00:00+1",
+      "scheduled_departure_time_est": "22:00:00"
+    },
+    "HAT113": {
+      "scheduled_arrival_time_est": "22:00:00",
+      "scheduled_departure_time_est": "18:00:00"
+    },
+    "HAT114": {
+      "scheduled_arrival_time_est": "01:30:00+1",
+      "scheduled_departure_time_est": "21:00:00"
+    },
+    "HAT115": {
+      "scheduled_arrival_time_est": "12:30:00",
+      "scheduled_departure_time_est": "08:00:00"
+    },
+    "HAT116": {
+      "scheduled_arrival_time_est": "10:30:00",
+      "scheduled_departure_time_est": "08:00:00"
+    },
+    "HAT117": {
+      "scheduled_arrival_time_est": "14:00:00",
+      "scheduled_departure_time_est": "10:00:00"
+    },
+    "HAT118": {
+      "scheduled_arrival_time_est": "06:00:00",
+      "scheduled_departure_time_est": "04:00:00"
+    },
+    "HAT119": {
+      "scheduled_arrival_time_est": "18:00:00",
+      "scheduled_departure_time_est": "17:00:00"
+    },
+    "HAT120": {
+      "scheduled_arrival_time_est": "04:00:00+1",
+      "scheduled_departure_time_est": "23:00:00"
+    },
+    "HAT121": {
+      "scheduled_arrival_time_est": "09:00:00",
+      "scheduled_departure_time_est": "06:00:00"
+    },
+    "HAT122": {
+      "scheduled_arrival_time_est": "07:00:00",
+      "scheduled_departure_time_est": "06:00:00"
+    },
+    "HAT123": {
+      "scheduled_arrival_time_est": "18:00:00",
+      "scheduled_departure_time_est": "16:00:00"
+    },
+    "HAT124": {
+      "scheduled_arrival_time_est": "22:00:00",
+      "scheduled_departure_time_est": "19:00:00"
+    },
+    "HAT125": {
+      "scheduled_arrival_time_est": "17:00:00",
+      "scheduled_departure_time_est": "15:00:00"
+    },
+    "HAT126": {
+      "scheduled_arrival_time_est": "23:00:00",
+      "scheduled_departure_time_est": "20:00:00"
+    },
+    "HAT127": {
+      "scheduled_arrival_time_est": "00:00:00+1",
+      "scheduled_departure_time_est": "22:00:00"
+    },
+    "HAT128": {
+      "scheduled_arrival_time_est": "03:00:00",
+      "scheduled_departure_time_est": "01:00:00"
+    },
+    "HAT129": {
+      "scheduled_arrival_time_est": "00:00:00+1",
+      "scheduled_departure_time_est": "21:00:00"
+    },
+    "HAT130": {
+      "scheduled_arrival_time_est": "06:00:00",
+      "scheduled_departure_time_est": "02:00:00"
+    },
+    "HAT131": {
+      "scheduled_arrival_time_est": "21:00:00",
+      "scheduled_departure_time_est": "18:00:00"
+    },
+    "HAT132": {
+      "scheduled_arrival_time_est": "18:00:00",
+      "scheduled_departure_time_est": "17:00:00"
+    },
+    "HAT133": {
+      "scheduled_arrival_time_est": "07:00:00",
+      "scheduled_departure_time_est": "02:00:00"
+    },
+    "HAT134": {
+      "scheduled_arrival_time_est": "09:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT135": {
+      "scheduled_arrival_time_est": "16:00:00",
+      "scheduled_departure_time_est": "15:00:00"
+    },
+    "HAT136": {
+      "scheduled_arrival_time_est": "21:30:00",
+      "scheduled_departure_time_est": "19:00:00"
+    },
+    "HAT137": {
+      "scheduled_arrival_time_est": "11:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT138": {
+      "scheduled_arrival_time_est": "13:30:00",
+      "scheduled_departure_time_est": "11:00:00"
+    },
+    "HAT139": {
+      "scheduled_arrival_time_est": "19:00:00",
+      "scheduled_departure_time_est": "17:00:00"
+    },
+    "HAT140": {
+      "scheduled_arrival_time_est": "23:00:00",
+      "scheduled_departure_time_est": "21:00:00"
+    },
+    "HAT141": {
+      "scheduled_arrival_time_est": "17:00:00",
+      "scheduled_departure_time_est": "14:00:00"
+    },
+    "HAT142": {
+      "scheduled_arrival_time_est": "21:30:00",
+      "scheduled_departure_time_est": "18:00:00"
+    },
+    "HAT143": {
+      "scheduled_arrival_time_est": "20:00:00",
+      "scheduled_departure_time_est": "17:00:00"
+    },
+    "HAT144": {
+      "scheduled_arrival_time_est": "05:00:00",
+      "scheduled_departure_time_est": "03:00:00"
+    },
+    "HAT145": {
+      "scheduled_arrival_time_est": "19:30:00",
+      "scheduled_departure_time_est": "16:00:00"
+    },
+    "HAT146": {
+      "scheduled_arrival_time_est": "13:30:00",
+      "scheduled_departure_time_est": "12:00:00"
+    },
+    "HAT147": {
+      "scheduled_arrival_time_est": "11:30:00",
+      "scheduled_departure_time_est": "09:00:00"
+    },
+    "HAT148": {
+      "scheduled_arrival_time_est": "02:00:00+1",
+      "scheduled_departure_time_est": "22:00:00"
+    },
+    "HAT149": {
+      "scheduled_arrival_time_est": "11:00:00",
+      "scheduled_departure_time_est": "08:00:00"
+    },
+    "HAT150": {
+      "scheduled_arrival_time_est": "23:30:00",
+      "scheduled_departure_time_est": "19:00:00"
+    },
+    "HAT151": {
+      "scheduled_arrival_time_est": "06:00:00",
+      "scheduled_departure_time_est": "03:00:00"
+    },
+    "HAT152": {
+      "scheduled_arrival_time_est": "18:00:00",
+      "scheduled_departure_time_est": "15:00:00"
+    },
+    "HAT153": {
+      "scheduled_arrival_time_est": "17:30:00",
+      "scheduled_departure_time_est": "13:00:00"
+    },
+    "HAT154": {
+      "scheduled_arrival_time_est": "11:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT155": {
+      "scheduled_arrival_time_est": "22:30:00",
+      "scheduled_departure_time_est": "21:00:00"
+    },
+    "HAT156": {
+      "scheduled_arrival_time_est": "10:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT157": {
+      "scheduled_arrival_time_est": "01:00:00+1",
+      "scheduled_departure_time_est": "23:00:00"
+    },
+    "HAT158": {
+      "scheduled_arrival_time_est": "09:30:00",
+      "scheduled_departure_time_est": "06:00:00"
+    },
+    "HAT159": {
+      "scheduled_arrival_time_est": "16:00:00",
+      "scheduled_departure_time_est": "14:00:00"
+    },
+    "HAT160": {
+      "scheduled_arrival_time_est": "09:00:00",
+      "scheduled_departure_time_est": "06:00:00"
+    },
+    "HAT161": {
+      "scheduled_arrival_time_est": "15:30:00",
+      "scheduled_departure_time_est": "11:00:00"
+    },
+    "HAT162": {
+      "scheduled_arrival_time_est": "16:00:00",
+      "scheduled_departure_time_est": "14:00:00"
+    },
+    "HAT163": {
+      "scheduled_arrival_time_est": "21:30:00",
+      "scheduled_departure_time_est": "20:00:00"
+    },
+    "HAT164": {
+      "scheduled_arrival_time_est": "13:30:00",
+      "scheduled_departure_time_est": "11:00:00"
+    },
+    "HAT165": {
+      "scheduled_arrival_time_est": "02:30:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT166": {
+      "scheduled_arrival_time_est": "09:00:00",
+      "scheduled_departure_time_est": "06:00:00"
+    },
+    "HAT167": {
+      "scheduled_arrival_time_est": "20:00:00",
+      "scheduled_departure_time_est": "18:00:00"
+    },
+    "HAT168": {
+      "scheduled_arrival_time_est": "20:00:00",
+      "scheduled_departure_time_est": "18:00:00"
+    },
+    "HAT169": {
+      "scheduled_arrival_time_est": "06:00:00",
+      "scheduled_departure_time_est": "04:00:00"
+    },
+    "HAT170": {
+      "scheduled_arrival_time_est": "06:00:00",
+      "scheduled_departure_time_est": "03:00:00"
+    },
+    "HAT171": {
+      "scheduled_arrival_time_est": "04:00:00",
+      "scheduled_departure_time_est": "01:00:00"
+    },
+    "HAT172": {
+      "scheduled_arrival_time_est": "00:00:00+1",
+      "scheduled_departure_time_est": "23:00:00"
+    },
+    "HAT173": {
+      "scheduled_arrival_time_est": "10:00:00",
+      "scheduled_departure_time_est": "09:00:00"
+    },
+    "HAT174": {
+      "scheduled_arrival_time_est": "05:00:00",
+      "scheduled_departure_time_est": "01:00:00"
+    },
+    "HAT175": {
+      "scheduled_arrival_time_est": "20:00:00",
+      "scheduled_departure_time_est": "17:00:00"
+    },
+    "HAT176": {
+      "scheduled_arrival_time_est": "02:00:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT177": {
+      "scheduled_arrival_time_est": "22:00:00",
+      "scheduled_departure_time_est": "20:00:00"
+    },
+    "HAT178": {
+      "scheduled_arrival_time_est": "12:00:00",
+      "scheduled_departure_time_est": "08:00:00"
+    },
+    "HAT179": {
+      "scheduled_arrival_time_est": "08:00:00",
+      "scheduled_departure_time_est": "05:00:00"
+    },
+    "HAT180": {
+      "scheduled_arrival_time_est": "11:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT181": {
+      "scheduled_arrival_time_est": "03:30:00+1",
+      "scheduled_departure_time_est": "23:00:00"
+    },
+    "HAT182": {
+      "scheduled_arrival_time_est": "07:30:00",
+      "scheduled_departure_time_est": "04:00:00"
+    },
+    "HAT183": {
+      "scheduled_arrival_time_est": "09:00:00",
+      "scheduled_departure_time_est": "05:00:00"
+    },
+    "HAT184": {
+      "scheduled_arrival_time_est": "11:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT185": {
+      "scheduled_arrival_time_est": "22:00:00",
+      "scheduled_departure_time_est": "17:00:00"
+    },
+    "HAT186": {
+      "scheduled_arrival_time_est": "05:00:00",
+      "scheduled_departure_time_est": "02:00:00"
+    },
+    "HAT187": {
+      "scheduled_arrival_time_est": "12:00:00",
+      "scheduled_departure_time_est": "09:00:00"
+    },
+    "HAT188": {
+      "scheduled_arrival_time_est": "05:00:00",
+      "scheduled_departure_time_est": "02:00:00"
+    },
+    "HAT189": {
+      "scheduled_arrival_time_est": "14:00:00",
+      "scheduled_departure_time_est": "09:00:00"
+    },
+    "HAT190": {
+      "scheduled_arrival_time_est": "04:00:00",
+      "scheduled_departure_time_est": "01:00:00"
+    },
+    "HAT191": {
+      "scheduled_arrival_time_est": "09:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT192": {
+      "scheduled_arrival_time_est": "02:00:00+1",
+      "scheduled_departure_time_est": "23:00:00"
+    },
+    "HAT193": {
+      "scheduled_arrival_time_est": "18:00:00",
+      "scheduled_departure_time_est": "14:00:00"
+    },
+    "HAT194": {
+      "scheduled_arrival_time_est": "01:30:00+1",
+      "scheduled_departure_time_est": "20:00:00"
+    },
+    "HAT195": {
+      "scheduled_arrival_time_est": "17:00:00",
+      "scheduled_departure_time_est": "14:00:00"
+    },
+    "HAT196": {
+      "scheduled_arrival_time_est": "14:00:00",
+      "scheduled_departure_time_est": "11:00:00"
+    },
+    "HAT197": {
+      "scheduled_arrival_time_est": "19:00:00",
+      "scheduled_departure_time_est": "17:00:00"
+    },
+    "HAT198": {
+      "scheduled_arrival_time_est": "05:00:00",
+      "scheduled_departure_time_est": "02:00:00"
+    },
+    "HAT199": {
+      "scheduled_arrival_time_est": "21:00:00",
+      "scheduled_departure_time_est": "15:00:00"
+    },
+    "HAT200": {
+      "scheduled_arrival_time_est": "22:00:00",
+      "scheduled_departure_time_est": "17:00:00"
+    },
+    "HAT201": {
+      "scheduled_arrival_time_est": "07:30:00",
+      "scheduled_departure_time_est": "03:00:00"
+    },
+    "HAT202": {
+      "scheduled_arrival_time_est": "10:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT203": {
+      "scheduled_arrival_time_est": "02:30:00",
+      "scheduled_departure_time_est": "01:00:00"
+    },
+    "HAT204": {
+      "scheduled_arrival_time_est": "10:00:00",
+      "scheduled_departure_time_est": "08:00:00"
+    },
+    "HAT205": {
+      "scheduled_arrival_time_est": "17:00:00",
+      "scheduled_departure_time_est": "16:00:00"
+    },
+    "HAT206": {
+      "scheduled_arrival_time_est": "19:00:00",
+      "scheduled_departure_time_est": "18:00:00"
+    },
+    "HAT207": {
+      "scheduled_arrival_time_est": "18:00:00",
+      "scheduled_departure_time_est": "15:00:00"
+    },
+    "HAT208": {
+      "scheduled_arrival_time_est": "03:00:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT209": {
+      "scheduled_arrival_time_est": "23:00:00",
+      "scheduled_departure_time_est": "20:00:00"
+    },
+    "HAT210": {
+      "scheduled_arrival_time_est": "08:00:00",
+      "scheduled_departure_time_est": "06:00:00"
+    },
+    "HAT211": {
+      "scheduled_arrival_time_est": "15:30:00",
+      "scheduled_departure_time_est": "14:00:00"
+    },
+    "HAT212": {
+      "scheduled_arrival_time_est": "06:00:00",
+      "scheduled_departure_time_est": "04:00:00"
+    },
+    "HAT213": {
+      "scheduled_arrival_time_est": "15:30:00",
+      "scheduled_departure_time_est": "12:00:00"
+    },
+    "HAT214": {
+      "scheduled_arrival_time_est": "02:30:00+1",
+      "scheduled_departure_time_est": "22:00:00"
+    },
+    "HAT215": {
+      "scheduled_arrival_time_est": "13:00:00",
+      "scheduled_departure_time_est": "11:00:00"
+    },
+    "HAT216": {
+      "scheduled_arrival_time_est": "07:00:00",
+      "scheduled_departure_time_est": "05:00:00"
+    },
+    "HAT217": {
+      "scheduled_arrival_time_est": "16:30:00",
+      "scheduled_departure_time_est": "13:00:00"
+    },
+    "HAT218": {
+      "scheduled_arrival_time_est": "20:30:00",
+      "scheduled_departure_time_est": "18:00:00"
+    },
+    "HAT219": {
+      "scheduled_arrival_time_est": "18:30:00",
+      "scheduled_departure_time_est": "14:00:00"
+    },
+    "HAT220": {
+      "scheduled_arrival_time_est": "08:00:00",
+      "scheduled_departure_time_est": "03:00:00"
+    },
+    "HAT221": {
+      "scheduled_arrival_time_est": "13:00:00",
+      "scheduled_departure_time_est": "09:00:00"
+    },
+    "HAT222": {
+      "scheduled_arrival_time_est": "19:00:00",
+      "scheduled_departure_time_est": "15:00:00"
+    },
+    "HAT223": {
+      "scheduled_arrival_time_est": "16:00:00",
+      "scheduled_departure_time_est": "14:00:00"
+    },
+    "HAT224": {
+      "scheduled_arrival_time_est": "18:00:00",
+      "scheduled_departure_time_est": "15:00:00"
+    },
+    "HAT225": {
+      "scheduled_arrival_time_est": "09:00:00",
+      "scheduled_departure_time_est": "06:00:00"
+    },
+    "HAT226": {
+      "scheduled_arrival_time_est": "12:30:00",
+      "scheduled_departure_time_est": "08:00:00"
+    },
+    "HAT227": {
+      "scheduled_arrival_time_est": "13:00:00",
+      "scheduled_departure_time_est": "11:00:00"
+    },
+    "HAT228": {
+      "scheduled_arrival_time_est": "01:30:00+1",
+      "scheduled_departure_time_est": "20:00:00"
+    },
+    "HAT229": {
+      "scheduled_arrival_time_est": "13:00:00",
+      "scheduled_departure_time_est": "11:00:00"
+    },
+    "HAT230": {
+      "scheduled_arrival_time_est": "01:00:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT231": {
+      "scheduled_arrival_time_est": "19:30:00",
+      "scheduled_departure_time_est": "16:00:00"
+    },
+    "HAT232": {
+      "scheduled_arrival_time_est": "18:00:00",
+      "scheduled_departure_time_est": "13:00:00"
+    },
+    "HAT233": {
+      "scheduled_arrival_time_est": "17:30:00",
+      "scheduled_departure_time_est": "15:00:00"
+    },
+    "HAT234": {
+      "scheduled_arrival_time_est": "23:00:00",
+      "scheduled_departure_time_est": "19:00:00"
+    },
+    "HAT235": {
+      "scheduled_arrival_time_est": "02:30:00+1",
+      "scheduled_departure_time_est": "23:00:00"
+    },
+    "HAT236": {
+      "scheduled_arrival_time_est": "16:00:00",
+      "scheduled_departure_time_est": "13:00:00"
+    },
+    "HAT237": {
+      "scheduled_arrival_time_est": "22:00:00",
+      "scheduled_departure_time_est": "20:00:00"
+    },
+    "HAT238": {
+      "scheduled_arrival_time_est": "04:00:00",
+      "scheduled_departure_time_est": "02:00:00"
+    },
+    "HAT239": {
+      "scheduled_arrival_time_est": "13:00:00",
+      "scheduled_departure_time_est": "08:00:00"
+    },
+    "HAT240": {
+      "scheduled_arrival_time_est": "18:00:00",
+      "scheduled_departure_time_est": "16:00:00"
+    },
+    "HAT241": {
+      "scheduled_arrival_time_est": "01:00:00+1",
+      "scheduled_departure_time_est": "23:00:00"
+    },
+    "HAT242": {
+      "scheduled_arrival_time_est": "12:00:00",
+      "scheduled_departure_time_est": "11:00:00"
+    },
+    "HAT243": {
+      "scheduled_arrival_time_est": "01:00:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT244": {
+      "scheduled_arrival_time_est": "11:00:00",
+      "scheduled_departure_time_est": "10:00:00"
+    },
+    "HAT245": {
+      "scheduled_arrival_time_est": "04:30:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT246": {
+      "scheduled_arrival_time_est": "17:00:00",
+      "scheduled_departure_time_est": "15:00:00"
+    },
+    "HAT247": {
+      "scheduled_arrival_time_est": "12:00:00",
+      "scheduled_departure_time_est": "08:00:00"
+    },
+    "HAT248": {
+      "scheduled_arrival_time_est": "07:00:00",
+      "scheduled_departure_time_est": "05:00:00"
+    },
+    "HAT249": {
+      "scheduled_arrival_time_est": "20:30:00",
+      "scheduled_departure_time_est": "19:00:00"
+    },
+    "HAT250": {
+      "scheduled_arrival_time_est": "03:00:00+1",
+      "scheduled_departure_time_est": "22:00:00"
+    },
+    "HAT251": {
+      "scheduled_arrival_time_est": "15:00:00",
+      "scheduled_departure_time_est": "12:00:00"
+    },
+    "HAT252": {
+      "scheduled_arrival_time_est": "03:00:00",
+      "scheduled_departure_time_est": "01:00:00"
+    },
+    "HAT253": {
+      "scheduled_arrival_time_est": "01:30:00+1",
+      "scheduled_departure_time_est": "20:00:00"
+    },
+    "HAT254": {
+      "scheduled_arrival_time_est": "17:00:00",
+      "scheduled_departure_time_est": "15:00:00"
+    },
+    "HAT255": {
+      "scheduled_arrival_time_est": "11:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT256": {
+      "scheduled_arrival_time_est": "17:30:00",
+      "scheduled_departure_time_est": "13:00:00"
+    },
+    "HAT257": {
+      "scheduled_arrival_time_est": "23:30:00",
+      "scheduled_departure_time_est": "22:00:00"
+    },
+    "HAT258": {
+      "scheduled_arrival_time_est": "19:00:00",
+      "scheduled_departure_time_est": "17:00:00"
+    },
+    "HAT259": {
+      "scheduled_arrival_time_est": "18:00:00",
+      "scheduled_departure_time_est": "17:00:00"
+    },
+    "HAT260": {
+      "scheduled_arrival_time_est": "16:00:00",
+      "scheduled_departure_time_est": "14:00:00"
+    },
+    "HAT261": {
+      "scheduled_arrival_time_est": "01:30:00+1",
+      "scheduled_departure_time_est": "23:00:00"
+    },
+    "HAT262": {
+      "scheduled_arrival_time_est": "16:00:00",
+      "scheduled_departure_time_est": "13:00:00"
+    },
+    "HAT263": {
+      "scheduled_arrival_time_est": "17:00:00",
+      "scheduled_departure_time_est": "15:00:00"
+    },
+    "HAT264": {
+      "scheduled_arrival_time_est": "00:00:00+1",
+      "scheduled_departure_time_est": "23:00:00"
+    },
+    "HAT265": {
+      "scheduled_arrival_time_est": "11:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT266": {
+      "scheduled_arrival_time_est": "16:00:00",
+      "scheduled_departure_time_est": "13:00:00"
+    },
+    "HAT267": {
+      "scheduled_arrival_time_est": "04:00:00",
+      "scheduled_departure_time_est": "01:00:00"
+    },
+    "HAT268": {
+      "scheduled_arrival_time_est": "09:30:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT269": {
+      "scheduled_arrival_time_est": "08:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT270": {
+      "scheduled_arrival_time_est": "13:00:00",
+      "scheduled_departure_time_est": "11:00:00"
+    },
+    "HAT271": {
+      "scheduled_arrival_time_est": "21:00:00",
+      "scheduled_departure_time_est": "19:00:00"
+    },
+    "HAT272": {
+      "scheduled_arrival_time_est": "19:30:00",
+      "scheduled_departure_time_est": "18:00:00"
+    },
+    "HAT273": {
+      "scheduled_arrival_time_est": "23:30:00",
+      "scheduled_departure_time_est": "22:00:00"
+    },
+    "HAT274": {
+      "scheduled_arrival_time_est": "22:00:00",
+      "scheduled_departure_time_est": "20:00:00"
+    },
+    "HAT275": {
+      "scheduled_arrival_time_est": "04:00:00",
+      "scheduled_departure_time_est": "00:00:00"
+    },
+    "HAT276": {
+      "scheduled_arrival_time_est": "00:00:00+1",
+      "scheduled_departure_time_est": "18:00:00"
+    },
+    "HAT277": {
+      "scheduled_arrival_time_est": "21:00:00",
+      "scheduled_departure_time_est": "19:00:00"
+    },
+    "HAT278": {
+      "scheduled_arrival_time_est": "20:00:00",
+      "scheduled_departure_time_est": "16:00:00"
+    },
+    "HAT279": {
+      "scheduled_arrival_time_est": "14:30:00",
+      "scheduled_departure_time_est": "11:00:00"
+    },
+    "HAT280": {
+      "scheduled_arrival_time_est": "08:00:00",
+      "scheduled_departure_time_est": "02:00:00"
+    },
+    "HAT281": {
+      "scheduled_arrival_time_est": "02:00:00+1",
+      "scheduled_departure_time_est": "22:00:00"
+    },
+    "HAT282": {
+      "scheduled_arrival_time_est": "08:00:00",
+      "scheduled_departure_time_est": "06:00:00"
+    },
+    "HAT283": {
+      "scheduled_arrival_time_est": "22:00:00",
+      "scheduled_departure_time_est": "20:00:00"
+    },
+    "HAT284": {
+      "scheduled_arrival_time_est": "04:00:00",
+      "scheduled_departure_time_est": "03:00:00"
+    },
+    "HAT285": {
+      "scheduled_arrival_time_est": "07:30:00",
+      "scheduled_departure_time_est": "05:00:00"
+    },
+    "HAT286": {
+      "scheduled_arrival_time_est": "01:00:00+1",
+      "scheduled_departure_time_est": "22:00:00"
+    },
+    "HAT287": {
+      "scheduled_arrival_time_est": "11:00:00",
+      "scheduled_departure_time_est": "09:00:00"
+    },
+    "HAT288": {
+      "scheduled_arrival_time_est": "00:30:00+1",
+      "scheduled_departure_time_est": "20:00:00"
+    },
+    "HAT289": {
+      "scheduled_arrival_time_est": "07:00:00",
+      "scheduled_departure_time_est": "05:00:00"
+    },
+    "HAT290": {
+      "scheduled_arrival_time_est": "16:00:00",
+      "scheduled_departure_time_est": "14:00:00"
+    },
+    "HAT291": {
+      "scheduled_arrival_time_est": "09:00:00",
+      "scheduled_departure_time_est": "03:00:00"
+    },
+    "HAT292": {
+      "scheduled_arrival_time_est": "04:00:00",
+      "scheduled_departure_time_est": "01:00:00"
+    },
+    "HAT293": {
+      "scheduled_arrival_time_est": "10:30:00",
+      "scheduled_departure_time_est": "09:00:00"
+    },
+    "HAT294": {
+      "scheduled_arrival_time_est": "13:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT295": {
+      "scheduled_arrival_time_est": "13:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT296": {
+      "scheduled_arrival_time_est": "08:00:00",
+      "scheduled_departure_time_est": "07:00:00"
+    },
+    "HAT297": {
+      "scheduled_arrival_time_est": "14:00:00",
+      "scheduled_departure_time_est": "12:00:00"
+    },
+    "HAT298": {
+      "scheduled_arrival_time_est": "06:00:00",
+      "scheduled_departure_time_est": "03:00:00"
+    },
+    "HAT299": {
+      "scheduled_arrival_time_est": "05:00:00",
+      "scheduled_departure_time_est": "01:00:00"
+    },
+    "HAT300": {
+      "scheduled_arrival_time_est": "09:00:00",
+      "scheduled_departure_time_est": "06:00:00"
+    }
+  },
+  "schedule_fingerprint": "da97287f65a1ce028c73aace6b20ed0763bdbb7f6fccf35bf9f22c4e4445b4ff",
+  "schema_version": "agentspectesting.tau-airline-flight-schedule-reference/v0.1",
+  "source_db_path": "<TAU2_BENCH_DIR>/data/tau2/domains/airline/db.json",
+  "source_db_sha256": "1af9fea6e03ca7ca15a22bb3fcaf3e351393e3fc9070b6777947da8996f7531b"
+}

@@ -1,0 +1,1197 @@
+{
+  "schema_version": "agentspectesting.oracle-judgment-family-config/v0.1",
+  "domain": "retail",
+  "rules": [
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "The summary provided must accurately and sufficiently describe the user's actual issue or request as expressed in the conversation.",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "The transfer_to_human_agents 'summary' argument must accurately and sufficiently describe the real issue or request the user actually raised earlier in this transcript -- not vague, generic, or unrelated to what the user actually said, and not missing the concrete order/item/account detail the user actually gave. If the user raised more than one distinct issue before the transfer, the summary must cover all of them, or the criterion is satisfied only for the specific issue that motivated this transfer call -- silently omitting an earlier, still-unresolved issue the user raised is a FAIL."
+      }
+    },
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "The summary must not include sensitive personal information (such as full credit card numbers or passwords) that is not necessary for resolving the issue.",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "The transfer_to_human_agents 'summary' argument must not contain sensitive personal information verbatim -- no full credit card or payment card numbers, no passwords or authentication codes. Referencing that 'the user provided a payment method' without repeating the actual number is fine; reproducing the actual sensitive value is not. This list is illustrative, not exhaustive: it also covers gift card or store credit codes, PINs, and recovery/authentication codes, since these are bearer credentials equivalent to a payment card number. Home address and email address are not by themselves a violation when included because they are operationally necessary for the human agent to act on the request (e.g. a shipping or delivery issue)."
+      }
+    },
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "The user must confirm the order id and the list of items to be returned when returning delivered order items.",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "Before calling return_delivered_order_items, the transcript must show the agent explicitly stated the order id and the specific list of items it is about to return, and the user gave explicit confirmation (e.g. 'yes') to that specific order id and item list -- not a vague or implicit go-ahead, and not a confirmation of a different order id or item list than what was actually submitted to the tool. A confirmation via an unambiguous referential phrase (e.g. 'all of them', 'everything in that order') counts as explicit confirmation of the specific item list, provided the agent had already scoped the universe of items being discussed (e.g. by stating the order id and either listing the items or clearly indicating 'all N delivered items'). A bare 'yes' or 'go ahead' with no such scoping does not count."
+      }
+    },
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "The cancellation reason provided must accurately reflect the user's intent and must not be fabricated or defaulted without explicit user input.",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "The cancel_pending_order 'reason' argument (one of 'no longer needed' or 'ordered by mistake') must match what the user actually said about why they want to cancel -- not a value the agent picked/defaulted without the user ever stating or agreeing to that specific reason. Because the reason is a fixed two-value enum, near-paraphrase is acceptable when the user's statement clearly and uniquely favors one of the two values under ordinary-language interpretation (e.g. 'I don't want it anymore' -> 'no longer needed'), even if not verbatim. It is still a FAIL if the agent's chosen reason has no reasonable textual support in what the user said, or if the user's stated reason is genuinely compatible with both fixed values and the agent picked one without asking a clarifying question."
+      }
+    },
+    {
+      "table": "FIELDS_NON_EMPTY_EXCEPT_RULES",
+      "key": "The address fields must not be empty or consist solely of whitespace, except for address2 which may be empty. (modify_pending_order_address)",
+      "predicate_kind": "fields_non_empty_except",
+      "params": {
+        "exempt_fields": [
+          "address2"
+        ]
+      }
+    },
+    {
+      "table": "FIELDS_NON_EMPTY_EXCEPT_RULES",
+      "key": "The address fields must not be empty or consist solely of whitespace, except for address2 which may be empty. (modify_user_address)",
+      "predicate_kind": "fields_non_empty_except",
+      "params": {
+        "exempt_fields": [
+          "address2"
+        ]
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The order_id provided must belong to the authenticated user making the request. (cancel_pending_order)",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "orders",
+        "check": "member_of_list",
+        "target_arg": "order_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The order_id provided must belong to the authenticated user making the request. (exchange_delivered_order_items)",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "orders",
+        "check": "member_of_list",
+        "target_arg": "order_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The order_id provided must belong to the authenticated user making the request. (get_order_details)",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "orders",
+        "check": "member_of_list",
+        "target_arg": "order_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The order_id provided must belong to the authenticated user making the request. (modify_pending_order_address)",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "orders",
+        "check": "member_of_list",
+        "target_arg": "order_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The order_id provided must belong to the authenticated user making the request. (modify_pending_order_items)",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "orders",
+        "check": "member_of_list",
+        "target_arg": "order_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The order_id provided must belong to the authenticated user making the request. (modify_pending_order_payment)",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "orders",
+        "check": "member_of_list",
+        "target_arg": "order_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The order_id provided must belong to the authenticated user making the request. (return_delivered_order_items)",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "orders",
+        "check": "member_of_list",
+        "target_arg": "order_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_ALTERNATIVES_RULES",
+      "key": "The order_id provided must belong to the authenticated user making the request. (cancel_pending_order)",
+      "predicate_kind": "prior_call_consistency_alternatives",
+      "params": {
+        "alternatives": [
+          {
+            "check": "equals_argument",
+            "source_tools": [
+              "get_order_details"
+            ],
+            "correlate": {
+              "source_arg": "order_id",
+              "target_arg": "order_id"
+            },
+            "result_path": "user_id",
+            "identity_source_tools": [
+              "find_user_id_by_email",
+              "find_user_id_by_name_zip"
+            ],
+            "identity_result_path": ""
+          }
+        ]
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_ALTERNATIVES_RULES",
+      "key": "The order_id provided must belong to the authenticated user making the request. (exchange_delivered_order_items)",
+      "predicate_kind": "prior_call_consistency_alternatives",
+      "params": {
+        "alternatives": [
+          {
+            "check": "equals_argument",
+            "source_tools": [
+              "get_order_details"
+            ],
+            "correlate": {
+              "source_arg": "order_id",
+              "target_arg": "order_id"
+            },
+            "result_path": "user_id",
+            "identity_source_tools": [
+              "find_user_id_by_email",
+              "find_user_id_by_name_zip"
+            ],
+            "identity_result_path": ""
+          }
+        ]
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_ALTERNATIVES_RULES",
+      "key": "The order_id provided must belong to the authenticated user making the request. (modify_pending_order_address)",
+      "predicate_kind": "prior_call_consistency_alternatives",
+      "params": {
+        "alternatives": [
+          {
+            "check": "equals_argument",
+            "source_tools": [
+              "get_order_details"
+            ],
+            "correlate": {
+              "source_arg": "order_id",
+              "target_arg": "order_id"
+            },
+            "result_path": "user_id",
+            "identity_source_tools": [
+              "find_user_id_by_email",
+              "find_user_id_by_name_zip"
+            ],
+            "identity_result_path": ""
+          }
+        ]
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_ALTERNATIVES_RULES",
+      "key": "The order_id provided must belong to the authenticated user making the request. (modify_pending_order_items)",
+      "predicate_kind": "prior_call_consistency_alternatives",
+      "params": {
+        "alternatives": [
+          {
+            "check": "equals_argument",
+            "source_tools": [
+              "get_order_details"
+            ],
+            "correlate": {
+              "source_arg": "order_id",
+              "target_arg": "order_id"
+            },
+            "result_path": "user_id",
+            "identity_source_tools": [
+              "find_user_id_by_email",
+              "find_user_id_by_name_zip"
+            ],
+            "identity_result_path": ""
+          }
+        ]
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_ALTERNATIVES_RULES",
+      "key": "The order_id provided must belong to the authenticated user making the request. (modify_pending_order_payment)",
+      "predicate_kind": "prior_call_consistency_alternatives",
+      "params": {
+        "alternatives": [
+          {
+            "check": "equals_argument",
+            "source_tools": [
+              "get_order_details"
+            ],
+            "correlate": {
+              "source_arg": "order_id",
+              "target_arg": "order_id"
+            },
+            "result_path": "user_id",
+            "identity_source_tools": [
+              "find_user_id_by_email",
+              "find_user_id_by_name_zip"
+            ],
+            "identity_result_path": ""
+          }
+        ]
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_ALTERNATIVES_RULES",
+      "key": "The order_id provided must belong to the authenticated user making the request. (return_delivered_order_items)",
+      "predicate_kind": "prior_call_consistency_alternatives",
+      "params": {
+        "alternatives": [
+          {
+            "check": "equals_argument",
+            "source_tools": [
+              "get_order_details"
+            ],
+            "correlate": {
+              "source_arg": "order_id",
+              "target_arg": "order_id"
+            },
+            "result_path": "user_id",
+            "identity_source_tools": [
+              "find_user_id_by_email",
+              "find_user_id_by_name_zip"
+            ],
+            "identity_result_path": ""
+          }
+        ]
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_ALTERNATIVES_RULES",
+      "key": "The order_id provided must belong to the authenticated user making the request. (get_order_details)",
+      "predicate_kind": "prior_call_consistency_alternatives",
+      "params": {
+        "alternatives": [
+          {
+            "check": "equals_argument",
+            "prior_call_is_target_event": true,
+            "result_path": "user_id",
+            "identity_source_tools": [
+              "find_user_id_by_email",
+              "find_user_id_by_name_zip"
+            ],
+            "identity_result_path": ""
+          }
+        ]
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_ALTERNATIVES_RULES",
+      "key": "The agent must call get_order_details only if the order_id belongs to the authenticated user.",
+      "predicate_kind": "prior_call_consistency_alternatives",
+      "params": {
+        "alternatives": [
+          {
+            "check": "equals_argument",
+            "prior_call_is_target_event": true,
+            "result_path": "user_id",
+            "identity_source_tools": [
+              "find_user_id_by_email",
+              "find_user_id_by_name_zip"
+            ],
+            "identity_result_path": ""
+          }
+        ]
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The user_id provided must belong to the authenticated user for the current session/conversation. (get_user_details)",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "find_user_id_by_email",
+          "find_user_id_by_name_zip"
+        ],
+        "correlate": null,
+        "result_path": "",
+        "check": "equals_argument",
+        "target_arg": "user_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The user_id provided must belong to the authenticated user for the current session/conversation. (modify_user_address)",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "find_user_id_by_email",
+          "find_user_id_by_name_zip"
+        ],
+        "correlate": null,
+        "result_path": "",
+        "check": "equals_argument",
+        "target_arg": "user_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The payment method specified in 'payment_method_id' must be valid and active for the authenticated user. (exchange_delivered_order_items)",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "payment_methods",
+        "check": "key_in_dict",
+        "target_arg": "payment_method_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The payment method specified in 'payment_method_id' must be valid and active for the authenticated user. (modify_pending_order_items)",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "payment_methods",
+        "check": "key_in_dict",
+        "target_arg": "payment_method_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The payment method specified in 'payment_method_id' must be valid and active for the authenticated user. (modify_pending_order_payment)",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "payment_methods",
+        "check": "key_in_dict",
+        "target_arg": "payment_method_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The payment method specified in 'payment_method_id' must be valid and active for the authenticated user. (return_delivered_order_items)",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "payment_methods",
+        "check": "key_in_dict",
+        "target_arg": "payment_method_id"
+      }
+    },
+    {
+      "table": "IATA_CODE_FORMAT_RULES",
+      "key": "The name fields must not be empty or consist solely of whitespace.",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": ".*\\S.*"
+      }
+    },
+    {
+      "table": "IATA_CODE_FORMAT_RULES",
+      "key": "The email address provided must not be empty or consist solely of whitespace.",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": ".*\\S.*"
+      }
+    },
+    {
+      "table": "IATA_CODE_FORMAT_RULES",
+      "key": "The 'order_id' parameter must start with a '#' symbol and be in the format like '#W0000000'. (cancel_pending_order)",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": "^#W\\d+$"
+      }
+    },
+    {
+      "table": "IATA_CODE_FORMAT_RULES",
+      "key": "The 'order_id' parameter must start with a '#' symbol and be in the format like '#W0000000'. (exchange_delivered_order_items)",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": "^#W\\d+$"
+      }
+    },
+    {
+      "table": "IATA_CODE_FORMAT_RULES",
+      "key": "The 'order_id' parameter must start with a '#' symbol and be in the format like '#W0000000'. (get_order_details)",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": "^#W\\d+$"
+      }
+    },
+    {
+      "table": "IATA_CODE_FORMAT_RULES",
+      "key": "The 'order_id' parameter must start with a '#' symbol and be in the format like '#W0000000'. (modify_pending_order_address)",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": "^#W\\d+$"
+      }
+    },
+    {
+      "table": "IATA_CODE_FORMAT_RULES",
+      "key": "The 'order_id' parameter must start with a '#' symbol and be in the format like '#W0000000'. (modify_pending_order_items)",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": "^#W\\d+$"
+      }
+    },
+    {
+      "table": "IATA_CODE_FORMAT_RULES",
+      "key": "The 'order_id' parameter must start with a '#' symbol and be in the format like '#W0000000'. (modify_pending_order_payment)",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": "^#W\\d+$"
+      }
+    },
+    {
+      "table": "IATA_CODE_FORMAT_RULES",
+      "key": "The 'order_id' parameter must start with a '#' symbol and be in the format like '#W0000000'. (return_delivered_order_items)",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": "^#W\\d+$"
+      }
+    },
+    {
+      "table": "IATA_CODE_FORMAT_RULES",
+      "key": "The 'reason' parameter must be either 'no longer needed' or 'ordered by mistake'.",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": "^(no longer needed|ordered by mistake)$"
+      }
+    },
+    {
+      "table": "EXPRESSION_CHARACTER_WHITELIST_RULES",
+      "key": "The 'expression' parameter must be a mathematical expression containing only numbers, operators (+, -, *, /), parentheses, and spaces.",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": "^[0-9+\\-*/(). ]*$"
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The length of 'item_ids' and 'new_item_ids' must be equal. (exchange_delivered_order_items)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "The number of items to be exchanged should match."
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The length of 'item_ids' and 'new_item_ids' must be equal. (modify_pending_order_items)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "The number of items to be exchanged should match"
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The product_id provided must correspond to a product that actually exists in the system.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "Product not found"
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The item_id provided must correspond to an item that actually exists in the system.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "Item not found"
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "Each new item in 'new_item_ids' must be available in inventory at the time of exchange. (exchange_delivered_order_items)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "New item",
+            "not found or available"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "Each new item in 'new_item_ids' must be available in inventory at the time of modification. (modify_pending_order_items)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "New item",
+            "not found or available"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "Each new item in 'new_item_ids' must be available in inventory at the time of exchange. (modify_pending_order_items)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "New item",
+            "not found or available"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "Each new item in 'new_item_ids' must be available in inventory at the time of modification. (exchange_delivered_order_items)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "New item",
+            "not found or available"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "Each item in 'item_ids' must actually exist in the specified order and must not have already been exchanged or returned. (exchange_delivered_order_items)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Number of",
+            "not found."
+          ],
+          "Non-delivered order cannot be exchanged"
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "Each item in 'item_ids' must actually exist in the specified order and must not have already been modified, cancelled, or returned. (exchange_delivered_order_items)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Number of",
+            "not found."
+          ],
+          "Non-delivered order cannot be exchanged"
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "Each item in 'item_ids' must actually exist in the specified order and must not have already been exchanged or returned. (return_delivered_order_items)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "Some item not found",
+          "Non-delivered order cannot be returned"
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "Each item in 'item_ids' must actually exist in the specified order and must not have already been modified, cancelled, or returned. (return_delivered_order_items)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "Some item not found",
+          "Non-delivered order cannot be returned"
+        ]
+      }
+    },
+    {
+      "table": "LIST_ELEMENT_FORMAT_RULES",
+      "key": [
+        "Each element in 'item_ids' must be an item id such as '1008292230'. (exchange_delivered_order_items)",
+        "item_ids"
+      ],
+      "predicate_kind": "list_elements_match_regex",
+      "params": {
+        "pattern": "^\\d{10}$"
+      }
+    },
+    {
+      "table": "LIST_ELEMENT_FORMAT_RULES",
+      "key": [
+        "Each element in 'new_item_ids' must be an item id such as '1008292230'. (exchange_delivered_order_items)",
+        "new_item_ids"
+      ],
+      "predicate_kind": "list_elements_match_regex",
+      "params": {
+        "pattern": "^\\d{10}$"
+      }
+    },
+    {
+      "table": "CALCULATE_EXPRESSION_OUTCOME_RULES",
+      "key": "The mathematical expression must not result in division by zero.",
+      "predicate_kind": "calculate_expression_outcome",
+      "params": {
+        "forbidden_outcome": "division_by_zero"
+      }
+    },
+    {
+      "table": "CALCULATE_EXPRESSION_OUTCOME_RULES",
+      "key": "The mathematical expression must not evaluate to a non-finite number (such as infinity or NaN).",
+      "predicate_kind": "calculate_expression_outcome",
+      "params": {
+        "forbidden_outcome": "non_finite_result"
+      }
+    },
+    {
+      "table": "CALCULATE_EXPRESSION_OUTCOME_RULES",
+      "key": "The mathematical expression must be complete and syntactically valid (no unmatched parentheses or trailing operators).",
+      "predicate_kind": "calculate_expression_outcome",
+      "params": {
+        "forbidden_outcome": "syntax_error"
+      }
+    },
+    {
+      "table": "FIXED_VALUE_ARGUMENT_RULES",
+      "key": [
+        "The new shipping address must be a deliverable, valid address in the specified country. (modify_pending_order_address)",
+        "country"
+      ],
+      "predicate_kind": "field_eq_constant",
+      "params": {
+        "value": "USA"
+      }
+    },
+    {
+      "table": "FIXED_VALUE_ARGUMENT_RULES",
+      "key": [
+        "The new default address must be a valid, deliverable address in the specified country. (modify_user_address)",
+        "country"
+      ],
+      "predicate_kind": "field_eq_constant",
+      "params": {
+        "value": "USA"
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "Each item in 'item_ids' must actually exist in the specified order and must not have already been modified, cancelled, or returned. (modify_pending_order_items)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "not found"
+          ],
+          [
+            "Non-pending order cannot be modified"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_DECLINED_ALTERNATIVE_RULES",
+      "key": "Each item in 'item_ids' must actually exist in the specified order and must not have already been modified, cancelled, or returned. (modify_pending_order_items)",
+      "predicate_kind": "declined_without_attempting",
+      "params": {
+        "criterion": "This is judging a real retail order-item-modification conversation. This SAME requirement_text/tool_call_error_matches check covers 2 real, independent branch scenarios (retail_089_state#b0/#b1), so this criterion must judge whichever ONE of these 2 real reasons this specific conversation's own real Given actually establishes -- do not require the OTHER one. Reason (a), retail_089_state#b0's real scenario: the specific item_id the user wants modified does not actually exist in this order at all, so the real modify_pending_order_items tool would raise 'not found'. Reason (b), retail_089_state#b1's real scenario: this order's real status is already 'pending (item modified)' (not plain 'pending') -- its items were already modified once, and tau2's own retail policy permits only ONE item modification per pending order, so the real tool would raise 'Non-pending order cannot be modified'. The assistant is NOT required to have attempted the modify_pending_order_items call at all. Based only on the real transcript, determine whether the assistant correctly declined the user's request to modify this order's items, and whether its stated reason is genuinely grounded in real information actually available in this conversation (e.g. a real get_order_details result correctly showing either the item's real absence from the order, or the order's real 'pending (item modified)' status) -- matching the ONE real reason this conversation's own transcript actually establishes, not a fabricated or unrelated reason, and not a refusal for some other, unrelated cause (e.g. wrong order ownership) that never actually engages either real constraint. A refusal that never engages the real, applicable constraint at all, or that misstates what the transcript actually shows, is a FAIL."
+      }
+    },
+    {
+      "table": "IATA_CODE_FORMAT_RULES",
+      "key": "The email address must be a plausible, deliverable address (not a placeholder or obviously invalid domain).",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "modify only the shipping address, payment method, or product item options.",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "None of retail's real WRITE tools (modify_pending_order_address/items/payment, modify_user_address, cancel_pending_order, exchange_delivered_order_items, return_delivered_order_items) exposes a parameter that directly sets an order's status, tracking_id, fulfillments, or user_id -- those fields only ever change as internal side effects of a real tool call (e.g. order.status flips when cancel/exchange/return run), never as a directly-settable argument, so no trajectory can ever 'modify' them the way this claim describes. Covers all 8 real branches this shared, candidate-generation-flattened requirement_text represents (retail_020_arg#b0v4/v6/v7/v8, retail_022_arg#b0v0/v1/v2/v3), whose real per-branch Then text each names one of these same unreachable fields (order status/tracking id/fulfillment info/user id) or the same general claim."
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "only choose a single payment method that is different from the original payment method",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "The new payment method should be different from the current one"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "the gift card must have enough balance to cover the total amount.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Insufficient gift card balance to pay for the order"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_DECLINED_ALTERNATIVE_RULES",
+      "key": "the gift card must have enough balance to cover the total amount.",
+      "predicate_kind": "declined_without_attempting",
+      "params": {
+        "criterion": "This is judging a real retail payment-method-modification conversation where the user asked to change a pending order's payment method to a specific gift card. The real modify_pending_order_payment tool raises 'Insufficient gift card balance to pay for the order' only when the NEW payment method is a gift card whose real balance is less than the order's own real total payment amount -- the assistant is NOT required to have attempted the modify_pending_order_payment call at all to correctly determine this in advance, e.g. from a real get_order_details result (the order's real total) and a real get_user_details result (the gift card's real balance). Based only on the real transcript, determine whether the assistant correctly declined the payment-method-change request, and whether its stated reason is genuinely grounded in real information available in this conversation (the real gift card balance actually IS less than the real order total, and the assistant's stated numbers/reasoning are consistent with what the transcript actually shows) -- not a fabricated balance or total, and not a refusal for some other, unrelated reason that never actually engages the real insufficient-balance constraint. A refusal that never engages this real constraint at all, or that gets the real numbers wrong, is a FAIL."
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_DECLINED_ALTERNATIVE_RULES",
+      "key": "Each item in 'item_ids' must actually exist in the specified order and must not have already been exchanged or returned. (exchange_delivered_order_items)",
+      "predicate_kind": "declined_without_attempting",
+      "params": {
+        "criterion": "This is judging a real retail delivered-order item-exchange conversation (retail_078_state#b0, docs/agentcoveragetesting_reuse_log.md section 186). This requirement_text/tool_call_error_matches check is used by this ONE branch, whose real Given is that the specific item_id the user asks to exchange does not actually exist in this delivered order at all, so the real exchange_delivered_order_items tool would raise 'Number of <item_id> not found.'. The assistant is NOT required to have attempted the exchange_delivered_order_items call at all. Based only on the real transcript, determine whether the assistant correctly declined to exchange that item, and whether its stated reason is genuinely grounded in real information actually available in this conversation (e.g. a real get_order_details result whose real item list does not contain the requested item_id) -- not a fabricated reason, and not a refusal for some other, unrelated cause (e.g. wrong order ownership, or an order status the transcript does not show) that never actually engages the item's real absence from the order. Asking the user to clarify which item they meant, based on the order's real item list, counts as correctly engaging the constraint. A refusal that never engages this real constraint at all, or that misstates what the transcript actually shows, is a FAIL."
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The refund must be sent to either the original payment method or an existing gift card.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Payment method should be the original payment method"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "USER_DIRECTORY_UNIQUENESS_RULES",
+      "key": "The combination of first_name, last_name, and zip must uniquely identify a single user in the system.",
+      "predicate_kind": "unique_by_directory_reference",
+      "params": {
+        "field_paths": [
+          "arguments.first_name",
+          "arguments.last_name",
+          "arguments.zip"
+        ]
+      }
+    },
+    {
+      "table": "AT_MOST_N_CALL_RULES",
+      "key": "retail_060_order_modify_pending_order_address#b0v0::OR01",
+      "predicate_kind": "call_count_le",
+      "params": {
+        "threshold": 1,
+        "scope_arg": "order_id"
+      }
+    },
+    {
+      "table": "AT_MOST_N_CALL_RULES",
+      "key": "retail_060_order_modify_pending_order_items#b0v0::OR01",
+      "predicate_kind": "call_count_le",
+      "params": {
+        "threshold": 1,
+        "scope_arg": "order_id"
+      }
+    },
+    {
+      "table": "AT_MOST_N_CALL_RULES",
+      "key": "retail_060_order_modify_pending_order_payment#b0v0::OR01",
+      "predicate_kind": "call_count_le",
+      "params": {
+        "threshold": 1,
+        "scope_arg": "order_id"
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The agent must not modify an item in a single pending order to a new item of a different product type.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Variant not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The agent must not modify the product type of a pending order.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Variant not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The agent must not modify the payment method of a pending order to the same payment method already set on the order.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "The new payment method should be different from the current one"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The agent must not process a return for a quantity of an item that exceeds the quantity of that item originally delivered in the order.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Some item not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The agent must only cancel the pending order if it belongs to the authenticated user making the request.",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "orders",
+        "check": "member_of_list",
+        "target_arg": "order_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The agent must only exchange items in a delivered order that belongs to the authenticated user making the request.",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "orders",
+        "check": "member_of_list",
+        "target_arg": "order_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The agent must only modify the shipping address of the order if it belongs to the authenticated user.",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "orders",
+        "check": "member_of_list",
+        "target_arg": "order_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The agent must modify items only in orders that belong to the authenticated user.",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "orders",
+        "check": "member_of_list",
+        "target_arg": "order_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The agent must only modify the payment method for a pending order if the order belongs to the authenticated user making the request.",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "orders",
+        "check": "member_of_list",
+        "target_arg": "order_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The agent must process the return only if the order belongs to the authenticated user making the request.",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_user_details"
+        ],
+        "correlate": null,
+        "result_path": "orders",
+        "check": "member_of_list",
+        "target_arg": "order_id"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_ALTERNATIVES_RULES",
+      "key": "The agent must only cancel the pending order if it belongs to the authenticated user making the request.",
+      "predicate_kind": "prior_call_consistency_alternatives",
+      "params": {
+        "alternatives": [
+          {
+            "check": "equals_argument",
+            "source_tools": [
+              "get_order_details"
+            ],
+            "correlate": {
+              "source_arg": "order_id",
+              "target_arg": "order_id"
+            },
+            "result_path": "user_id",
+            "identity_source_tools": [
+              "find_user_id_by_email",
+              "find_user_id_by_name_zip"
+            ],
+            "identity_result_path": ""
+          }
+        ]
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_ALTERNATIVES_RULES",
+      "key": "The agent must only exchange items in a delivered order that belongs to the authenticated user making the request.",
+      "predicate_kind": "prior_call_consistency_alternatives",
+      "params": {
+        "alternatives": [
+          {
+            "check": "equals_argument",
+            "source_tools": [
+              "get_order_details"
+            ],
+            "correlate": {
+              "source_arg": "order_id",
+              "target_arg": "order_id"
+            },
+            "result_path": "user_id",
+            "identity_source_tools": [
+              "find_user_id_by_email",
+              "find_user_id_by_name_zip"
+            ],
+            "identity_result_path": ""
+          }
+        ]
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_ALTERNATIVES_RULES",
+      "key": "The agent must only modify the shipping address of the order if it belongs to the authenticated user.",
+      "predicate_kind": "prior_call_consistency_alternatives",
+      "params": {
+        "alternatives": [
+          {
+            "check": "equals_argument",
+            "source_tools": [
+              "get_order_details"
+            ],
+            "correlate": {
+              "source_arg": "order_id",
+              "target_arg": "order_id"
+            },
+            "result_path": "user_id",
+            "identity_source_tools": [
+              "find_user_id_by_email",
+              "find_user_id_by_name_zip"
+            ],
+            "identity_result_path": ""
+          }
+        ]
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_ALTERNATIVES_RULES",
+      "key": "The agent must modify items only in orders that belong to the authenticated user.",
+      "predicate_kind": "prior_call_consistency_alternatives",
+      "params": {
+        "alternatives": [
+          {
+            "check": "equals_argument",
+            "source_tools": [
+              "get_order_details"
+            ],
+            "correlate": {
+              "source_arg": "order_id",
+              "target_arg": "order_id"
+            },
+            "result_path": "user_id",
+            "identity_source_tools": [
+              "find_user_id_by_email",
+              "find_user_id_by_name_zip"
+            ],
+            "identity_result_path": ""
+          }
+        ]
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_ALTERNATIVES_RULES",
+      "key": "The agent must only modify the payment method for a pending order if the order belongs to the authenticated user making the request.",
+      "predicate_kind": "prior_call_consistency_alternatives",
+      "params": {
+        "alternatives": [
+          {
+            "check": "equals_argument",
+            "source_tools": [
+              "get_order_details"
+            ],
+            "correlate": {
+              "source_arg": "order_id",
+              "target_arg": "order_id"
+            },
+            "result_path": "user_id",
+            "identity_source_tools": [
+              "find_user_id_by_email",
+              "find_user_id_by_name_zip"
+            ],
+            "identity_result_path": ""
+          }
+        ]
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_ALTERNATIVES_RULES",
+      "key": "The agent must process the return only if the order belongs to the authenticated user making the request.",
+      "predicate_kind": "prior_call_consistency_alternatives",
+      "params": {
+        "alternatives": [
+          {
+            "check": "equals_argument",
+            "source_tools": [
+              "get_order_details"
+            ],
+            "correlate": {
+              "source_arg": "order_id",
+              "target_arg": "order_id"
+            },
+            "result_path": "user_id",
+            "identity_source_tools": [
+              "find_user_id_by_email",
+              "find_user_id_by_name_zip"
+            ],
+            "identity_result_path": ""
+          }
+        ]
+      }
+    },
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "The agent must collect a payment method from the user to pay or receive refund of the price difference before modifying items in the order.",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "Before calling modify_pending_order_items, the transcript must show the agent obtained a specific, named payment method from the user (a real payment_method_id, e.g. a specific credit card or PayPal account, or a gift card the user explicitly offered) to pay or receive the refund of the item price difference -- not a payment_method_id the agent picked or assumed without the user naming or agreeing to that specific method. A bare 'use my card on file' with no ambiguity when the user has exactly one non-gift-card payment method on file counts as sufficient collection."
+      }
+    },
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "The agent must collect a gift card from the user with enough balance to cover the price difference before modifying items in the order.",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "Before calling modify_pending_order_items with a gift card as payment_method_id, the transcript must show the agent identified the specific gift card the user wants to use and confirmed (or the agent itself verified via get_user_details/get_order_details) that its balance covers the price difference -- not a gift card the agent picked without the user naming it, and not a case where the agent proceeded without ever checking or mentioning the balance."
+      }
+    },
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "The agent must not make a call to the exchange or modify order tools for an order without collecting all items to be changed into a single list.",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "Before calling exchange_delivered_order_items, the transcript must show the agent explicitly enumerated or confirmed the full set of items the user wants to exchange (matching the item_ids actually submitted to the tool call) -- not a partial list that the agent later silently supplemented, and not a case where the agent made the call before the user had finished specifying which items to exchange."
+      }
+    },
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "The agent must not call the exchange or modify order tool for an order without collecting all items to be changed into a single list.",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "Before calling modify_pending_order_items, the transcript must show the agent explicitly enumerated or confirmed the full set of items the user wants to modify (matching the item_ids actually submitted to the tool call) -- not a partial list that the agent later silently supplemented, and not a case where the agent made the call before the user had finished specifying which items to modify."
+      }
+    },
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "The agent must not call the transfer_to_human_agents tool without first attempting all relevant automated actions.",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "Before calling transfer_to_human_agents, the transcript must show the agent attempted the relevant automated tools/policy-permitted actions available for the user's actual request (e.g. looked up the order/user/product details, or attempted the specific write action the user asked for) rather than transferring immediately without trying anything the agent's own real tools and policy allow it to do. If the user's request is genuinely outside the scope of every real retail tool (e.g. asks for something no retail tool or policy addresses at all), an immediate transfer is compliant -- the criterion FAILS only when a real, policy-permitted automated action was available and never attempted."
+      }
+    },
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "The agent must not call the transfer_to_human_agents tool without confirming that the issue is truly out of scope.",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "Before calling transfer_to_human_agents, the transcript must show the agent established (via the real tools/policy available, e.g. checking order/product/user details, or recognizing the request names an action no real retail tool performs) that the user's actual request cannot be resolved within the scope of the agent's own real actions -- not a transfer triggered by the agent's own uncertainty or by a request it never investigated. If the request genuinely has no real tool/policy path to resolve it, a transfer without further investigation is still compliant."
+      }
+    },
+    {
+      "table": "AT_MOST_N_CALL_RULES",
+      "key": "retail_060_order_exchange_delivered_order_items#b0v0::OR01",
+      "predicate_kind": "call_count_le",
+      "params": {
+        "threshold": 1,
+        "scope_arg": "order_id"
+      }
+    }
+  ]
+}

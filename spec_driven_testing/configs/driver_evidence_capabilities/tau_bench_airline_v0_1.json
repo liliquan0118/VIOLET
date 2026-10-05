@@ -1,0 +1,66 @@
+{
+  "schema_version": "agentspectesting.driver-evidence-capability-profile/v0.1",
+  "profile_id": "tau_bench_airline_driver_evidence_v0_1",
+  "domain": "airline",
+  "evidence_sources": [
+    {
+      "source_kind": "user_speech_act",
+      "implementation_status": "available",
+      "description": "The user's utterance itself creates the condition, such as requesting, asking, refusing, or complaining.",
+      "supports": ["request content", "complaint occurrence", "explicit ask or omission"],
+      "limitations": ["does not prove database or prior-action facts"]
+    },
+    {
+      "source_kind": "user_supplied_fact",
+      "implementation_status": "available_with_spec_authority_check",
+      "description": "The synthetic user supplies a scenario fact that the target policy expects the agent to learn from the user.",
+      "supports": ["intent", "reason", "preference", "user knowledge"],
+      "limitations": ["must not replace a fact that the target can and should verify from tools or state"]
+    },
+    {
+      "source_kind": "fixture_state",
+      "implementation_status": "available",
+      "description": "A field, entity, absence, or collection in the synthetic tau-bench fixture directly establishes the condition.",
+      "supports": ["entity existence or absence", "field equality", "collection membership", "stored status"],
+      "limitations": ["requires a concrete fixture path or complete collection"]
+    },
+    {
+      "source_kind": "derived_state",
+      "implementation_status": "requires_evaluator_contract",
+      "description": "A deterministic evaluator over fixture values, tool-observable values, policy constants, or time establishes the condition.",
+      "supports": ["cross-value comparison", "count or aggregate", "time relation", "set membership derived from a complete collection", "policy eligibility predicate"],
+      "limitations": ["the derivation rule and every input value must be available"]
+    },
+    {
+      "source_kind": "prior_runtime_event",
+      "implementation_status": "available",
+      "description": "An earlier message, action, tool call, or tool result in the same execution trace establishes the condition.",
+      "supports": ["earlier user act", "earlier agent action", "earlier tool outcome"],
+      "limitations": ["the event must be staged and trace-verifiable"]
+    },
+    {
+      "source_kind": "agent_capability",
+      "implementation_status": "available",
+      "description": "The condition is established by comparing the request with the target Agent's declared actions or policy scope.",
+      "supports": ["in-scope request", "out-of-scope request", "available transfer action"],
+      "limitations": ["requires the relevant action or policy scope in accepted artifacts"]
+    },
+    {
+      "source_kind": "multiple_sources",
+      "implementation_status": "composition_required",
+      "description": "Two or more independent evidence sources above are inherently required.",
+      "supports": ["cross-source conjunction"],
+      "limitations": ["must name each required component source"]
+    }
+  ],
+  "non_source_outcomes": [
+    {
+      "outcome": "source_undefined",
+      "meaning": "The selected spec uses the condition but does not define any authoritative way to establish it."
+    },
+    {
+      "outcome": "insufficient_context",
+      "meaning": "The supplied accepted artifacts are not enough to choose between otherwise defined sources."
+    }
+  ]
+}

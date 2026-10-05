@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.then-atomization-packet-set/v0.1",
+  "title": "GWT Then Atomization Packet Set",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source",
+    "selected_branch_ids",
+    "packets",
+    "summary",
+    "packet_set_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {"const": "agentspectesting.then-atomization-packet-set/v0.1"},
+    "source": {"type": "object"},
+    "selected_branch_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "packets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schema_version",
+          "spec_id",
+          "branch_id",
+          "source_context",
+          "gwt_context",
+          "task_inputs",
+          "packet_fingerprint"
+        ],
+        "properties": {
+          "schema_version": {"const": "agentspectesting.then-atomization-packet/v0.1"},
+          "spec_id": {"type": "string", "minLength": 1},
+          "branch_id": {"type": "string", "minLength": 1},
+          "source_context": {"type": "object"},
+          "gwt_context": {
+            "type": "object",
+            "required": ["given", "when", "then"],
+            "properties": {
+              "given": {"type": "string", "minLength": 1},
+              "when": {"type": "string", "minLength": 1},
+              "then": {"type": "string", "minLength": 1}
+            }
+          },
+          "task_inputs": {
+            "type": "object",
+            "required": ["source_alignment", "predicate_partition", "claim_inventory"],
+            "properties": {
+              "source_alignment": {"type": "object"},
+              "predicate_partition": {"type": "object"},
+              "claim_inventory": {"type": "object"}
+            }
+          },
+          "packet_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "summary": {"type": "object"},
+    "packet_set_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

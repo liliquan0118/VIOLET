@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.compile-assessment/v0.2",
+  "title": "Compiler Layer Readiness Assessment",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "source_record_fingerprint",
+    "source_branch_id",
+    "source_kind",
+    "resolved_evaluation_target_identity",
+    "target_resolution_report",
+    "target_archetype",
+    "stages",
+    "end_to_end_ready",
+    "capability_registry",
+    "diagnostics",
+    "llm_calls",
+    "compile_assessment_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.compile-assessment/v0.2"
+    },
+    "source_record_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_branch_id": {"type": "string", "minLength": 1},
+    "source_kind": {"type": ["string", "null"]},
+    "resolved_evaluation_target_identity": {
+      "type": "object",
+      "required": ["fingerprint", "resolution_status", "resolver_id"]
+    },
+    "target_resolution_report": {"type": "object"},
+    "target_archetype": {"type": ["string", "null"]},
+    "stages": {
+      "type": "object",
+      "required": [
+        "source_loading",
+        "semantic_resolution",
+        "experiment_planning",
+        "probe_synthesis",
+        "fixture_binding",
+        "runtime_protocol",
+        "surface_realization",
+        "outcome_oracle",
+        "mutation_provider",
+        "guidance"
+      ],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["status", "reason_code", "capability_id"],
+        "properties": {
+          "status": {
+            "enum": ["ready", "partial", "blocked", "not_assessed"]
+          },
+          "reason_code": {"type": "string", "minLength": 1},
+          "capability_id": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "end_to_end_ready": {"type": "boolean"},
+    "capability_registry": {"type": "object"},
+    "diagnostics": {"type": "array", "items": {"type": "object"}},
+    "llm_calls": {"const": 0},
+    "compile_assessment_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

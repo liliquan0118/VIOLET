@@ -1,0 +1,582 @@
+{
+ "schema_version": "agentspectesting.llm-oracle-for-uncompilable-thens/v0.1",
+ "note": "Section 206. Test cases whose Then compiled to no decidable check get ONE semantic-judge check whose requirement_text is below. Rewrite rules (user decision 2026-09-25): none = the Then as written; permission_as_prohibition = 'The agent may X' judged as 'the agent must not X unless the policy's conditions for X hold' (section 207; the section 206 may_to_must rule failed 5/5 on correct refusals); iff_one_direction = one direction of an if-and-only-if chosen for this branch's scenario; multi_step_llm = an ordered multi-step Then judged as a whole by the LLM. The Given (if not 'True') is stated as context.",
+ "branches": {
+  "retail_006_arg#b0": {
+   "rewrite": "none",
+   "original_given": "The order status is 'delivered' and the user requests to exchange one or more items in the order.",
+   "original_when": "The user requests to exchange specific items in a delivered order for new items.",
+   "original_then": "The agent must, for each item in a delivered order being exchanged, ensure that the new item provided in the same position in 'new_item_ids' is a variant of the same product as the original item in 'item_ids'.",
+   "criterion": "The agent must, for each item in a delivered order being exchanged, ensure that the new item provided in the same position in 'new_item_ids' is a variant of the same product as the original item in 'item_ids'.",
+   "requirement_text": "In this conversation the following holds: The order status is 'delivered' and the user requests to exchange one or more items in the order. The agent must, for each item in a delivered order being exchanged, ensure that the new item provided in the same position in 'new_item_ids' is a variant of the same product as the original item in 'item_ids'.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Then does not start with any configured modality prefix."
+   ]
+  },
+  "retail_023_arg#b0v0": {
+   "rewrite": "none",
+   "original_given": "The order status is pending.",
+   "original_when": "The user requests to modify the payment method of the pending order.",
+   "original_then": "The agent must not allow the user to choose more than one payment method for the modification in a single pending order.",
+   "criterion": "The agent must not allow the user to choose more than one payment method for the modification in a single pending order.",
+   "requirement_text": "In this conversation the following holds: The order status is pending. The agent must not allow the user to choose more than one payment method for the modification in a single pending order.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "retail_032_arg#b0": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The user requests to exchange items in a delivered order.",
+   "original_then": "The agent must not include the same item id more than once in the 'item_ids' list for a single exchange operation.",
+   "criterion": "The agent must not include the same item id more than once in the 'item_ids' list for a single exchange operation.",
+   "requirement_text": "The agent must not include the same item id more than once in the 'item_ids' list for a single exchange operation.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Then modality directly determines the expected observation."
+   ]
+  },
+  "retail_034_arg#b0": {
+   "rewrite": "none",
+   "original_given": "A zip code has been provided for user identification.",
+   "original_when": "The user requests identification or lookup by name and zip code.",
+   "original_then": "The agent must ensure the zip code provided corresponds to a valid postal code in the country of operation before proceeding with user lookup.",
+   "criterion": "The agent must ensure the zip code provided corresponds to a valid postal code in the country of operation before proceeding with user lookup.",
+   "requirement_text": "In this conversation the following holds: A zip code has been provided for user identification. The agent must ensure the zip code provided corresponds to a valid postal code in the country of operation before proceeding with user lookup.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "retail_038_arg#b0": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The user requests to list all product types.",
+   "original_then": "The agent must not return a list of product types that includes two or more entries with the same product id.",
+   "criterion": "The agent must not return a list of product types that includes two or more entries with the same product id.",
+   "requirement_text": "The agent must not return a list of product types that includes two or more entries with the same product id.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "retail_039_arg#b0": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The user requests a list of all product types.",
+   "original_then": "The agent must ensure that each product type listed has both a valid, non-empty name and a valid, non-empty product id.",
+   "criterion": "The agent must ensure that each product type listed has both a valid, non-empty name and a valid, non-empty product id.",
+   "requirement_text": "The agent must ensure that each product type listed has both a valid, non-empty name and a valid, non-empty product id.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "retail_042_arg#b0": {
+   "rewrite": "none",
+   "original_given": "The order status is 'pending'.",
+   "original_when": "The user requests to modify the shipping address of the pending order.",
+   "original_then": "The agent must not submit a modification request where all address fields are unchanged from the current order address.",
+   "criterion": "The agent must not submit a modification request where all address fields are unchanged from the current order address.",
+   "requirement_text": "In this conversation the following holds: The order status is 'pending'. The agent must not submit a modification request where all address fields are unchanged from the current order address.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "retail_043_arg#b0": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The user requests to modify items in a pending order.",
+   "original_then": "The agent must not include the same item id multiple times in the 'item_ids' list for a single modification operation.",
+   "criterion": "The agent must not include the same item id multiple times in the 'item_ids' list for a single modification operation.",
+   "requirement_text": "The agent must not include the same item id multiple times in the 'item_ids' list for a single modification operation.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Then modality directly determines the expected observation."
+   ]
+  },
+  "retail_045_arg#b0": {
+   "rewrite": "none",
+   "original_given": "The order is pending and a payment method is available for selection.",
+   "original_when": "The user requests to modify the payment method of a pending order.",
+   "original_then": "The agent must select a payment method that is eligible for the order's currency and shipping country.",
+   "criterion": "The agent must select a payment method that is eligible for the order's currency and shipping country.",
+   "requirement_text": "In this conversation the following holds: The order is pending and a payment method is available for selection. The agent must select a payment method that is eligible for the order's currency and shipping country.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "retail_048_arg#b0": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The user requests to modify their default address.",
+   "original_then": "The agent must enter a zip code that is valid for the specified country and state.",
+   "criterion": "The agent must enter a zip code that is valid for the specified country and state.",
+   "requirement_text": "The agent must enter a zip code that is valid for the specified country and state.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "retail_050_arg#b0": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The user requests to return items from a delivered order.",
+   "original_then": "The agent must not include the same item id more than once in the 'item_ids' list for a single return operation.",
+   "criterion": "The agent must not include the same item id more than once in the 'item_ids' list for a single return operation.",
+   "requirement_text": "The agent must not include the same item id more than once in the 'item_ids' list for a single return operation.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Then modality directly determines the expected observation."
+   ]
+  },
+  "retail_060_order_modify_pending_order_address#b0v1": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The user requests to modify the shipping address of a pending order.",
+   "original_then": "The agent must not call modify_pending_order_address before all items to be changed have been collected into a list.",
+   "criterion": "The agent must not call modify_pending_order_address before all items to be changed have been collected into a list.",
+   "requirement_text": "The agent must not call modify_pending_order_address before all items to be changed have been collected into a list.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "retail_060_order_modify_pending_order_payment#b0v1": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The user requests to exchange or modify an order",
+   "original_then": "The agent must not make a call to an exchange or modify order tool for an order without collecting all items to be changed into a single list.",
+   "criterion": "The agent must not make a call to an exchange or modify order tool for an order without collecting all items to be changed into a single list.",
+   "requirement_text": "The agent must not make a call to an exchange or modify order tool for an order without collecting all items to be changed into a single list.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "retail_061_state#b0": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "The order status is 'pending'.",
+   "original_when": "The user requests to cancel the order.",
+   "original_then": "The agent may cancel the order.",
+   "criterion": "The agent must not cancel the order unless the retail policy's conditions for it hold in this conversation: the order's status is 'pending', the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "requirement_text": "In this conversation the following holds: The order status is 'pending'. The agent must not cancel the order unless the retail policy's conditions for it hold in this conversation: the order's status is 'pending', the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "operator": "present",
+   "why_uncompilable": [
+    "Permission without an aligned explicit action request does n"
+   ]
+  },
+  "retail_063_state#b0": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "The order status is 'delivered'.",
+   "original_when": "The user requests to return the order.",
+   "original_then": "The agent may initiate the return process for the order.",
+   "criterion": "The agent must not initiate a return for the order unless the retail policy's conditions for it hold in this conversation: the order's status is 'delivered', the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "requirement_text": "In this conversation the following holds: The order status is 'delivered'. The agent must not initiate a return for the order unless the retail policy's conditions for it hold in this conversation: the order's status is 'delivered', the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "retail_064_state#b0": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "The order status is 'delivered'.",
+   "original_when": "The user requests to exchange items in the order.",
+   "original_then": "The agent may exchange items in the order.",
+   "criterion": "The agent must not exchange items in the order unless the retail policy's conditions for it hold in this conversation: the order's status is 'delivered', the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "requirement_text": "In this conversation the following holds: The order status is 'delivered'. The agent must not exchange items in the order unless the retail policy's conditions for it hold in this conversation: the order's status is 'delivered', the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "operator": "present",
+   "why_uncompilable": [
+    "Permission without an aligned explicit action request does n"
+   ]
+  },
+  "retail_066_order_get_user_details#b0": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "The user has been authenticated and the information requested concerns the authenticated user's own profile, orders, or related products.",
+   "original_when": "The user requests information about their own profile, orders, or related products.",
+   "original_then": "The agent may provide information about the authenticated user's own profile, orders, or related products.",
+   "criterion": "The agent must not provide information about a user's profile, orders, or products unless, as the retail policy requires, the user has been authenticated and the information concerns that authenticated user's own account.",
+   "requirement_text": "In this conversation the following holds: The user has been authenticated and the information requested concerns the authenticated user's own profile, orders, or related products. The agent must not provide information about a user's profile, orders, or products unless, as the retail policy requires, the user has been authenticated and the information concerns that authenticated user's own account.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Permission without an aligned explicit action request does n"
+   ]
+  },
+  "retail_067_state_cancel_pending_order#b0": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "The order status is 'pending'.",
+   "original_when": "The user requests an action on the order.",
+   "original_then": "The agent may take action on the order.",
+   "criterion": "The agent must not take any action that changes the order (cancel, modify, return or exchange) unless the retail policy allows that action for the order's current status (only a 'pending' order can be cancelled or modified; only a 'delivered' order can be returned or exchanged), the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "requirement_text": "In this conversation the following holds: The order status is 'pending'. The agent must not take any action that changes the order (cancel, modify, return or exchange) unless the retail policy allows that action for the order's current status (only a 'pending' order can be cancelled or modified; only a 'delivered' order can be returned or exchanged), the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "operator": "present",
+   "why_uncompilable": [
+    "Permission without an aligned explicit action request does n"
+   ]
+  },
+  "retail_067_state_cancel_pending_order#b1": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "The order status is 'delivered'.",
+   "original_when": "The user requests an action on the order.",
+   "original_then": "The agent may take action on the order.",
+   "criterion": "The agent must not take any action that changes the order (cancel, modify, return or exchange) unless the retail policy allows that action for the order's current status (only a 'pending' order can be cancelled or modified; only a 'delivered' order can be returned or exchanged), the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "requirement_text": "In this conversation the following holds: The order status is 'delivered'. The agent must not take any action that changes the order (cancel, modify, return or exchange) unless the retail policy allows that action for the order's current status (only a 'pending' order can be cancelled or modified; only a 'delivered' order can be returned or exchanged), the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "operator": "present",
+   "why_uncompilable": [
+    "Permission without an aligned explicit action request does n"
+   ]
+  },
+  "retail_067_state_exchange_delivered_order_items#b1": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "The order status is 'delivered'.",
+   "original_when": "The user requests to exchange items in the order.",
+   "original_then": "The agent may use the exchange_delivered_order_items tool to exchange items in the order.",
+   "criterion": "The agent must not use exchange_delivered_order_items on the order unless the retail policy's conditions for it hold in this conversation: the order's status is 'delivered', the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "requirement_text": "In this conversation the following holds: The order status is 'delivered'. The agent must not use exchange_delivered_order_items on the order unless the retail policy's conditions for it hold in this conversation: the order's status is 'delivered', the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "operator": "present",
+   "why_uncompilable": [
+    "Permission without an aligned explicit action request does n"
+   ]
+  },
+  "retail_067_state_modify_pending_order_address#b0": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "The order status is 'pending'.",
+   "original_when": "The user requests to modify the shipping address of the order.",
+   "original_then": "The agent may modify the shipping address of the order.",
+   "criterion": "The agent must not modify the order's shipping address unless the retail policy's conditions for it hold in this conversation: the order's status is 'pending', the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "requirement_text": "In this conversation the following holds: The order status is 'pending'. The agent must not modify the order's shipping address unless the retail policy's conditions for it hold in this conversation: the order's status is 'pending', the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "operator": "present",
+   "why_uncompilable": [
+    "Permission without an aligned explicit action request does n"
+   ]
+  },
+  "retail_067_state_modify_pending_order_items#b0": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "The order status is 'pending'.",
+   "original_when": "The user requests to modify items in the order.",
+   "original_then": "The agent may use the modify_pending_order_items tool for this order.",
+   "criterion": "The agent must not use modify_pending_order_items on the order unless the retail policy's conditions for it hold in this conversation: the order's status is 'pending', the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "requirement_text": "In this conversation the following holds: The order status is 'pending'. The agent must not use modify_pending_order_items on the order unless the retail policy's conditions for it hold in this conversation: the order's status is 'pending', the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "operator": "present",
+   "why_uncompilable": [
+    "Permission without an aligned explicit action request does n"
+   ]
+  },
+  "retail_067_state_modify_pending_order_payment#b0": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "The order is in 'pending' status.",
+   "original_when": "The user requests to modify the payment method of the order.",
+   "original_then": "The agent may use the modify_pending_order_payment tool to modify the payment method of the order.",
+   "criterion": "The agent must not modify the order's payment method unless the retail policy's conditions for it hold in this conversation: the order's status is 'pending', the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "requirement_text": "In this conversation the following holds: The order is in 'pending' status. The agent must not modify the order's payment method unless the retail policy's conditions for it hold in this conversation: the order's status is 'pending', the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "operator": "present",
+   "why_uncompilable": [
+    "Permission without an aligned explicit action request does n"
+   ]
+  },
+  "retail_067_state_return_delivered_order_items#b1": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "The order status is 'delivered'.",
+   "original_when": "The user requests to return items from the order.",
+   "original_then": "The agent may take action to return delivered order items.",
+   "criterion": "The agent must not return items of the order unless the retail policy's conditions for it hold in this conversation: the order's status is 'delivered', the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "requirement_text": "In this conversation the following holds: The order status is 'delivered'. The agent must not return items of the order unless the retail policy's conditions for it hold in this conversation: the order's status is 'delivered', the user asked for it, and after the agent listed the action details the user gave explicit confirmation (yes).",
+   "operator": "present",
+   "why_uncompilable": [
+    "Permission without an aligned explicit action request does n"
+   ]
+  },
+  "retail_068_order#b0": {
+   "rewrite": "none",
+   "original_given": "The order is pending and the user is the owner of the order.",
+   "original_when": "The user requests information about the refund process after cancelling a pending order.",
+   "original_then": "The agent must not state that the refund will not be processed via the original payment method or that the refund timing is different from 'immediately if gift card, otherwise in 5 to 7 business days'.",
+   "criterion": "The agent must not state that the refund will not be processed via the original payment method or that the refund timing is different from 'immediately if gift card, otherwise in 5 to 7 business days'.",
+   "requirement_text": "In this conversation the following holds: The order is pending and the user is the owner of the order. The agent must not state that the refund will not be processed via the original payment method or that the refund timing is different from 'immediately if gift card, otherwise in 5 to 7 business days'.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Then quotes a reference value inside a 'different from'/'oth"
+   ]
+  },
+  "retail_095_state#b0": {
+   "rewrite": "none",
+   "original_given": "The user has a default address on file.",
+   "original_when": "The user requests to update their default address.",
+   "original_then": "The agent must not submit a modify_user_address tool call where all address fields match the user's existing default address.",
+   "criterion": "The agent must not submit a modify_user_address tool call where all address fields match the user's existing default address.",
+   "requirement_text": "In this conversation the following holds: The user has a default address on file. The agent must not submit a modify_user_address tool call where all address fields match the user's existing default address.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "retail_100_state#b0": {
+   "rewrite": "none",
+   "original_given": "The payment method selected for the refund is a gift card.",
+   "original_when": "The user requests to return items from a delivered order and provides a gift card as the payment method to receive the refund.",
+   "original_then": "The agent must ensure that the selected gift card has sufficient balance to accept the full refund amount before proceeding with the return.",
+   "criterion": "The agent must ensure that the selected gift card has sufficient balance to accept the full refund amount before proceeding with the return.",
+   "requirement_text": "In this conversation the following holds: The payment method selected for the refund is a gift card. The agent must ensure that the selected gift card has sufficient balance to accept the full refund amount before proceeding with the return.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "retail_101_order#b0v1": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The user makes a request for assistance.",
+   "original_then": "The agent must not call the transfer_to_human_agents tool without confirming that the issue is truly out of scope.",
+   "criterion": "The agent must not call the transfer_to_human_agents tool without confirming that the issue is truly out of scope.",
+   "requirement_text": "The agent must not call the transfer_to_human_agents tool without confirming that the issue is truly out of scope.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "retail_105_state#b0": {
+   "rewrite": "none",
+   "original_given": "The payment method has been deactivated in a previous operation within the same session.",
+   "original_when": "The user requests a refund or payment using this payment method.",
+   "original_then": "The agent must not use the payment method for a refund or payment after it has been deactivated in a previous operation within the same session.",
+   "criterion": "The agent must not use the payment method for a refund or payment after it has been deactivated in a previous operation within the same session.",
+   "requirement_text": "In this conversation the following holds: The payment method has been deactivated in a previous operation within the same session. The agent must not use the payment method for a refund or payment after it has been deactivated in a previous operation within the same session.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "telecom_026_arg#b0": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "A customer line exists with an associated plan specifying a data refueling price per GB.",
+   "original_when": "The user requests to add more data to their line.",
+   "original_then": "The agent may add more data to the line by refueling data at the price per GB specified by the plan.",
+   "criterion": "The agent must not refuel data on a line unless the telecom policy's refueling conditions hold in this conversation: the user asked for more data, the agent confirmed the amount and the price (the line's plan price per GB) with the user first, and the amount is at most 2 GB.",
+   "requirement_text": "In this conversation the following holds: A customer line exists with an associated plan specifying a data refueling price per GB. The agent must not refuel data on a line unless the telecom policy's refueling conditions hold in this conversation: the user asked for more data, the agent confirmed the amount and the price (the line's plan price per GB) with the user first, and the amount is at most 2 GB.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Permission without an aligned explicit action request does n"
+   ]
+  },
+  "telecom_038_norm#b0": {
+   "rewrite": "iff_one_direction",
+   "original_given": "True",
+   "original_when": "The user makes a request.",
+   "original_then": "The agent must transfer the user to a human agent if and only if the request cannot be handled within the scope of the agent's actions.",
+   "criterion": "The user's request (changing the name on their account) cannot be handled within the scope of the agent's actions (no tool can change a customer's name), so the agent must transfer the user to a human agent, after trying what it can within its scope.",
+   "requirement_text": "The user's request (changing the name on their account) cannot be handled within the scope of the agent's actions (no tool can change a customer's name), so the agent must transfer the user to a human agent, after trying what it can within its scope.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Then is phrased as an if-and-only-if: it states two opposite"
+   ]
+  },
+  "telecom_052_order#b0": {
+   "rewrite": "multi_step_llm",
+   "original_given": "True",
+   "original_when": "The user requests to refuel data for a line.",
+   "original_then": "The agent must, in order: ask the user how much data they want to refuel, confirm the price, and then apply the refueled data to the line associated with the phone number the user provided.",
+   "criterion": "The agent must, in order: ask the user how much data they want to refuel, confirm the price, and then apply the refueled data to the line associated with the phone number the user provided.",
+   "requirement_text": "The agent must, in order: ask the user how much data they want to refuel, confirm the price, and then apply the refueled data to the line associated with the phone number the user provided.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Then does not start with any configured modality prefix."
+   ]
+  },
+  "telecom_053_order#b0": {
+   "rewrite": "multi_step_llm",
+   "original_given": "True",
+   "original_when": "The user requests to change their plan.",
+   "original_then": "The agent must, in each single plan change request, first know what line the user wants to change the plan for, then gather available plans, then ask the user to select one, then calculate the price of the new plan, then confirm the price, and finally apply the selected plan to the line associated with the phone number the user provided, in that order.",
+   "criterion": "The agent must, in each single plan change request, first know what line the user wants to change the plan for, then gather available plans, then ask the user to select one, then calculate the price of the new plan, then confirm the price, and finally apply the selected plan to the line associated with the phone number the user provided, in that order.",
+   "requirement_text": "The agent must, in each single plan change request, first know what line the user wants to change the plan for, then gather available plans, then ask the user to select one, then calculate the price of the new plan, then confirm the price, and finally apply the selected plan to the line associated with the phone number the user provided, in that order.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Then does not start with any configured modality prefix."
+   ]
+  },
+  "telecom_072_norm#b0": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The agent generates a response.",
+   "original_then": "The agent must generate valid JSON in every response.",
+   "criterion": "The agent must generate valid JSON in every response.",
+   "requirement_text": "The agent must generate valid JSON in every response.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "telecom_078_order#b0": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The user requests assistance with mobile data functionality.",
+   "original_then": "The agent must confirm that the user has cellular service before taking any action related to mobile data.",
+   "criterion": "The agent must confirm that the user has cellular service before taking any action related to mobile data.",
+   "requirement_text": "The agent must confirm that the user has cellular service before taking any action related to mobile data.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Then modality directly determines the expected observation."
+   ]
+  },
+  "telecom_081_order#b0": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The user requests troubleshooting for data roaming issues.",
+   "original_then": "The agent must check that the line associated with the phone number the user provided is roaming enabled before troubleshooting data roaming issues.",
+   "criterion": "The agent must check that the line associated with the phone number the user provided is roaming enabled before troubleshooting data roaming issues.",
+   "requirement_text": "The agent must check that the line associated with the phone number the user provided is roaming enabled before troubleshooting data roaming issues.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Then modality directly determines the expected observation."
+   ]
+  },
+  "telecom_082_order#b0": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "The user's data usage for a line exceeds the plan's data limit.",
+   "original_when": "The user requests to change to a plan with more data.",
+   "original_then": "The agent may help the user change to a plan with more data.",
+   "criterion": "The agent must not change the user's plan, or claim to have changed it, unless the telecom policy's plan-change steps were followed in this conversation: the user asked for a plan change, chose the plan, and confirmed it and its price.",
+   "requirement_text": "In this conversation the following holds: The user's data usage for a line exceeds the plan's data limit. The agent must not change the user's plan, or claim to have changed it, unless the telecom policy's plan-change steps were followed in this conversation: the user asked for a plan change, chose the plan, and confirmed it and its price.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "telecom_083_order#b0": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The user requests troubleshooting for MMS issues.",
+   "original_then": "The agent must ensure, before troubleshooting MMS issues, that the user can make calls and that their mobile data is working for other apps.",
+   "criterion": "The agent must ensure, before troubleshooting MMS issues, that the user can make calls and that their mobile data is working for other apps.",
+   "requirement_text": "The agent must ensure, before troubleshooting MMS issues, that the user can make calls and that their mobile data is working for other apps.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Then modality directly determines the expected observation."
+   ]
+  },
+  "telecom_093_state#b0": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The user requests to suspend a line.",
+   "original_then": "The agent must not suspend a line for a period exceeding 6 months in a single action.",
+   "criterion": "The agent must not suspend a line for a period exceeding 6 months in a single action.",
+   "requirement_text": "The agent must not suspend a line for a period exceeding 6 months in a single action.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "telecom_096_order#b0": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The user requests to resume a suspended line.",
+   "original_then": "The agent must verify the user's authorization to manage the specified line before resuming it.",
+   "criterion": "The agent must verify the user's authorization to manage the specified line before resuming it.",
+   "requirement_text": "The agent must verify the user's authorization to manage the specified line before resuming it.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "telecom_108_order#b0": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The user requests to enable roaming for a specified line.",
+   "original_then": "The agent must verify that the user is authorized to manage roaming for the specified line before enabling roaming.",
+   "criterion": "The agent must verify that the user is authorized to manage roaming for the specified line before enabling roaming.",
+   "requirement_text": "The agent must verify that the user is authorized to manage roaming for the specified line before enabling roaming.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "telecom_112_order#b0": {
+   "rewrite": "none",
+   "original_given": "True",
+   "original_when": "The user requests to disable roaming for a specified line.",
+   "original_then": "The agent must verify the user's authorization to manage roaming for the specified line before disabling roaming.",
+   "criterion": "The agent must verify the user's authorization to manage roaming for the specified line before disabling roaming.",
+   "requirement_text": "The agent must verify the user's authorization to manage roaming for the specified line before disabling roaming.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "airline_098_state#b0": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "The user is a silver member",
+   "original_when": "The user requests compensation",
+   "original_then": "The agent may send a certificate as compensation",
+   "criterion": "The agent must not send a certificate as compensation unless the airline policy's compensation conditions hold in this conversation: the user explicitly asked for compensation, complained about a cancelled or delayed flight in their reservation, the agent confirmed those facts, and the user is a silver or gold member, has travel insurance, or flies business; the amount must follow the policy.",
+   "requirement_text": "In this conversation the following holds: The user is a silver member. The agent must not send a certificate as compensation unless the airline policy's compensation conditions hold in this conversation: the user explicitly asked for compensation, complained about a cancelled or delayed flight in their reservation, the agent confirmed those facts, and the user is a silver or gold member, has travel insurance, or flies business; the amount must follow the policy.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Permission without an aligned explicit action request does n"
+   ]
+  },
+  "airline_098_state#b1": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "The user is a gold member",
+   "original_when": "The user requests compensation",
+   "original_then": "The agent may send a certificate as compensation",
+   "criterion": "The agent must not send a certificate as compensation unless the airline policy's compensation conditions hold in this conversation: the user explicitly asked for compensation, complained about a cancelled or delayed flight in their reservation, the agent confirmed those facts, and the user is a silver or gold member, has travel insurance, or flies business; the amount must follow the policy.",
+   "requirement_text": "In this conversation the following holds: The user is a gold member. The agent must not send a certificate as compensation unless the airline policy's compensation conditions hold in this conversation: the user explicitly asked for compensation, complained about a cancelled or delayed flight in their reservation, the agent confirmed those facts, and the user is a silver or gold member, has travel insurance, or flies business; the amount must follow the policy.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Permission without an aligned explicit action request does n"
+   ]
+  },
+  "airline_098_state#b2": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "The user has travel insurance",
+   "original_when": "The user requests compensation",
+   "original_then": "The agent may send a certificate as compensation",
+   "criterion": "The agent must not send a certificate as compensation unless the airline policy's compensation conditions hold in this conversation: the user explicitly asked for compensation, complained about a cancelled or delayed flight in their reservation, the agent confirmed those facts, and the user is a silver or gold member, has travel insurance, or flies business; the amount must follow the policy.",
+   "requirement_text": "In this conversation the following holds: The user has travel insurance. The agent must not send a certificate as compensation unless the airline policy's compensation conditions hold in this conversation: the user explicitly asked for compensation, complained about a cancelled or delayed flight in their reservation, the agent confirmed those facts, and the user is a silver or gold member, has travel insurance, or flies business; the amount must follow the policy.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Permission without an aligned explicit action request does n"
+   ]
+  },
+  "airline_098_state#b3": {
+   "rewrite": "permission_as_prohibition",
+   "original_given": "The user flies business",
+   "original_when": "The user requests compensation",
+   "original_then": "The agent may send a certificate as compensation",
+   "criterion": "The agent must not send a certificate as compensation unless the airline policy's compensation conditions hold in this conversation: the user explicitly asked for compensation, complained about a cancelled or delayed flight in their reservation, the agent confirmed those facts, and the user is a silver or gold member, has travel insurance, or flies business; the amount must follow the policy.",
+   "requirement_text": "In this conversation the following holds: The user flies business. The agent must not send a certificate as compensation unless the airline policy's compensation conditions hold in this conversation: the user explicitly asked for compensation, complained about a cancelled or delayed flight in their reservation, the agent confirmed those facts, and the user is a silver or gold member, has travel insurance, or flies business; the amount must follow the policy.",
+   "operator": "present",
+   "why_uncompilable": [
+    "Permission without an aligned explicit action request does n"
+   ]
+  },
+  "airline_126_state#b0": {
+   "rewrite": "none",
+   "original_given": "A flight or segment in the reservation has already been flown (completed).",
+   "original_when": "The user requests to update passenger details for the reservation.",
+   "original_then": "The agent must not update the passenger details for a segment that has already been flown.",
+   "criterion": "The agent must not update the passenger details for a segment that has already been flown.",
+   "requirement_text": "In this conversation the following holds: A flight or segment in the reservation has already been flown (completed). The agent must not update the passenger details for a segment that has already been flown.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  },
+  "airline_126_state#b1": {
+   "rewrite": "none",
+   "original_given": "A flight or segment in the reservation is currently in progress (departed but not yet landed).",
+   "original_when": "The user requests to update passenger details for the reservation.",
+   "original_then": "The agent must not update the passenger details for a segment that is currently in progress.",
+   "criterion": "The agent must not update the passenger details for a segment that is currently in progress.",
+   "requirement_text": "In this conversation the following holds: A flight or segment in the reservation is currently in progress (departed but not yet landed). The agent must not update the passenger details for a segment that is currently in progress.",
+   "operator": "present",
+   "why_uncompilable": [
+    "no oracle requirement compiled from this Then"
+   ]
+  }
+ }
+}

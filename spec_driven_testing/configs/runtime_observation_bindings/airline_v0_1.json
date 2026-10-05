@@ -1,0 +1,32 @@
+{
+  "schema_version": "agentspectesting.runtime-observation-binding-vocabulary/v0.1",
+  "domain": "airline",
+  "named_fact_vocabulary": {
+    "user id": "user_id",
+    "trip type": "flight_type",
+    "origin": "origin",
+    "destination": "destination"
+  },
+  "prerequisite_lookup_vocabulary": {
+    "user id": "get_user_details",
+    "reservation id": "get_reservation_details",
+    "locate": "get_user_details"
+  },
+  "dialogue_act_keywords": {
+    "CA0021::A01": [
+      "insurance"
+    ],
+    "CA0048::A01": [
+      "confirm"
+    ],
+    "CA0042::A01": [
+      "reason"
+    ]
+  },
+  "fact_verification_prerequisite_vocabulary": {
+    "CA0048::A01": [
+      "get_reservation_details",
+      "get_flight_status"
+    ]
+  }
+}

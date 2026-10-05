@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.tau-online-execution/v0.1",
+  "title": "AgentSpecTesting tau-bench Online Driver Execution",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "adapter_version",
+    "bound_driver_plan_identity",
+    "fixture_instance_id",
+    "variation_selection",
+    "model",
+    "seed",
+    "budget",
+    "duration_seconds",
+    "tau_termination_reason",
+    "runtime_stop_reason",
+    "runtime_driver",
+    "pre_state",
+    "terminal_state",
+    "messages",
+    "materialized_tau_task",
+    "bound_oracle"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.tau-online-execution/v0.1"
+    },
+    "adapter_version": {
+      "const": "tau-online-runtime-adapter/v0.1"
+    },
+    "bound_driver_plan_identity": {"type": "object"},
+    "fixture_instance_id": {"type": "string", "minLength": 1},
+    "variation_selection": {"type": "object"},
+    "model": {"type": "string", "minLength": 1},
+    "seed": {"type": "integer"},
+    "budget": {
+      "type": "object",
+      "required": [
+        "approved_agent_call_budget",
+        "observed_agent_calls",
+        "user_model_calls",
+        "orchestrator_steps",
+        "request_retries"
+      ],
+      "properties": {
+        "approved_agent_call_budget": {"type": "integer", "minimum": 1},
+        "observed_agent_calls": {"type": "integer", "minimum": 0},
+        "user_model_calls": {"const": 0},
+        "orchestrator_steps": {"type": "integer", "minimum": 0},
+        "request_retries": {"const": 0}
+      }
+    },
+    "duration_seconds": {"type": "number", "minimum": 0},
+    "tau_termination_reason": {"type": "string"},
+    "runtime_stop_reason": {"type": ["string", "null"]},
+    "runtime_driver": {"type": "object"},
+    "pre_state": {"type": "object"},
+    "terminal_state": {"type": "object"},
+    "messages": {"type": "array"},
+    "materialized_tau_task": {"type": "object"},
+    "bound_oracle": {"type": "object"}
+  }
+}

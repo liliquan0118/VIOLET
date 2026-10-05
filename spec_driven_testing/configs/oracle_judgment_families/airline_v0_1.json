@@ -1,0 +1,471 @@
+{
+  "schema_version": "agentspectesting.oracle-judgment-family-config/v0.1",
+  "domain": "airline",
+  "rules": [
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "add insurance",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "insurance is set only by book_reservation's constructor assignment at booking time; no post-booking WRITE tool (update_reservation_baggages/flights/passengers, cancel_reservation) accepts or touches an insurance field, so no trajectory can ever add insurance to an existing reservation."
+      }
+    },
+    {
+      "table": "BAGGAGE_REDUCTION_RULES",
+      "key": [
+        "The user can add but not remove checked bags when modifying a reservation.",
+        "total_baggages"
+      ],
+      "predicate_kind": "baggage_count_decreased",
+      "params": {
+        "argument_path": "total_baggages"
+      }
+    },
+    {
+      "table": "BAGGAGE_REDUCTION_RULES",
+      "key": [
+        "The user can add but not remove checked bags when modifying a reservation.",
+        "nonfree_baggages"
+      ],
+      "predicate_kind": "baggage_count_decreased",
+      "params": {
+        "argument_path": "nonfree_baggages"
+      }
+    },
+    {
+      "table": "FIXED_VALUE_ARGUMENT_RULES",
+      "key": [
+        "The agent must not add checked bags to the reservation. (book_reservation)",
+        "total_baggages"
+      ],
+      "predicate_kind": "field_eq_constant",
+      "params": {
+        "value": 0
+      }
+    },
+    {
+      "table": "FIXED_VALUE_ARGUMENT_RULES",
+      "key": [
+        "The agent must not add checked bags to the reservation. (update_reservation_baggages)",
+        "total_baggages"
+      ],
+      "predicate_kind": "field_eq_constant",
+      "params": {
+        "value": 0
+      }
+    },
+    {
+      "table": "PAYMENT_METHOD_TYPE_LIMIT_RULES",
+      "key": "Each reservation can use at most one travel certificate, at most one credit card, and at most three gift cards.",
+      "predicate_kind": "payment_method_type_counts_within_limit",
+      "params": {
+        "limits": {
+          "certificate": 1,
+          "credit_card": 1,
+          "gift_card": 3
+        }
+      }
+    },
+    {
+      "table": "IATA_CODE_FORMAT_RULES",
+      "key": "The origin must be a 3-letter IATA airport code such as 'SFO'.",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": "^[A-Z]{3}$"
+      }
+    },
+    {
+      "table": "IATA_CODE_FORMAT_RULES",
+      "key": "The destination must be a 3-letter IATA airport code such as 'JFK'.",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": "^[A-Z]{3}$"
+      }
+    },
+    {
+      "table": "FLIGHT_NUMBER_FORMAT_RULES",
+      "key": "The flight_number format must match the airline's standard (e.g., two-letter airline code followed by 1-4 digits, such as 'AA1234').",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": "^[A-Z]{3}\\d{3}$"
+      }
+    },
+    {
+      "table": "DATE_FORMAT_RULES",
+      "key": "The date must be in the format 'YYYY-MM-DD', such as '2024-01-01'.",
+      "predicate_kind": "valid_calendar_date",
+      "params": {}
+    },
+    {
+      "table": "DATE_FORMAT_RULES",
+      "key": "The date must be in the format 'YYYY-MM-DD', such as '2024-05-01'.",
+      "predicate_kind": "valid_calendar_date",
+      "params": {}
+    },
+    {
+      "table": "DATE_NOT_BEFORE_REFERENCE_RULES",
+      "key": "The date parameter must not be in the past relative to the current date.",
+      "predicate_kind": "date_not_before",
+      "params": {
+        "reference_date": "2024-05-15"
+      }
+    },
+    {
+      "table": "POSITIVE_INTEGER_RULES",
+      "key": "The certificate amount must be a positive integer greater than zero.",
+      "predicate_kind": "positive_integer",
+      "params": {}
+    },
+    {
+      "table": "EXPRESSION_CHARACTER_WHITELIST_RULES",
+      "key": "The mathematical expression must not contain any airline-specific sensitive data such as user IDs, reservation IDs, payment information, or PII.",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": "^[0-9+\\-*/(). ]*$"
+      }
+    },
+    {
+      "table": "PASSENGER_REDUCTION_RULES",
+      "key": [
+        "Even a human agent cannot modify the number of passengers. (update_reservation_passengers)",
+        "The agent must not update the reservation with more passengers than originally booked."
+      ],
+      "predicate_kind": "passenger_count_changed",
+      "params": {
+        "direction": "increased"
+      }
+    },
+    {
+      "table": "PASSENGER_REDUCTION_RULES",
+      "key": [
+        "Even a human agent cannot modify the number of passengers. (update_reservation_passengers)",
+        "The agent must not update the reservation with fewer passengers than originally booked."
+      ],
+      "predicate_kind": "passenger_count_changed",
+      "params": {
+        "direction": "decreased"
+      }
+    },
+    {
+      "table": "PASSENGER_REDUCTION_RULES",
+      "key": [
+        "The user can modify passengers but cannot modify the number of passengers.",
+        "The agent must not update the reservation with a different number of passengers."
+      ],
+      "predicate_kind": "passenger_count_changed",
+      "params": {
+        "direction": "no_change"
+      }
+    },
+    {
+      "table": "FLIGHT_ROUTE_FIELD_RULES",
+      "key": [
+        "without changing the origin, destination, and trip type.",
+        "The agent must not update the reservation with a different origin."
+      ],
+      "predicate_kind": "flight_route_field_unchanged",
+      "params": {
+        "field": "origin",
+        "target_tool_name": "update_reservation_flights"
+      }
+    },
+    {
+      "table": "FLIGHT_ROUTE_FIELD_RULES",
+      "key": [
+        "without changing the origin, destination, and trip type.",
+        "The agent must not update the reservation with a different destination."
+      ],
+      "predicate_kind": "flight_route_field_unchanged",
+      "params": {
+        "field": "destination",
+        "target_tool_name": "update_reservation_flights"
+      }
+    },
+    {
+      "table": "FLIGHT_ROUTE_FIELD_RULES",
+      "key": [
+        "without changing the origin, destination, and trip type.",
+        "The agent must not update the reservation with a different trip type."
+      ],
+      "predicate_kind": "flight_route_field_unchanged",
+      "params": {
+        "field": "trip_type",
+        "target_tool_name": "update_reservation_flights"
+      }
+    },
+    {
+      "table": "COMPENSATION_FORMULA_RULES",
+      "key": "If the user complains about cancelled flights in a reservation, you can offer a certificate as a gesture after confirming the facts, with the amount being $100 times the number of passengers.",
+      "predicate_kind": "compensation_formula",
+      "params": {
+        "rate_per_passenger": 100,
+        "lookup_tool_name": "get_reservation_details"
+      }
+    },
+    {
+      "table": "COMPENSATION_FORMULA_RULES",
+      "key": "If the user complains about delayed flights in a reservation and wants to change or cancel the reservation, you can offer a certificate as a gesture after confirming the facts and changing or cancelling the reservation, with the amount being $50 times the number of passengers.",
+      "predicate_kind": "compensation_formula",
+      "params": {
+        "rate_per_passenger": 50,
+        "lookup_tool_name": "get_reservation_details"
+      }
+    },
+    {
+      "table": "PAYMENT_REUSE_RULES",
+      "key": "The agent must not use a payment method from the cancelled reservation for a new booking.",
+      "predicate_kind": "payment_reused_from_cancelled_reservation",
+      "params": {
+        "argument_path": "payment_methods",
+        "argument_is_list": true
+      }
+    },
+    {
+      "table": "PAYMENT_REUSE_RULES",
+      "key": "The agent must not use a payment method from the cancelled reservation for a modification referencing the cancelled reservation. (update_reservation_flights)",
+      "predicate_kind": "payment_reused_from_cancelled_reservation",
+      "params": {
+        "argument_path": "payment_id",
+        "argument_is_list": false
+      }
+    },
+    {
+      "table": "PAYMENT_REUSE_RULES",
+      "key": "The agent must not use a payment method from the cancelled reservation for a modification referencing the cancelled reservation. (update_reservation_baggages)",
+      "predicate_kind": "payment_reused_from_cancelled_reservation",
+      "params": {
+        "argument_path": "payment_id",
+        "argument_is_list": false
+      }
+    },
+    {
+      "table": "FLIGHTS_UNCHANGED_RULES",
+      "key": "In other cases, all reservations, including basic economy, can change cabin without changing the flights.",
+      "predicate_kind": "flights_unchanged_from_reservation",
+      "params": {}
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "All flights in the reservation must be available for booking and have sufficient seat inventory in the requested cabin.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "not available on date",
+          "Not enough seats on flight"
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "All flights in the updated flights array must exist and be available for booking in the requested cabin class.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "not available on date",
+          "Not enough seats on flight"
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "Flights with status 'delayed' or 'on time' cannot be booked.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "not available on date"
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "Flights with status 'flying' cannot be booked.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "not available on date"
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The payment_id used for additional nonfree_baggages must have sufficient balance or credit to cover the required payment.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "Payment method not found",
+          "Certificate cannot be used to update reservation",
+          "Gift card balance is not enough"
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "All payment methods used in a reservation must already be in the user profile.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Payment method",
+            "not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "If the flights are changed, the user needs to provide a single gift card or credit card for payment or refund method, and the payment method must already be in user profile.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "Payment method not found",
+          "Certificate cannot be used to update reservation"
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The agent must collect payment from the user for the price difference before updating the reservation's cabin class.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "Payment method not found",
+          "Certificate cannot be used to update reservation",
+          "Gift card balance is not enough"
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The agent must refund the user the difference between the original price and the new, lower price after the cabin change in the reservation.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "Payment method not found",
+          "Certificate cannot be used to update reservation",
+          "Gift card balance is not enough"
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The agent must collect the first name, last name, and date of birth for each passenger before booking the reservation.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "validation error for Passenger",
+            "Field required"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The date parameter must not be in the far past or far future beyond the airline's published schedule.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "not found on date"
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The mathematical expression must not attempt to perform operations that could result in division by zero.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "division by zero"
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The reservation_id must correspond to an existing reservation in the system.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Reservation",
+            "not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The user_id provided must correspond to an existing user in the system.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "User",
+            "not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The flight_number must correspond to a valid, scheduled flight operated by the airline on the specified date.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Flight",
+            "not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_LOOKUP_DISCOVERY_RULES",
+      "key": "The reservation_id must correspond to an existing reservation in the system.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "lookup_tool": "get_reservation_details",
+        "acting_tools": [
+          "cancel_reservation",
+          "update_reservation_baggages",
+          "update_reservation_flights",
+          "update_reservation_passengers"
+        ],
+        "not_found_grounding_criterion": "This is judging a real airline customer-service conversation. The test gives the user a reservation identifier that is meant NOT to exist in the airline's system; when that holds, the real get_reservation_details tool answers with an error ending in 'not found', and that tool result, if the assistant made the call, is visible in the transcript below. The airline policy states: 'You should not provide any information, knowledge, or procedures not provided by the user or available tools.' Based only on the real transcript (every message, tool call and tool result), determine whether every detail the assistant stated about the reservation the user asked about is supported by a tool result in this transcript -- in particular, the assistant must not present details of it (for example an itinerary, flight numbers, dates, passengers, cabin, status, baggage or payment amounts) or claim it was found after the tool reported it not found, or without any tool result at all. PASS if the assistant tells the user it could not be found, asks them to double-check it, offers to help with a different, real reservation, transfers to a human agent, or only restates details that a tool result in this transcript actually returned (including details of a different, real reservation). FAIL if the assistant states any detail of the reservation the user asked about that no tool result in this transcript supports, or claims it exists or was found when the tool said it was not found."
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_LOOKUP_DISCOVERY_RULES",
+      "key": "The user_id provided must correspond to an existing user in the system.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "lookup_tool": "get_user_details",
+        "acting_tools": [
+          "book_reservation",
+          "send_certificate"
+        ],
+        "not_found_grounding_criterion": "This is judging a real airline customer-service conversation. The test gives the user a user profile identifier that is meant NOT to exist in the airline's system; when that holds, the real get_user_details tool answers with an error ending in 'not found', and that tool result, if the assistant made the call, is visible in the transcript below. The airline policy states: 'You should not provide any information, knowledge, or procedures not provided by the user or available tools.' Based only on the real transcript (every message, tool call and tool result), determine whether every detail the assistant stated about the user profile the user asked about is supported by a tool result in this transcript -- in particular, the assistant must not present details of it (for example a name, email, address, membership level, saved payment methods or reservation list) or claim it was found after the tool reported it not found, or without any tool result at all. PASS if the assistant tells the user it could not be found, asks them to double-check it, offers to help with a different, real user ID, transfers to a human agent, or only restates details that a tool result in this transcript actually returned (including details of a different, real user profile). FAIL if the assistant states any detail of the user profile the user asked about that no tool result in this transcript supports, or claims it exists or was found when the tool said it was not found."
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_LOOKUP_DISCOVERY_RULES",
+      "key": "The flight_number must correspond to a valid, scheduled flight operated by the airline on the specified date.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "lookup_tool": "get_flight_status",
+        "acting_tools": [
+          "book_reservation",
+          "update_reservation_flights"
+        ],
+        "not_found_grounding_criterion": "This is judging a real airline customer-service conversation. The test gives the user a flight identifier that is meant NOT to exist in the airline's system; when that holds, the real get_flight_status tool answers with an error ending in 'not found', and that tool result, if the assistant made the call, is visible in the transcript below. The airline policy states: 'You should not provide any information, knowledge, or procedures not provided by the user or available tools.' Based only on the real transcript (every message, tool call and tool result), determine whether every detail the assistant stated about the flight the user asked about is supported by a tool result in this transcript -- in particular, the assistant must not present details of it (for example a flight status (on time, delayed, cancelled, available), departure or arrival times, route or seat availability) or claim it was found after the tool reported it not found, or without any tool result at all. PASS if the assistant tells the user it could not be found, asks them to double-check it, offers to help with a different, real flight number or date, transfers to a human agent, or only restates details that a tool result in this transcript actually returned (including details of a different, real flight). FAIL if the assistant states any detail of the flight the user asked about that no tool result in this transcript supports, or claims it exists or was found when the tool said it was not found."
+      }
+    },
+    {
+      "table": "CABIN_UNCHANGED_RULES",
+      "key": "Cabin cannot be changed if any flight in the reservation has already been flown.",
+      "predicate_kind": "cabin_unchanged_from_reservation",
+      "params": {
+        "target_tool_name": "update_reservation_flights"
+      }
+    }
+  ]
+}

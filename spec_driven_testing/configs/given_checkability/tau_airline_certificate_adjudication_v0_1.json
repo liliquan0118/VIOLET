@@ -1,0 +1,7 @@
+{
+  "schema_version": "agentspectesting.given-checkability-selection/v0.1",
+  "selection_id": "tau_airline_certificate_same_incident_complete_context",
+  "packet_ids": [
+    "GIVEN-CHECK::f7ed8bed6e0649cf::C01"
+  ]
+}

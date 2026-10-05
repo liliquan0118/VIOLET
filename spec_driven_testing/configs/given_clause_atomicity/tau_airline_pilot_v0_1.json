@@ -1,0 +1,13 @@
+{
+  "schema_version": "agentspectesting.given-clause-atomicity-selection/v0.1",
+  "selection_id": "tau_airline_given_atomicity_pilot_v0_1",
+  "source_full_packet_set_fingerprint": "73a0caabcb6f634e153aff1ae758eeaafeec08a038c15ef5bed01b80a8cb740f",
+  "packet_ids": [
+    "airline_034_arg#e0::GIVEN::A001::ATOMICITY01",
+    "airline_048_arg#b0::GIVEN::A002::ATOMICITY01",
+    "airline_058_arg#b0::GIVEN::A002::ATOMICITY01",
+    "airline_094_norm#b0::GIVEN::A001::ATOMICITY01",
+    "airline_120_state#b0v1::GIVEN::A002::ATOMICITY01",
+    "airline_127_state#b0v0::GIVEN::A001::ATOMICITY01"
+  ]
+}

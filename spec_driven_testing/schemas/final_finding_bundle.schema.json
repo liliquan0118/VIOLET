@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.final-finding-bundle/v0.1",
+  "title": "AgentSpecTesting Final Finding Bundle v0.1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generator_version",
+    "finding_id",
+    "finding_status",
+    "finding_type",
+    "lineage",
+    "focal_target",
+    "failure_signature",
+    "minimal_trigger",
+    "confirmation",
+    "passing_surface_contrasts",
+    "same_surface_boundary_contrasts",
+    "search_summary",
+    "evidence_records",
+    "method_limits",
+    "llm_calls",
+    "finding_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.final-finding-bundle/v0.1"
+    },
+    "generator_version": {"type": "string", "minLength": 1},
+    "finding_id": {"type": "string", "pattern": "^FIND::[0-9a-f]{16}$"},
+    "finding_status": {"const": "confirmed"},
+    "finding_type": {"const": "policy_violation"},
+    "lineage": {
+      "type": "object",
+      "required": [
+        "source_spec_record",
+        "resolved_spec_target",
+        "compiled_plan_identity",
+        "bound_driver_plan_identity",
+        "search_id",
+        "terminal_guidance_decision_fingerprint",
+        "terminal_guidance_decision_source"
+      ]
+    },
+    "focal_target": {"type": "object"},
+    "failure_signature": {
+      "type": "object",
+      "required": [
+        "classification",
+        "supported_hypothesis_ids",
+        "expected_operation_decision",
+        "actual_decision",
+        "representation_sensitive"
+      ]
+    },
+    "minimal_trigger": {
+      "type": "object",
+      "required": [
+        "fixture_instance_id",
+        "refinement_id",
+        "coverage_cell_id",
+        "object_bindings",
+        "observation_bindings",
+        "variation_selection",
+        "effective_variation_profile",
+        "minimality"
+      ]
+    },
+    "confirmation": {
+      "type": "object",
+      "required": [
+        "required_confirmations",
+        "accepted_attempt_count",
+        "accepted_violation_count",
+        "trigger_observation_ids",
+        "confirmation_rule"
+      ]
+    },
+    "passing_surface_contrasts": {"type": "array"},
+    "same_surface_boundary_contrasts": {"type": "array"},
+    "search_summary": {"type": "object"},
+    "evidence_records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "observation_id",
+          "evidence_status",
+          "coordinate",
+          "classification",
+          "oracle_result"
+        ],
+        "properties": {
+          "evidence_status": {
+            "enum": ["accepted", "quarantined"]
+          }
+        }
+      }
+    },
+    "method_limits": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "llm_calls": {"const": 0},
+    "finding_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.run-configuration/v0.1",
+  "title": "AgentSpecTesting Runtime Resource Configuration",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "configuration_id",
+    "budgets"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.run-configuration/v0.1"
+    },
+    "configuration_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "budgets": {
+      "type": "object",
+      "required": [
+        "max_fixture_candidates",
+        "max_state_patches",
+        "max_dialogue_turns",
+        "max_recovery_actions",
+        "max_model_calls"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

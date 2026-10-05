@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.compiled-test-plan/v0.3",
+  "title": "Profile-driven AgentSpecTesting Compiled Test Plan",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "compiler_version",
+    "compiled_plan_id",
+    "compiled_plan_fingerprint",
+    "source_spec_record",
+    "resolved_spec_target",
+    "resolved_evaluation_target",
+    "experiment_plan",
+    "selected_coverage_target",
+    "derived_test_design",
+    "target",
+    "contrast_targets",
+    "boundary_refinements",
+    "fixture_requirements",
+    "interaction_requirements",
+    "oracle_contract",
+    "variation_contract",
+    "guidance_contract",
+    "environment_requirements",
+    "configuration",
+    "capability_contract",
+    "compiler_checks"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.compiled-test-plan/v0.3"
+    },
+    "compiler_version": {
+      "const": "profile-driven-source-resolved-compiler/v0.3"
+    },
+    "compiled_plan_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "compiled_plan_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_spec_record": {
+      "type": "object"
+    },
+    "resolved_spec_target": {
+      "type": "object"
+    },
+    "resolved_evaluation_target": {
+      "type": "object"
+    },
+    "experiment_plan": {
+      "type": "object"
+    },
+    "selected_coverage_target": {
+      "type": "object"
+    },
+    "derived_test_design": {
+      "type": "object"
+    },
+    "target": {
+      "type": "object"
+    },
+    "contrast_targets": {
+      "type": "array"
+    },
+    "boundary_refinements": {
+      "type": "array"
+    },
+    "probe_contract": {
+      "type": "object"
+    },
+    "fixture_requirements": {
+      "type": "object"
+    },
+    "interaction_requirements": {
+      "type": "object"
+    },
+    "oracle_contract": {
+      "type": "object"
+    },
+    "variation_contract": {
+      "type": "object"
+    },
+    "guidance_contract": {
+      "type": "object"
+    },
+    "environment_requirements": {
+      "type": "object"
+    },
+    "configuration": {
+      "type": "object"
+    },
+    "capability_contract": {
+      "type": "object",
+      "required": [
+        "registry_schema_version",
+        "target_archetype",
+        "probe_family",
+        "stage_bindings"
+      ],
+      "properties": {
+        "registry_schema_version": {
+          "const": "agentspectesting.capability-registry/v0.1"
+        },
+        "target_archetype": {
+          "type": "string"
+        },
+        "probe_family": {
+          "type": "string"
+        },
+        "stage_bindings": {
+          "type": "object"
+        }
+      }
+    },
+    "compiler_checks": {
+      "type": "object"
+    }
+  },
+  "not": {
+    "required": [
+      "budget"
+    ]
+  }
+}

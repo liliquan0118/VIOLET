@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.generic-driver-plan-set/v0.1",
+  "title": "AgentSpecTesting Generic Driver Plan Set",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "lowering_version",
+    "plans",
+    "excluded_branches",
+    "summary",
+    "source_branch_test_contract_set_fingerprint",
+    "driver_plan_set_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.generic-driver-plan-set/v0.1"
+    },
+    "lowering_version": {
+      "const": "branch-contract-driver-lowering/v0.1"
+    },
+    "plans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "schema_version",
+          "lowering_version",
+          "driver_plan_id",
+          "source",
+          "test_point_contract",
+          "fixture_binding_plan",
+          "interaction_plan",
+          "reachability_contract",
+          "oracle_plan",
+          "boundary_plan",
+          "surface_realizer_contract",
+          "variation_contract",
+          "binder_requirements",
+          "generation_readiness",
+          "compiler_checks",
+          "driver_plan_fingerprint"
+        ],
+        "properties": {
+          "schema_version": {
+            "const": "agentspectesting.generic-driver-plan/v0.1"
+          },
+          "lowering_version": {
+            "const": "branch-contract-driver-lowering/v0.1"
+          },
+          "driver_plan_id": {"type": "string", "minLength": 1},
+          "source": {"type": "object"},
+          "test_point_contract": {"type": "object"},
+          "fixture_binding_plan": {"type": "object"},
+          "interaction_plan": {"type": "object"},
+          "reachability_contract": {"type": "object"},
+          "oracle_plan": {"type": "object"},
+          "boundary_plan": {"type": "object"},
+          "surface_realizer_contract": {"type": "object"},
+          "variation_contract": {"type": "object"},
+          "binder_requirements": {"type": "object"},
+          "generation_readiness": {
+            "type": "object",
+            "properties": {
+              "status": {"const": "ready_for_binding"},
+              "runtime_execution_allowed": {"const": false}
+            },
+            "required": ["status", "runtime_execution_allowed"]
+          },
+          "compiler_checks": {"type": "object"},
+          "driver_plan_fingerprint": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "excluded_branches": {"type": "array"},
+    "summary": {"type": "object"},
+    "driver_plan_set_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

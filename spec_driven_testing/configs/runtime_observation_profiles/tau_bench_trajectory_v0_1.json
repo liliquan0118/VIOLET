@@ -1,0 +1,35 @@
+{
+  "schema_version": "agentspectesting.runtime-observation-profile/v0.1",
+  "profile_id": "tau-bench-trajectory/v0.1",
+  "canonical_event_stream": {
+    "stream_id": "canonical_tau_events",
+    "order_field": "event_index",
+    "source_message_field": "source_message_index"
+  },
+  "raw_message_adapter": {
+    "adapter_id": "tau_message_sequence/v0.1",
+    "messages_path": "messages"
+  },
+  "event_contracts": {
+    "assistant_tool_call": {
+      "tool_name_field": "tool_name",
+      "arguments_field": "arguments",
+      "tool_call_id_field": "tool_call_id"
+    },
+    "assistant_message": {
+      "content_field": "content"
+    },
+    "user_message": {
+      "content_field": "content"
+    },
+    "tool_result": {
+      "tool_call_id_field": "tool_call_id",
+      "content_field": "content"
+    }
+  },
+  "driver_binding_namespace": "driver_bindings",
+  "scope_binding_parameters": [
+    "reservation_id",
+    "user_id"
+  ]
+}

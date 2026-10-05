@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.generic-bound-driver-plan-set/v0.1",
+  "title": "AgentSpecTesting Generic Bound Driver Plan Set",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "binder_version",
+    "bound_plans",
+    "binding_failures",
+    "summary",
+    "source_driver_plan_set_fingerprint",
+    "bound_driver_plan_set_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {"const": "agentspectesting.generic-bound-driver-plan-set/v0.1"},
+    "binder_version": {"const": "tau-airline-generic-driver-binder/v0.1"},
+    "bound_plans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "schema_version",
+          "binder_version",
+          "bound_driver_plan_id",
+          "source_branch_id",
+          "object_bindings",
+          "given_precondition_witnesses",
+          "operation_argument_fact_bundle",
+          "dialogue_contract",
+          "oracle_plan",
+          "binding_checks",
+          "generation_readiness",
+          "bound_driver_plan_fingerprint"
+        ],
+        "properties": {
+          "schema_version": {"const": "agentspectesting.generic-bound-driver-plan/v0.1"},
+          "binder_version": {"const": "tau-airline-generic-driver-binder/v0.1"},
+          "bound_driver_plan_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "binding_failures": {"type": "array"},
+    "summary": {"type": "object"},
+    "bound_driver_plan_set_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

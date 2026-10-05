@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+.env
+*api*.txt
+*key*.txt
+/tau2-bench/
+business_rule_mining_and_refinement/tau2-bench
+# results of test runs
+spec_driven_testing/outputs/

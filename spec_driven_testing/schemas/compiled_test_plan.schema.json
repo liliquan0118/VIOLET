@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.compiled-test-plan/v0.1",
+  "title": "AgentSpecTesting Compiled Test Plan",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "compiler_version",
+    "compiled_plan_id",
+    "compiled_plan_fingerprint",
+    "provenance",
+    "source_anchors",
+    "target",
+    "contrast_targets",
+    "boundary_refinements",
+    "fixture_requirements",
+    "interaction_requirements",
+    "reachability_contract",
+    "oracle_contract",
+    "variation_contract",
+    "guidance_contract",
+    "generation_readiness",
+    "compiler_diagnostics",
+    "compiler_checks"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.compiled-test-plan/v0.1"
+    },
+    "compiler_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "compiled_plan_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "compiled_plan_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "source_anchors": {
+      "type": "array"
+    },
+    "target": {
+      "type": "object",
+      "required": [
+        "subject",
+        "focal_configuration",
+        "lifecycle_scope",
+        "conditions",
+        "generation_contract"
+      ]
+    },
+    "contrast_targets": {
+      "type": "array"
+    },
+    "boundary_refinements": {
+      "type": "array"
+    },
+    "fixture_requirements": {
+      "type": "object",
+      "required": [
+        "binding_status",
+        "concrete_object_ids_are_forbidden",
+        "state_constraints",
+        "dialogue_controlled_constraints",
+        "isolation_predicate_truth"
+      ],
+      "properties": {
+        "binding_status": {
+          "const": "unbound"
+        },
+        "concrete_object_ids_are_forbidden": {
+          "const": true
+        }
+      }
+    },
+    "interaction_requirements": {
+      "type": "object"
+    },
+    "reachability_contract": {
+      "type": "object"
+    },
+    "oracle_contract": {
+      "type": "object",
+      "required": [
+        "fixture_oracle",
+        "coverage_oracle",
+        "reachability_oracle",
+        "correctness_oracle"
+      ]
+    },
+    "variation_contract": {
+      "type": "object"
+    },
+    "guidance_contract": {
+      "type": "object"
+    },
+    "generation_readiness": {
+      "type": "object"
+    },
+    "compiler_diagnostics": {
+      "type": "array"
+    },
+    "compiler_checks": {
+      "type": "object",
+      "required": [
+        "artifact_hashes_verified",
+        "concrete_fixture_ids_absent",
+        "coverage_reachability_correctness_separated",
+        "llm_calls"
+      ],
+      "properties": {
+        "llm_calls": {
+          "const": 0
+        }
+      }
+    }
+  }
+}

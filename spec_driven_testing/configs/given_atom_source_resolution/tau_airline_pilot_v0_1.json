@@ -1,0 +1,14 @@
+{
+  "schema_version": "agentspectesting.given-atom-source-selection/v0.1",
+  "selection_id": "tau_airline_source_kind_pilot_v0_1",
+  "purpose": "Qualitative pilot covering the distinct evidence-source decisions before the full unresolved-Given batch.",
+  "source_full_packet_set_fingerprint": "9185e4c1670f890ad689e46fc8403bda8610f7699c89038ab23d76f2dfdc0486",
+  "packet_ids": [
+    "airline_033_arg#b0::GIVEN::A003::SOURCE01",
+    "airline_037_arg#b0::GIVEN::A002::SOURCE01",
+    "airline_076_norm#b0::GIVEN::A001::SOURCE01",
+    "airline_117_state#b0::GIVEN::A001::SOURCE01",
+    "airline_118_state#b0::GIVEN::A001::SOURCE01",
+    "airline_094_norm#b0::GIVEN::A001::SOURCE01"
+  ]
+}

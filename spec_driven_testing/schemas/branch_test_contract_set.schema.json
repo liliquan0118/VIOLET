@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.branch-test-contract-set/v0.1",
+  "title": "AgentSpecTesting Branch Test Contract Set",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "contracts",
+    "summary",
+    "source_given_when_contract_set_fingerprint",
+    "source_given_logical_form_set_fingerprint",
+    "source_given_binding_set_fingerprint",
+    "source_fixture_support_fingerprint",
+    "source_runtime_observation_binding_set_fingerprint",
+    "source_oracle_evaluator_contract_set_fingerprint",
+    "source_semantic_judge_contract_set_fingerprint",
+    "branch_test_contract_set_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.branch-test-contract-set/v0.1"
+    },
+    "contracts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "schema_version",
+          "branch_test_contract_id",
+          "branch_id",
+          "spec_id",
+          "gwt",
+          "given_contract",
+          "when_contract",
+          "fixture_contract",
+          "oracle_contract",
+          "required_work",
+          "primary_status",
+          "admission_status",
+          "branch_test_contract_fingerprint"
+        ],
+        "properties": {
+          "schema_version": {
+            "const": "agentspectesting.branch-test-contract/v0.1"
+          },
+          "branch_test_contract_id": {"type": "string", "minLength": 1},
+          "branch_id": {"type": "string", "minLength": 1},
+          "spec_id": {"type": "string", "minLength": 1},
+          "gwt": {"type": "object"},
+          "given_contract": {"type": "object"},
+          "when_contract": {"type": "object"},
+          "fixture_contract": {"type": "object"},
+          "oracle_contract": {"type": "object"},
+          "required_work": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "blocked_by_given",
+                "blocked_by_fixture",
+                "needs_fixture_construction",
+                "blocked_by_oracle",
+                "needs_runtime_binding"
+              ]
+            }
+          },
+          "primary_status": {
+            "enum": [
+              "ready_for_driver",
+              "blocked_by_given",
+              "blocked_by_fixture",
+              "needs_fixture_construction",
+              "blocked_by_oracle",
+              "needs_runtime_binding"
+            ]
+          },
+          "admission_status": {
+            "enum": ["ready_for_driver", "work_required"]
+          },
+          "branch_test_contract_fingerprint": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "summary": {"type": "object"},
+    "branch_test_contract_set_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

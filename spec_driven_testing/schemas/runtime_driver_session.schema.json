@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.runtime-driver-session/v0.1",
+  "title": "AgentSpecTesting Runtime Driver Session",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "runtime_driver_version",
+    "bound_driver_plan_identity",
+    "fixture_instance_id",
+    "runtime_context",
+    "variation_profile",
+    "state",
+    "next_action",
+    "runtime_checks"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.runtime-driver-session/v0.1"
+    },
+    "runtime_driver_version": {
+      "const": "deterministic-runtime-driver/v0.1"
+    },
+    "bound_driver_plan_identity": {"type": "object"},
+    "fixture_instance_id": {"type": "string", "minLength": 1},
+    "runtime_context": {"type": "object"},
+    "variation_profile": {"type": "object"},
+    "state": {
+      "type": "object",
+      "required": [
+        "status",
+        "stop_reason",
+        "turn_count",
+        "awaiting_agent",
+        "milestones",
+        "disclosed_facts",
+        "requested_facts",
+        "successful_probe_keys",
+        "target_action_observed",
+        "observation_log",
+        "action_log"
+      ],
+      "properties": {
+        "status": {"enum": ["active", "terminal"]},
+        "stop_reason": {"type": ["string", "null"]},
+        "turn_count": {"type": "integer", "minimum": 0},
+        "awaiting_agent": {"type": "boolean"},
+        "milestones": {"type": "object"},
+        "disclosed_facts": {"type": "array"},
+        "requested_facts": {"type": "array"},
+        "successful_probe_keys": {"type": "array"},
+        "target_action_observed": {"type": "boolean"},
+        "observation_log": {"type": "array"},
+        "action_log": {"type": "array"}
+      }
+    },
+    "next_action": {"$ref": "driver_action.schema.json"},
+    "runtime_checks": {"type": "object"}
+  }
+}

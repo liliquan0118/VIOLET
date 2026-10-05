@@ -1,0 +1,20 @@
+{
+  "schema_version": "agentspectesting.runtime-observation-binding-vocabulary/v0.1",
+  "domain": "retail",
+  "named_fact_vocabulary": {
+    "order id": "order_id",
+    "list of items": "item_ids"
+  },
+  "prerequisite_lookup_vocabulary": {},
+  "dialogue_act_keywords_note": "See docs/agentcoveragetesting_reuse_log.md section 49. CA0011::A01/A02 are retail_055_order_cancel_pending_order#b1's real left_event_semantic_unit_ids ('list the action details' / 'obtain explicit user confirmation (yes) to proceed') -- reached via _resolve_ambiguous_right_event's tied-top-score disjunctive right_event override (modify_pending_order_address/items/payment all real, equally valid targets for this branch's real 'modify an order' Then), same precedent style as airline's own CA0048::A01 -> ['confirm'].",
+  "dialogue_act_keywords": {
+    "CA0011::A01": ["detail"],
+    "CA0011::A02": ["confirm"]
+  },
+  "semantic_event_alias_vocabulary_note": "See docs/agentcoveragetesting_reuse_log.md section 44. Each entry is a real, individually-verified semantic_requirement candidate whose true target is a single, real retail tool (tau2/domains/retail/tools.py) that the frozen same-branch-alias heuristic cannot match (these claims are about the tool's own internal business-logic error text, not anything its description says). resolve_as='outcome_alias' for all of these -- binding_status stays 'semantic_deferred' so compile_oracle_evaluator_contracts_extended's TOOL_CALL_OUTCOME_RULES/tool_call_error_matches dispatch (not match_cardinality) applies; see the matching TOOL_CALL_OUTCOME_RULES entries in configs/oracle_judgment_families/retail_v0_1.json for the real tau2 error text each one checks.",
+  "semantic_event_alias_vocabulary": {
+    "retail_023_arg#b0v1::OR01": {"tool_name": "modify_pending_order_payment", "resolve_as": "outcome_alias"},
+    "retail_024_arg#b0::OR01": {"tool_name": "modify_pending_order_payment", "resolve_as": "outcome_alias"},
+    "retail_028_arg#b0::OR01": {"tool_name": "return_delivered_order_items", "resolve_as": "outcome_alias"}
+  }
+}

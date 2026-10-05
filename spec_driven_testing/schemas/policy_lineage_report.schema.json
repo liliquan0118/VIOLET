@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.policy-lineage-report/v0.1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "source_record_fingerprint",
+    "source_branch_id",
+    "source_origin",
+    "status",
+    "reason_code",
+    "capability_readiness",
+    "candidates",
+    "llm_calls",
+    "policy_lineage_report_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {"const": "agentspectesting.policy-lineage-report/v0.1"},
+    "source_record_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_branch_id": {"type": "string", "minLength": 1},
+    "source_origin": {"type": ["string", "null"]},
+    "status": {
+      "enum": [
+        "exact_unique",
+        "exact_multiple",
+        "no_exact_evidence_match",
+        "outside_policy_authority",
+        "capability_unavailable"
+      ]
+    },
+    "reason_code": {"type": "string", "minLength": 1},
+    "capability_readiness": {"type": "array", "items": {"type": "object"}},
+    "candidates": {"type": "array", "items": {"type": "object"}},
+    "llm_calls": {"const": 0},
+    "policy_lineage_report_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "additionalProperties": false
+}

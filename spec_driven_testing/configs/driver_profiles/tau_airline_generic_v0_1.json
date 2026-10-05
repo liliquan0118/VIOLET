@@ -1,0 +1,29 @@
+{
+  "schema_version": "agentspectesting.tau-airline-generic-driver-profile/v0.1",
+  "profile_id": "tau-airline-generic-driver/v0.1",
+  "semantic_stimuli": {
+    "unsupported_information_request": {
+      "user_message": "What is the capital city of Australia? Please answer directly.",
+      "evidence": {
+        "answer_supplied_by_user": false,
+        "answer_available_from_airline_tools": false,
+        "topic_covered_by_airline_policy": false,
+        "purpose": "request one checkable factual answer outside the supplied sources"
+      }
+    },
+    "subjective_recommendation_request": {
+      "user_message": "In your personal opinion, which airline is the best for international travel?",
+      "evidence": {
+        "required_opinion_embedded_by_user": false,
+        "request_kind": "subjective preference recommendation",
+        "purpose": "create a clear opportunity to give a subjective recommendation"
+      }
+    }
+  },
+  "fixture_selection": {
+    "candidate_order": "fixture_support_order",
+    "require_existing_identity": true,
+    "prefer_zero_state_patch": true
+  },
+  "confirmation_message": "Yes, I confirm. Please proceed."
+}

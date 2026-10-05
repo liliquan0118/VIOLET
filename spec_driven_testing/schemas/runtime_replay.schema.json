@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.runtime-replay/v0.1",
+  "title": "AgentSpecTesting Runtime Driver Replay",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "runtime_driver_version",
+    "trace_id",
+    "session",
+    "reachability_result",
+    "replay_checks",
+    "replay_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.runtime-replay/v0.1"
+    },
+    "runtime_driver_version": {
+      "const": "deterministic-runtime-driver/v0.1"
+    },
+    "trace_id": {
+      "type": "string"
+    },
+    "session": {
+      "type": "object"
+    },
+    "reachability_result": {
+      "type": "object",
+      "required": [
+        "reached",
+        "decision_opportunity_reached",
+        "target_action_observed",
+        "milestones",
+        "llm_calls"
+      ]
+    },
+    "replay_checks": {
+      "type": "object"
+    },
+    "replay_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

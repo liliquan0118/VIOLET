@@ -1,0 +1,28 @@
+{
+  "schema_version": "agentspectesting.oracle-requirement-pilot-spec/v0.8",
+  "purpose": "Evaluation-only holdout for composite argument constraints, temporal prerequisites, and exact sibling membership.",
+  "cases": [
+    {"branch_id": "airline_023_arg#b0v1", "candidate_id": "OC01", "expected_decision": "no"},
+    {"branch_id": "airline_023_arg#b0v1", "candidate_id": "OC02", "expected_decision": "no"},
+    {"branch_id": "airline_023_arg#b0v1", "candidate_id": "OC03", "expected_decision": "yes"},
+    {"branch_id": "airline_023_arg#b0v1", "candidate_id": "OC04", "expected_decision": "yes"},
+
+    {"branch_id": "airline_074_order#b1", "candidate_id": "OC01", "expected_decision": "no"},
+    {"branch_id": "airline_074_order#b1", "candidate_id": "OC02", "expected_decision": "yes"},
+    {"branch_id": "airline_074_order#b1", "candidate_id": "OC03", "expected_decision": "yes"},
+
+    {"branch_id": "airline_076_norm#b0", "candidate_id": "OC01", "expected_decision": "yes"},
+    {"branch_id": "airline_076_norm#b0", "candidate_id": "OC05", "expected_decision": "no"},
+    {"branch_id": "airline_076_norm#b0", "candidate_id": "OC06", "expected_decision": "yes"},
+
+    {"branch_id": "airline_078_norm#b0v0", "candidate_id": "OC01", "expected_decision": "yes"},
+    {"branch_id": "airline_078_norm#b0v0", "candidate_id": "OC02", "expected_decision": "no"},
+    {"branch_id": "airline_078_norm#b0v1", "candidate_id": "OC01", "expected_decision": "no"},
+    {"branch_id": "airline_078_norm#b0v1", "candidate_id": "OC02", "expected_decision": "yes"}
+  ],
+  "quality_gate": {
+    "minimum_accuracy": 1.0,
+    "maximum_ambiguous": 0,
+    "required_structural_validity": 1.0
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.sut-adapter-profile/v0.1",
+  "title": "AgentSpecTesting SUT Adapter Profile",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "profile_id",
+    "sut",
+    "domain",
+    "fixture_operations",
+    "observable_channels",
+    "controllable_channels",
+    "runtime_observation_catalog",
+    "scalar_resolutions",
+    "fixture_binding_catalog"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.sut-adapter-profile/v0.1"
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sut": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fixture_operations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "observable_channels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "controllable_channels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "runtime_observation_catalog": {
+      "type": "object",
+      "required": [
+        "fact_request_phrases",
+        "confirmation_request_phrases",
+        "refusal_phrases",
+        "transfer_phrases"
+      ],
+      "properties": {
+        "fact_request_phrases": {
+          "type": "object",
+          "required": ["user_id", "reservation_id", "operation_reason"]
+        },
+        "confirmation_request_phrases": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "refusal_phrases": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "transfer_phrases": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        }
+      },
+      "additionalProperties": false
+    },
+    "scalar_resolutions": {
+      "type": "object"
+    },
+    "fixture_binding_catalog": {
+      "type": "object",
+      "required": [
+        "observation_bindings",
+        "semantic_predicate_bindings"
+      ],
+      "properties": {
+        "observation_bindings": {
+          "type": "array"
+        },
+        "semantic_predicate_bindings": {
+          "type": "array"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

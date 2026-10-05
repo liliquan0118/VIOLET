@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.runtime-trace/v0.1",
+  "title": "AgentSpecTesting Runtime Driver Trace",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "trace_id",
+    "bound_driver_plan_fingerprint",
+    "fixture_instance_id",
+    "variation_selection",
+    "events"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.runtime-trace/v0.1"
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "bound_driver_plan_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "fixture_instance_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "variation_selection": {
+      "type": "object"
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["event_kind"],
+        "properties": {
+          "event_kind": {
+            "enum": [
+              "apply_next_driver_action",
+              "assistant_message",
+              "assistant_tool_call",
+              "tool_result",
+              "assistant_turn_completed",
+              "terminal_state"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

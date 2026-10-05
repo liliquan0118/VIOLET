@@ -1,0 +1,40 @@
+{
+  "schema_version": "agentspectesting.runtime-observation-binding-vocabulary/v0.1",
+  "domain": "telecom",
+  "_generation_note": "See docs/agentcoveragetesting_reuse_log.md section 39. 'identify the customer' (telecom_055_order#b0, real semantic_unit_id CA0028::A01) real-checked against tau2/domains/telecom/tools.py: telecom has three real, independent customer-lookup tools (get_customer_by_id/get_customer_by_phone/get_customer_by_name), any one of which genuinely establishes identity -- a disjunctive fact, unlike airline's single-tool prerequisite_lookup_vocabulary entries. This required extending _prerequisite_lookups_before_operation/_witness_for_left_event to accept a list of alternative tools for one phrase (a new 'prerequisite_tool_call_any_of' matcher kind, extension-module-only, not a change to the frozen matching semantics).",
+  "named_fact_vocabulary": {},
+  "prerequisite_lookup_vocabulary": {
+    "identify the customer": ["get_customer_by_id", "get_customer_by_phone", "get_customer_by_name"]
+  },
+  "dialogue_act_keywords": {},
+  "semantic_event_alias_vocabulary_note": "See docs/agentcoveragetesting_reuse_log.md sections 44 and 66 (Pattern #3). Each entry is a real, individually-verified semantic_requirement candidate whose true target is a single, real telecom agent tool (tau2/domains/telecom/tools.py's 13-tool TelecomTools catalog) that the frozen same-branch-alias heuristic cannot match, because that heuristic requires the claim's own wording to overlap the TARGET TOOL's description text -- these claims are about the tool's mere occurrence (a real presence/absence check, expected_observation.operator is already present/absent for every one of these), not anything the tool's description says. resolve_as='bound' for all of these (no error-text matching needed). The 6 'get_details_by_id' entries removed here (041 OR02, 046 OR02/OR03, 054 OR02, 080 OR02, 081 OR02) were a real bug, not a benign choice: get_details_by_id(id) is only ONE of two real ways to check bill/line status (get_bills_for_customer / get_customer_by_phone are the other real alternative for these branches), so aliasing to it as an independently-required 'bound' mechanical check got AND-combined against the sibling requirement bound to the OTHER real alternative tool -- a real observed failure for telecom_041/046 in batch_02, since the agent legitimately used the alternative tool. No 'any_of'/OR-alternative binding kind exists yet to express this correctly, so these 6 candidates are left as semantic_deferred (honest, not silently wrong) until that capability exists. The remaining 4 entries (049 OR02/OR03 -> resume_line, 054 OR03 -> enable_roaming, 058 OR01 -> transfer_to_human_agents) are unaffected: each aliases to the one real, unambiguous tool for that fact, with no real alternative tool to conflict with.",
+  "semantic_event_alias_vocabulary": {
+    "telecom_049_state#e0::OR02": {"tool_name": "resume_line", "resolve_as": "bound"},
+    "telecom_049_state#e0::OR03": {"tool_name": "resume_line", "resolve_as": "bound"},
+    "telecom_054_order#b0::OR03": {"tool_name": "enable_roaming", "resolve_as": "bound"},
+    "telecom_058_norm#b0::OR01": {"tool_name": "transfer_to_human_agents", "resolve_as": "bound"}
+  },
+  "effort_prerequisite_vocabulary_note": "See docs/agentcoveragetesting_reuse_log.md section 50. telecom_040_norm#b0 (CA0010::A01, 'try its best to resolve the user's issue')/telecom_056_norm#b0 (CA0029::A01, 'try all possible ways') before transferring to a human agent -- a subjective effort claim, not a spoken dialogue act or a named-fact/prerequisite-lookup (both need a real semantic_unit_model direct_action_text telecom does not have). Mechanical, NECESSARY-CONDITION-ONLY proxy: the agent must have called at least one real tool OTHER than transfer_to_human_agents first (an agent that transfers with zero prior attempts definitely violates the claim); whether the attempts made were adequate or exhaustive is a real semantic judgment this cannot make and does not claim to. The tool set is every one of telecom's real 13 TelecomTools (tau2/domains/telecom/tools.py) except transfer_to_human_agents itself.",
+  "effort_prerequisite_vocabulary": {
+    "CA0010::A01": [
+      "get_customer_by_phone", "get_customer_by_id", "get_customer_by_name", "get_details_by_id",
+      "suspend_line", "resume_line", "get_bills_for_customer", "send_payment_request",
+      "get_data_usage", "enable_roaming", "disable_roaming", "refuel_data"
+    ],
+    "CA0029::A01": [
+      "get_customer_by_phone", "get_customer_by_id", "get_customer_by_name", "get_details_by_id",
+      "suspend_line", "resume_line", "get_bills_for_customer", "send_payment_request",
+      "get_data_usage", "enable_roaming", "disable_roaming", "refuel_data"
+    ]
+  },
+  "generic_requested_operation_vocabulary_note": "See docs/agentcoveragetesting_reuse_log.md section 106. telecom_055_order#b0::OR01's 11 operation_family_candidates are not 11 independently-verified real tool candidates -- they are 11 IDs mechanically fanned out from ONE real policy statement (CP0021::P01, 'Under Technical Support, the agent must first identify the customer.'; main_policy.md's own '## Technical Support' section is literally that one sentence). Only 1 of 11 (disable_roaming) carries any real tool evidence in the pipeline's own execution_matching_contracts.json; the other 10 are explicitly 'left empty rather than guessing'. Real-verified against tau2-bench's own tech_support_workflow.md (the real technical-support troubleshooting doc): enable_roaming (Step 2.1.2), get_data_usage (Step 2.1.4), refuel_data (Step 2.1.4), and resume_line (Step 1.4, lifting a suspension blocking service) each appear as a named, single-tool troubleshooting action. get_details_by_id (too generic, no 1:1 step correspondence) and suspend_line (never appears in any troubleshooting path -- only resume_line, lifting one, does) were checked and excluded; 'change plan' (also named in Step 2.1.4) has no single real tool in tools.py, only a multi-step manual process per main_policy.md's own 'Change Plan' section, so no tool name was added for it.",
+  "generic_requested_operation_vocabulary": {
+    "telecom_055_order#b0::OR01": [
+      "disable_roaming", "enable_roaming", "get_data_usage", "refuel_data", "resume_line"
+    ]
+  },
+  "prerequisite_lookup_by_semantic_unit_vocabulary_note": "See docs/agentcoveragetesting_reuse_log.md section 106. Same real fact and same real tool set as prerequisite_lookup_vocabulary['identify the customer'] above (CA0028::A01, telecom_055_order#b0's left_event) -- duplicated under the semantic_unit_id key because _prerequisite_lookups_before_operation (which reads prerequisite_lookup_vocabulary by phrase text) needs a real tool_catalog/semantic_unit_model lookup telecom has never persisted, so it has never actually run against real telecom data; _prerequisite_lookup_by_semantic_unit_before_operation (which reads this table) is reached from the actual production post-processing-patch path used for telecom/retail and needs no such lookup.",
+  "prerequisite_lookup_by_semantic_unit_vocabulary": {
+    "CA0028::A01": ["get_customer_by_id", "get_customer_by_phone", "get_customer_by_name"]
+  }
+}

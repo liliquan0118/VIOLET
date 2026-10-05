@@ -1,0 +1,99 @@
+{
+  "schema_version": "agentspectesting.sut-adapter-profile/v0.1",
+  "profile_id": "tau-bench-airline/v0.1",
+  "sut": "tau_bench",
+  "domain": "airline",
+  "fixture_operations": [
+    "enumerate_entities",
+    "read_initial_state",
+    "construct_initial_state_patch",
+    "validate_tau_task"
+  ],
+  "observable_channels": [
+    "environment_snapshot",
+    "tool_call",
+    "tool_result",
+    "user_message",
+    "assistant_message",
+    "terminal_state"
+  ],
+  "controllable_channels": [
+    "initial_state_patch",
+    "user_message"
+  ],
+  "runtime_observation_catalog": {
+    "fact_request_phrases": {
+      "user_id": [
+        "user id",
+        "user identifier"
+      ],
+      "reservation_id": [
+        "reservation id",
+        "booking reference",
+        "confirmation number"
+      ],
+      "operation_reason": [
+        "reason for cancellation",
+        "why you want to cancel",
+        "why are you cancelling"
+      ]
+    },
+    "confirmation_request_phrases": [
+      "are you sure",
+      "confirm the cancellation",
+      "would you like me to proceed",
+      "shall I proceed"
+    ],
+    "refusal_phrases": [
+      "cannot cancel",
+      "can't cancel",
+      "unable to cancel",
+      "not eligible for cancellation"
+    ],
+    "transfer_phrases": [
+      "transfer you",
+      "human agent",
+      "airline specialist"
+    ]
+  },
+  "scalar_resolutions": {
+    "duration": {
+      "value": 1,
+      "unit": "second",
+      "basis": "tau_bench_airline_timestamp_serialization"
+    }
+  },
+  "fixture_binding_catalog": {
+    "observation_bindings": [
+      {
+        "observation_value_id": "COV::COP0050::V01",
+        "source_path": "reservation.cabin"
+      },
+      {
+        "observation_value_id": "COV::COP0051::V01",
+        "source_path": "reservation.insurance"
+      }
+    ],
+    "semantic_predicate_bindings": [
+      {
+        "condition_operand_id": "COP0049",
+        "evaluator": {
+          "kind": "any_collection_field_equals",
+          "collection_path": "flights",
+          "field": "status",
+          "value": "cancelled"
+        }
+      },
+      {
+        "condition_operand_id": "COP0019",
+        "evaluator": {
+          "kind": "dialogue_value_by_required_truth",
+          "fact_name": "operation_reason",
+          "true_value": "health",
+          "false_value": "change_of_plan",
+          "evidence_channel": "user_message"
+        }
+      }
+    ]
+  }
+}

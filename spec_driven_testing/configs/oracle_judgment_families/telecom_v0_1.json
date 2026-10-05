@@ -1,0 +1,669 @@
+{
+  "schema_version": "agentspectesting.oracle-judgment-family-config/v0.1",
+  "domain": "telecom",
+  "rules": [
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "The reason for suspension must be specific and relevant to the line's status or customer account (e.g., not empty, not generic like 'test').",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "The suspend_line 'reason' argument must be a specific, substantive reason tied to the real conversation (e.g. references an overdue bill, a lost/stolen device, fraud, or another concrete cause the user or agent actually discussed) -- not empty, not whitespace, and not a generic placeholder like 'test', 'reason', or 'N/A' that could apply to any suspension regardless of context. Additionally, the reason must not assert facts, incidents, or causes that are absent from or contradicted by the conversation, even if the wording sounds specific -- a fabricated-but-specific-sounding reason (e.g. inventing a fraud incident the user never mentioned) is a FAIL just as much as an empty or generic one."
+      }
+    },
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "The summary provided when transferring to a human agent must accurately and concisely reflect the user's actual issue or request.",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "The transfer_to_human_agents 'summary' argument must accurately and concisely describe the real issue or request the user raised earlier in this transcript -- not a vague, generic, or unrelated description, and not missing the concrete detail (account/line/billing specifics) the user actually gave. If the user raised more than one distinct issue before the transfer, the summary must cover all of them, or the criterion is satisfied only for the specific issue that motivated this transfer call -- silently omitting an earlier, still-unresolved issue the user raised is a FAIL."
+      }
+    },
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "The summary must not contain sensitive personal information (such as passwords, full credit card numbers, or authentication credentials).",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "The transfer_to_human_agents 'summary' argument must not contain sensitive personal information verbatim -- no full credit card or payment card numbers, no passwords or authentication codes/PINs, no full SSN-like government ID numbers. Referencing that 'the user provided a payment method' without repeating the actual number is fine; reproducing the actual sensitive value is not. This list is illustrative, not exhaustive: it also covers gift card or store credit codes, PINs, and recovery/authentication codes, since these are bearer credentials equivalent to a payment card number. Home address and email address are not by themselves a violation when included because they are operationally necessary for the human agent to act on the request (e.g. a shipping or delivery issue)."
+      }
+    },
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "You must check that the line associated with the phone number the user provided is roaming enabled before troubleshooting data roaming issues.",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "Before the agent gives the user any troubleshooting advice or diagnosis about a data roaming problem, the transcript must show the agent actually looked up (via a real tool call, e.g. get_data_usage or get_details_by_id on the relevant line) and considered whether roaming was enabled for that line -- not just launched into generic troubleshooting steps without checking the real roaming_enabled state first. A tool call from an earlier point in the same conversation satisfies this only if its result (the roaming_enabled value) is referenced or restated when the agent gives its advice; a lookup whose result is never connected to the advice, or asking the user to self-report roaming status instead of checking via a tool call, does not satisfy this criterion."
+      }
+    },
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "The combination of full_name and dob must be provided by the user or securely verified before calling this tool.",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "Before the agent calls get_customer_by_name with a given full_name and dob, the transcript must show the USER themselves actually stated that name and date of birth earlier in the conversation (not the agent guessing, inventing, or carrying over values from an unrelated context) -- the argument values used in the call must be traceable to something the user really said. Exact-value reformatting (e.g. converting a spoken date to ISO format) is acceptable and does not violate this criterion. However, if the user provides only a partial date of birth (e.g. month and year only, with no day), the agent must not silently supply a specific day to complete it -- doing so counts as inventing a value and is a FAIL."
+      }
+    },
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "The agent must confirm the type of object associated with the id before using the returned details for further actions.",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "get_details_by_id's real id-prefix convention (L=line, D=device, B=bill, C=customer, P=plan) determines what kind of object comes back. After calling get_details_by_id, the agent's subsequent behavior (what it tells the user, what it does with the result) must be consistent with the REAL type of object that was actually returned, not an assumed or mismatched type (e.g. treating a returned Bill as if it were a Line). Consistency is judged solely by whether the agent's statements and actions match fields/operations valid for the real returned type; the agent is not required to verbally name the type, and correct silent handling counts as a PASS. Conversely, correctly naming the type does not excuse a subsequent action that is invalid for that type."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a line that is currently active or suspended, not terminated, ported out, or deleted. (disable_roaming)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "telecom's real LineStatus enum (tau2/domains/telecom/data_model.py) has exactly four values: Active, Suspended, Pending Activation, Closed. There is no Terminated/Ported Out/Deleted status at all, so no real line can ever be in one of those states -- the exclusion clause is vacuously true for every real line by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a line that is currently active or suspended, not terminated, ported out, or deleted. (enable_roaming)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "telecom's real LineStatus enum (tau2/domains/telecom/data_model.py) has exactly four values: Active, Suspended, Pending Activation, Closed. There is no Terminated/Ported Out/Deleted status at all, so no real line can ever be in one of those states -- the exclusion clause is vacuously true for every real line by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a line that is currently active or suspended, not terminated, ported out, or deleted. (get_data_usage)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "telecom's real LineStatus enum (tau2/domains/telecom/data_model.py) has exactly four values: Active, Suspended, Pending Activation, Closed. There is no Terminated/Ported Out/Deleted status at all, so no real line can ever be in one of those states -- the exclusion clause is vacuously true for every real line by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a line that is currently active or suspended, not terminated, ported out, or deleted. (refuel_data)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "telecom's real LineStatus enum (tau2/domains/telecom/data_model.py) has exactly four values: Active, Suspended, Pending Activation, Closed. There is no Terminated/Ported Out/Deleted status at all, so no real line can ever be in one of those states -- the exclusion clause is vacuously true for every real line by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a line that is currently active or suspended, not terminated, ported out, or deleted. (resume_line)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "telecom's real LineStatus enum (tau2/domains/telecom/data_model.py) has exactly four values: Active, Suspended, Pending Activation, Closed. There is no Terminated/Ported Out/Deleted status at all, so no real line can ever be in one of those states -- the exclusion clause is vacuously true for every real line by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a line that is currently active or suspended, not terminated, ported out, or deleted. (suspend_line)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "telecom's real LineStatus enum (tau2/domains/telecom/data_model.py) has exactly four values: Active, Suspended, Pending Activation, Closed. There is no Terminated/Ported Out/Deleted status at all, so no real line can ever be in one of those states -- the exclusion clause is vacuously true for every real line by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a line that is not terminated, ported out, or deleted. (disable_roaming)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "Same real LineStatus enum fact as above: Terminated/Ported Out/Deleted are not real states, so this claim is vacuously true for every real line by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a line that is not terminated, ported out, or deleted. (enable_roaming)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "Same real LineStatus enum fact as above: Terminated/Ported Out/Deleted are not real states, so this claim is vacuously true for every real line by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a line that is not terminated, ported out, or deleted. (get_data_usage)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "Same real LineStatus enum fact as above: Terminated/Ported Out/Deleted are not real states, so this claim is vacuously true for every real line by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a line that is not terminated, ported out, or deleted. (refuel_data)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "Same real LineStatus enum fact as above: Terminated/Ported Out/Deleted are not real states, so this claim is vacuously true for every real line by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a line that is not terminated, ported out, or deleted. (resume_line)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "Same real LineStatus enum fact as above: Terminated/Ported Out/Deleted are not real states, so this claim is vacuously true for every real line by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a line that is not terminated, ported out, or deleted. (suspend_line)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "Same real LineStatus enum fact as above: Terminated/Ported Out/Deleted are not real states, so this claim is vacuously true for every real line by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a data-capable line (i.e., a line that supports mobile data services). (disable_roaming)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "telecom's real Line model (tau2/domains/telecom/data_model.py) has no line-type/voice-only distinction at all -- data_used_gb/data_refueling_gb/plan_id are universal fields on every Line, so every real line is equally \"data-capable\" by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a data-capable line (i.e., a line that supports mobile data services). (enable_roaming)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "telecom's real Line model (tau2/domains/telecom/data_model.py) has no line-type/voice-only distinction at all -- data_used_gb/data_refueling_gb/plan_id are universal fields on every Line, so every real line is equally \"data-capable\" by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a data-capable line (i.e., a line that supports mobile data services). (get_data_usage)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "telecom's real Line model (tau2/domains/telecom/data_model.py) has no line-type/voice-only distinction at all -- data_used_gb/data_refueling_gb/plan_id are universal fields on every Line, so every real line is equally \"data-capable\" by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a data-capable line (i.e., a line that supports mobile data services). (refuel_data)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "telecom's real Line model (tau2/domains/telecom/data_model.py) has no line-type/voice-only distinction at all -- data_used_gb/data_refueling_gb/plan_id are universal fields on every Line, so every real line is equally \"data-capable\" by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a data-capable line (i.e., a line that supports mobile data services). (resume_line)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "telecom's real Line model (tau2/domains/telecom/data_model.py) has no line-type/voice-only distinction at all -- data_used_gb/data_refueling_gb/plan_id are universal fields on every Line, so every real line is equally \"data-capable\" by construction of the schema."
+      }
+    },
+    {
+      "table": "STRUCTURALLY_UNREACHABLE_ACTION_RULES",
+      "key": "The line_id must refer to a data-capable line (i.e., a line that supports mobile data services). (suspend_line)",
+      "predicate_kind": "structurally_unreachable_action",
+      "params": {
+        "reason": "telecom's real Line model (tau2/domains/telecom/data_model.py) has no line-type/voice-only distinction at all -- data_used_gb/data_refueling_gb/plan_id are universal fields on every Line, so every real line is equally \"data-capable\" by construction of the schema."
+      }
+    },
+    {
+      "table": "DATE_FORMAT_RULES",
+      "key": "The dob parameter must be a string in the format YYYY-MM-DD.",
+      "predicate_kind": "valid_calendar_date",
+      "params": {}
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The line_id must exist and be active (not suspended, terminated, or ported out) before roaming can be enabled.",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_details_by_id"
+        ],
+        "correlate": {
+          "source_arg": "id",
+          "target_arg": "line_id"
+        },
+        "result_path": "status",
+        "check": "equals_constant",
+        "expected_values": [
+          "Active"
+        ]
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The line_id must exist and be active (not suspended, terminated, or ported out) before roaming can be disabled.",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_details_by_id"
+        ],
+        "correlate": {
+          "source_arg": "id",
+          "target_arg": "line_id"
+        },
+        "result_path": "status",
+        "check": "equals_constant",
+        "expected_values": [
+          "Active"
+        ]
+      }
+    },
+    {
+      "table": "IATA_CODE_FORMAT_RULES",
+      "key": "The phone_number parameter must be a valid, dialable phone number in the telecom's supported numbering plan (e.g., E.164 format, no letters or special characters except '+').",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": "^\\d{3}-\\d{3}-\\d{4}$"
+      }
+    },
+    {
+      "table": "IATA_CODE_FORMAT_RULES",
+      "key": "The full_name parameter must not be empty or consist solely of whitespace.",
+      "predicate_kind": "matches_regex",
+      "params": {
+        "pattern": ".*\\S.*"
+      }
+    },
+    {
+      "table": "DATE_NOT_BEFORE_REFERENCE_RULES",
+      "key": "The dob parameter must represent a date in the past (not today or future).",
+      "predicate_kind": "date_not_before",
+      "params": {
+        "reference_date": "2025-02-25",
+        "direction": "before"
+      }
+    },
+    {
+      "table": "POSITIVE_INTEGER_RULES",
+      "key": "The limit parameter must be a positive integer greater than zero and not unreasonably large (e.g., within a system-defined maximum).",
+      "predicate_kind": "positive_integer",
+      "params": {}
+    },
+    {
+      "table": "POSITIVE_INTEGER_RULES",
+      "key": "The gb_amount parameter must be strictly positive (greater than 0).",
+      "predicate_kind": "positive_integer",
+      "params": {
+        "numeric_type": "number"
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The customer_id provided must correspond to an existing customer record in the system. (disable_roaming)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Customer with ID",
+            "not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The customer_id provided must correspond to an existing customer record in the system. (enable_roaming)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Customer with ID",
+            "not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The customer_id provided must correspond to an existing customer record in the system. (get_bills_for_customer)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Customer with ID",
+            "not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The customer_id provided must correspond to an existing customer record in the system. (get_customer_by_id)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Customer with ID",
+            "not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The customer_id provided must correspond to an existing customer record in the system. (get_data_usage)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Customer with ID",
+            "not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The customer_id provided must correspond to an existing customer record in the system. (refuel_data)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Customer with ID",
+            "not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The customer_id provided must correspond to an existing customer record in the system. (resume_line)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Customer with ID",
+            "not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The customer_id provided must correspond to an existing customer record in the system. (send_payment_request)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Customer with ID",
+            "not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The customer_id provided must correspond to an existing customer record in the system. (suspend_line)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Customer with ID",
+            "not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The line_id must belong to the customer specified by customer_id. (disable_roaming)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Line",
+            "not found for customer"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The line_id must belong to the customer specified by customer_id. (enable_roaming)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Line",
+            "not found for customer"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The line_id must belong to the customer specified by customer_id. (get_data_usage)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Line",
+            "not found for customer"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The line_id must belong to the customer specified by customer_id. (refuel_data)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Line",
+            "not found for customer"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The line_id must belong to the customer specified by customer_id. (resume_line)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Line",
+            "not found for customer"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The line_id must belong to the customer specified by customer_id. (suspend_line)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Line",
+            "not found for customer"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The line_id must exist and be active (not already suspended, terminated, or ported out) before it can be suspended.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "Line must be active to suspend",
+          [
+            "Line",
+            "not found for customer"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The line_id must exist and currently be in a suspended state before it can be resumed.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          "Line must be suspended to resume",
+          [
+            "Line",
+            "not found for customer"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The bill_id must correspond to a bill that belongs to the specified customer_id.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Bill",
+            "not found for customer"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The customer_id must be authorized to make changes (such as refueling data) to the specified line_id. (disable_roaming)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Line",
+            "not found for customer"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The customer_id must be authorized to make changes (such as refueling data) to the specified line_id. (enable_roaming)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Line",
+            "not found for customer"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The customer_id must be authorized to make changes (such as refueling data) to the specified line_id. (get_data_usage)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Line",
+            "not found for customer"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The customer_id must be authorized to make changes (such as refueling data) to the specified line_id. (refuel_data)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Line",
+            "not found for customer"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The customer_id must be authorized to make changes (such as refueling data) to the specified line_id. (resume_line)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Line",
+            "not found for customer"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The customer_id must be authorized to make changes (such as refueling data) to the specified line_id. (suspend_line)",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Line",
+            "not found for customer"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The phone_number parameter must correspond to a number currently assigned to a customer (active or suspended), not to an unassigned or deactivated number.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Customer with phone number",
+            "not found"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "TOOL_CALL_OUTCOME_RULES",
+      "key": "The bill_id must correspond to an existing, non-deleted bill in the system.",
+      "predicate_kind": "tool_call_error_matches",
+      "params": {
+        "match_groups": [
+          [
+            "Bill",
+            "not found for customer"
+          ]
+        ]
+      }
+    },
+    {
+      "table": "CUMULATIVE_SUM_RULES",
+      "key": "The cumulative amount of data refueled to a line in a single session must not exceed 2GB.",
+      "predicate_kind": "cumulative_sum_le",
+      "params": {
+        "scope_arg": "line_id",
+        "sum_arg": "gb_amount",
+        "threshold": 2
+      }
+    },
+    {
+      "table": "ARGUMENT_UPPER_BOUND_RULES",
+      "key": "The agent must refuel no more than 2GB of data in a single refuel_data operation.",
+      "predicate_kind": "argument_le_constant",
+      "params": {
+        "parameter": "gb_amount",
+        "threshold": 2,
+        "numeric_type": "number"
+      }
+    },
+    {
+      "table": "PRIOR_CALL_CONSISTENCY_RULES",
+      "key": "The line_id must exist and currently be in a suspended state before it can be resumed.",
+      "predicate_kind": "prior_call_consistency",
+      "params": {
+        "source_tools": [
+          "get_details_by_id"
+        ],
+        "correlate": {
+          "source_arg": "id",
+          "target_arg": "line_id"
+        },
+        "result_path": "status",
+        "check": "equals_constant",
+        "expected_values": [
+          "Suspended",
+          "Pending Activation"
+        ]
+      }
+    },
+    {
+      "table": "SEMANTIC_TRANSCRIPT_JUDGMENT_RULES",
+      "key": "The agent must attempt all required troubleshooting steps and tool actions within their scope before transferring the user to a human agent.",
+      "predicate_kind": "semantic_transcript_judgment",
+      "params": {
+        "criterion": "Before this transfer_to_human_agents call, the transcript must show the agent attempted the relevant, available diagnostic/fix tool actions within its scope for the issue the user actually described (e.g., for a technical support issue, the applicable tech_support_workflow.md steps it had tools for; for other in-scope issues, the applicable resolution actions) -- not transferring immediately without attempting anything it could have tried. The agent is not required to attempt every conceivable step, only the ones genuinely relevant and available given what the user described and what tools exist for that issue. If the user explicitly asked for a human agent up front and no applicable in-scope resolution action existed to try first, that also counts as a PASS."
+      }
+    }
+  ]
+}

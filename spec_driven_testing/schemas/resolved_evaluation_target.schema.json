@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.resolved-evaluation-target/v0.2",
+  "title": "Resolved Evaluation Target",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "source_record_fingerprint",
+    "source_branch_id",
+    "resolution_status",
+    "resolver_id",
+    "evaluation_binding",
+    "candidate_bindings",
+    "resolution_evidence",
+    "diagnostics",
+    "resolved_evaluation_target_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.resolved-evaluation-target/v0.2"
+    },
+    "source_record_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_branch_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resolution_status": {
+      "enum": [
+        "resolved_unique",
+        "source_grounded",
+        "needs_adjudication",
+        "unresolved",
+        "ambiguous",
+        "lineage_gap",
+        "semantic_conflict"
+      ]
+    },
+    "resolver_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evaluation_binding": {
+      "type": ["object", "null"]
+    },
+    "candidate_bindings": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
+    "resolution_evidence": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
+    "resolved_evaluation_target_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "resolution_status": {
+            "enum": ["resolved_unique", "source_grounded"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evaluation_binding": {"type": "object"},
+          "candidate_bindings": {"maxItems": 0}
+        }
+      },
+      "else": {
+        "properties": {
+          "evaluation_binding": {"type": "null"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "resolution_status": {"const": "ambiguous"}
+        }
+      },
+      "then": {
+        "properties": {
+          "candidate_bindings": {"minItems": 2}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "resolution_status": {"const": "needs_adjudication"}
+        }
+      },
+      "then": {
+        "properties": {
+          "candidate_bindings": {"minItems": 1, "maxItems": 1}
+        }
+      }
+    }
+  ]
+}

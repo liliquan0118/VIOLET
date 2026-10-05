@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.probe-contract/v0.1",
+  "title": "AgentSpecTesting Probe Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "focus_predicate_id",
+    "probe_family",
+    "probe_instances",
+    "probe_contract_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.probe-contract/v0.1"
+    },
+    "focus_predicate_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "probe_family": {
+      "enum": [
+        "duration_boundary",
+        "semantic_boolean_contrast",
+        "enum_equality_contrast",
+        "unsupported"
+      ]
+    },
+    "probe_instances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "probe_id",
+          "target_name",
+          "coverage_cell_id",
+          "focus_predicate_id",
+          "required_focus_truth",
+          "expected_operation_decision",
+          "control_contract"
+        ]
+      }
+    },
+    "probe_contract_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "additionalProperties": false
+}

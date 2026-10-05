@@ -1,0 +1,77 @@
+{
+  "schema_version": "agentspectesting.sut-adapter-profile/v0.1",
+  "profile_id": "tau-bench-telecom/v0.1",
+  "sut": "tau_bench",
+  "domain": "telecom",
+  "fixture_operations": [
+    "enumerate_entities",
+    "read_initial_state",
+    "construct_initial_state_patch",
+    "validate_tau_task"
+  ],
+  "observable_channels": [
+    "environment_snapshot",
+    "tool_call",
+    "tool_result",
+    "user_message",
+    "assistant_message",
+    "terminal_state"
+  ],
+  "controllable_channels": [
+    "initial_state_patch",
+    "user_message"
+  ],
+  "runtime_observation_catalog": {
+    "fact_request_phrases": {
+      "customer_id": [
+        "could you provide your customer ID",
+        "what is your customer ID",
+        "can you give me your customer ID number",
+        "do you have your customer ID handy"
+      ],
+      "line_id": [
+        "which phone number is the line associated with",
+        "can you confirm the phone number for the line you'd like to update",
+        "what's the phone number on the line you're calling about",
+        "which line would you like me to look into"
+      ],
+      "reason": [
+        "why would you like to suspend this line",
+        "what's the reason for the suspension",
+        "can you tell me why you're looking to suspend this line"
+      ]
+    },
+    "confirmation_request_phrases": [
+      "can I confirm the price before proceeding",
+      "do you accept the payment request for this bill",
+      "shall I go ahead and apply this plan change",
+      "would you like me to proceed with the data refuel at this price",
+      "just to confirm, would you like me to proceed"
+    ],
+    "refusal_phrases": [
+      "I'm unable to lift the suspension because the line's contract end date has passed",
+      "I can't refuel more than 2GB of data at a time",
+      "I'm not able to provide that information since it isn't available from your account or our tools",
+      "I can't process that request as it falls outside our policy",
+      "I'm unable to give recommendations or subjective advice on that"
+    ],
+    "transfer_phrases": [
+      "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+      "I'll need to transfer you to a human agent for further assistance",
+      "let me transfer you to a human agent who can help with SIM security",
+      "this needs to be escalated to technical support",
+      "I'm connecting you with a human agent to resolve this"
+    ]
+  },
+  "scalar_resolutions": {
+    "duration": {
+      "value": 1,
+      "unit": "second",
+      "basis": "tau_bench_telecom_timestamp_serialization"
+    }
+  },
+  "fixture_binding_catalog": {
+    "observation_bindings": [],
+    "semantic_predicate_bindings": []
+  }
+}

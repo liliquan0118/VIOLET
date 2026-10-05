@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.compile-assessment-set/v0.2",
+  "title": "Compiler Assessment Set",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "selection",
+    "summary",
+    "items",
+    "llm_calls",
+    "compile_assessment_set_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.compile-assessment-set/v0.2"
+    },
+    "selection": {
+      "type": "object",
+      "required": ["workbook", "sheet", "review_ok"]
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "spec_count",
+        "resolution_status_counts",
+        "resolver_counts",
+        "target_archetype_counts",
+        "source_kind_counts",
+        "resolution_by_source_kind",
+        "target_resolution_dimension_counts",
+        "target_resolution_readiness_counts",
+        "end_to_end_ready_count"
+      ]
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["selected_spec_ref", "assessment"]
+      }
+    },
+    "llm_calls": {"const": 0},
+    "compile_assessment_set_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

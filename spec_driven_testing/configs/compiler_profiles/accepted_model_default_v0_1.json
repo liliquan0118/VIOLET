@@ -1,0 +1,134 @@
+{
+  "schema_version": "agentspectesting.compiler-profile/v0.1",
+  "profile_id": "accepted-model-default/v0.1",
+  "experiment_policy": {
+    "enabled_experiment_families": [
+      "nominal_witness",
+      "minimal_contrast",
+      "boundary"
+    ],
+    "witness_policy": {
+      "prefer_isolated_focus": true,
+      "minimize_active_alternative_branches": true,
+      "require_outer_blockers_nonblocking": true
+    },
+    "contrast_policy": {
+      "objective": "minimum_policy_factor_hamming_distance",
+      "require_unique_contrast": true
+    }
+  },
+  "probe_policy": {
+    "comparison_strategies": [
+      "just_below_threshold",
+      "at_threshold",
+      "just_above_threshold"
+    ],
+    "epsilon_policy": {
+      "mode": "smallest_reliably_controllable_unit"
+    }
+  },
+  "hypothesis_policy": {
+    "enabled_hypothesis_families": [
+      "decision_error",
+      "boundary_error",
+      "evidence_error",
+      "execution_error",
+      "interaction_error"
+    ]
+  },
+  "mutation_policy": {
+    "operator_catalog": [
+      {
+        "name": "fact_disclosure_order",
+        "applicability": "user_facts_or_prerequisites",
+        "baseline_value": "required_identity_first",
+        "allowed_values": [
+          "required_identity_first",
+          "target_entity_first",
+          "operation_reason_first",
+          "requested_fact_only_when_asked"
+        ],
+        "targets_progress_states": [
+          "requesting_identity_bound",
+          "target_entity_bound",
+          "required_user_facts_available"
+        ]
+      },
+      {
+        "name": "temporal_surface_form",
+        "applicability": "temporal_focus",
+        "baseline_value": "exact_observation_values",
+        "allowed_values": [
+          "exact_observation_values",
+          "relative_value_then_exact_on_request",
+          "coarse_value_then_exact_on_request"
+        ],
+        "targets_progress_states": [
+          "required_user_facts_available",
+          "decision_opportunity_reached"
+        ]
+      },
+      {
+        "name": "turn_decomposition",
+        "applicability": "user_message_control",
+        "baseline_value": "one_required_fact_per_turn",
+        "allowed_values": [
+          "single_turn",
+          "two_turn_required_fact_split",
+          "one_required_fact_per_turn"
+        ],
+        "targets_progress_states": [
+          "target_operation_requested",
+          "requesting_identity_bound",
+          "target_entity_bound",
+          "required_user_facts_available",
+          "required_agent_evidence_available",
+          "decision_opportunity_reached"
+        ]
+      },
+      {
+        "name": "confirmation_style",
+        "applicability": "confirmation_milestone",
+        "baseline_value": "direct",
+        "allowed_values": [
+          "direct",
+          "brief",
+          "consequence_restatement_before_confirmation"
+        ],
+        "targets_progress_states": [
+          "required_confirmation_completed"
+        ]
+      },
+      {
+        "name": "surface_paraphrase",
+        "applicability": "user_message_control",
+        "baseline_value": "canonical",
+        "allowed_values": [
+          "canonical",
+          "concise",
+          "natural_paraphrase"
+        ],
+        "targets_progress_states": [
+          "target_operation_requested",
+          "required_user_facts_available"
+        ]
+      }
+    ],
+    "max_changed_dimensions_per_candidate": 1,
+    "require_baseline": true,
+    "require_semantic_invariant_check": true
+  },
+  "guidance_policy": {
+    "selection_strategy": "earliest_failed_milestone_then_information_gain",
+    "prefer_single_dimension_changes": true,
+    "require_baseline_first": true,
+    "require_contrast_replay": true,
+    "minimize_confirmed_failures": true,
+    "stop_conditions": [
+      "reproducible_minimal_valid_failure_found",
+      "run_budget_exhausted",
+      "no_fixture_can_satisfy_target",
+      "all_remaining_candidates_violate_invariants"
+    ]
+  }
+}

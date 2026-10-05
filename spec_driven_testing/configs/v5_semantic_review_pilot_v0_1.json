@@ -1,0 +1,18 @@
+{
+  "schema_version": "agentspectesting.v5-semantic-pilot-policy/v0.1",
+  "selection_method": "first_by_branch_id_per_observed_structure",
+  "max_calls": 8,
+  "strata": [
+    "given:db_single",
+    "given:db_multiple",
+    "given:nonDB_single",
+    "given:nonDB_multiple",
+    "given:mixed",
+    "given:unmapped",
+    "when:constant_given",
+    "when:nonconstant_given"
+  ],
+  "max_calls_per_packet": 1,
+  "automatic_retries": 0,
+  "approval_status": "not_requested"
+}

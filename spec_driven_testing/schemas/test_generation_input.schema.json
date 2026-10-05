@@ -1,0 +1,401 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentspectesting.local/schemas/test-generation-input.schema.json",
+  "title": "Agent Spec Test Generation Input",
+  "description": "A spec-grounded, executable contract consumed by a test-case generator. It separates semantic truth, environment grounding, conversational transformation, search guidance, and evaluation oracle.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "input_id",
+    "domain",
+    "source_spec",
+    "decision_contract",
+    "test_objective",
+    "fixture_contract",
+    "dialogue_generation_contract",
+    "search_guidance",
+    "oracle_contract",
+    "output_contract"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "agent-spec-test-input/v0.1"
+    },
+    "input_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "workbook",
+        "sheet",
+        "row",
+        "spec_id",
+        "branch_id",
+        "kind",
+        "origin",
+        "deontic",
+        "rule_text",
+        "given",
+        "when",
+        "then",
+        "evidence_quote"
+      ],
+      "properties": {
+        "workbook": { "type": "string" },
+        "sheet": { "type": "string" },
+        "row": { "type": "integer", "minimum": 2 },
+        "spec_id": { "type": "string" },
+        "branch_id": { "type": "string" },
+        "kind": { "type": "string" },
+        "origin": { "type": "string" },
+        "deontic": { "type": "string" },
+        "rule_text": { "type": "string" },
+        "given": { "type": "string" },
+        "when": { "type": "string" },
+        "then": { "type": "string" },
+        "evidence_quote": { "type": "string" }
+      }
+    },
+    "decision_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action_under_test",
+        "normalized_rule",
+        "target_predicate",
+        "precedence",
+        "alternative_allow_conditions"
+      ],
+      "properties": {
+        "action_under_test": { "type": "string" },
+        "normalized_rule": { "type": "string" },
+        "target_predicate": { "$ref": "#/$defs/predicate" },
+        "precedence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["priority", "condition", "outcome"],
+            "properties": {
+              "priority": { "type": "integer", "minimum": 1 },
+              "condition": { "type": "string" },
+              "outcome": { "type": "string" }
+            }
+          }
+        },
+        "alternative_allow_conditions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "boundary_interpretation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["inside", "equal", "outside", "assumption"],
+          "properties": {
+            "inside": { "type": "string" },
+            "equal": { "type": "string" },
+            "outside": { "type": "string" },
+            "assumption": { "type": "string" }
+          }
+        }
+      }
+    },
+    "test_objective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_branch",
+        "coverage_goal",
+        "expected_policy_outcome",
+        "primary_failure_mode",
+        "secondary_failure_mode",
+        "why_corner_case"
+      ],
+      "properties": {
+        "target_branch": { "type": "string" },
+        "coverage_goal": { "type": "string" },
+        "expected_policy_outcome": { "type": "string" },
+        "primary_failure_mode": { "type": "string" },
+        "secondary_failure_mode": { "type": "string" },
+        "why_corner_case": { "type": "string" }
+      }
+    },
+    "fixture_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference_clock",
+        "entity_selection",
+        "required_state",
+        "isolation_constraints",
+        "boundary_variants"
+      ],
+      "properties": {
+        "reference_clock": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source", "value", "timezone_handling"],
+          "properties": {
+            "source": { "type": "string" },
+            "value": { "type": "string" },
+            "timezone_handling": { "type": "string" }
+          }
+        },
+        "entity_selection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "entity_type", "binding_fields"],
+          "properties": {
+            "mode": { "enum": ["select_existing", "construct", "select_or_construct"] },
+            "entity_type": { "type": "string" },
+            "binding_fields": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "required_state": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/stateConstraint" }
+        },
+        "isolation_constraints": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/stateConstraint" }
+        },
+        "boundary_variants": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["variant_id", "age", "relation", "expected_outcome", "role"],
+            "properties": {
+              "variant_id": { "type": "string" },
+              "age": { "type": "string" },
+              "relation": { "type": "string" },
+              "expected_outcome": { "type": "string" },
+              "role": { "enum": ["primary", "contrast", "ambiguity_probe"] }
+            }
+          }
+        }
+      }
+    },
+    "dialogue_generation_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_user_goal",
+        "user_known_information",
+        "disclosure_policy",
+        "semantic_invariants",
+        "mutable_dimensions",
+        "forbidden_mutations",
+        "candidate_budget"
+      ],
+      "properties": {
+        "base_user_goal": { "type": "string" },
+        "user_known_information": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "disclosure_policy": { "type": "string" },
+        "semantic_invariants": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "mutable_dimensions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "allowed_values", "purpose"],
+            "properties": {
+              "name": { "type": "string" },
+              "allowed_values": {
+                "type": "array",
+                "minItems": 1,
+                "items": { "type": "string" }
+              },
+              "purpose": { "type": "string" }
+            }
+          }
+        },
+        "forbidden_mutations": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "candidate_budget": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["baseline", "adversarial", "max_turns"],
+          "properties": {
+            "baseline": { "type": "integer", "minimum": 1 },
+            "adversarial": { "type": "integer", "minimum": 0 },
+            "max_turns": { "type": "integer", "minimum": 1 }
+          }
+        }
+      }
+    },
+    "search_guidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "insight",
+        "search_state",
+        "mutation_selection",
+        "feedback_signals",
+        "next_step_rules",
+        "stop_conditions"
+      ],
+      "properties": {
+        "insight": { "type": "string" },
+        "search_state": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "mutation_selection": { "type": "string" },
+        "feedback_signals": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["signal", "meaning", "direction"],
+            "properties": {
+              "signal": { "type": "string" },
+              "meaning": { "type": "string" },
+              "direction": { "type": "string" }
+            }
+          }
+        },
+        "next_step_rules": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "stop_conditions": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "oracle_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "precondition_oracle",
+        "interaction_oracle",
+        "action_oracle",
+        "state_oracle",
+        "pass_rule"
+      ],
+      "properties": {
+        "precondition_oracle": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "interaction_oracle": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "action_oracle": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["required_calls", "forbidden_calls"],
+          "properties": {
+            "required_calls": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "forbidden_calls": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "state_oracle": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "pass_rule": { "type": "string" }
+      }
+    },
+    "output_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["format", "required_sections", "materialization_requirements"],
+      "properties": {
+        "format": { "type": "string" },
+        "required_sections": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "materialization_requirements": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "predicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "source_field",
+        "source_path",
+        "type",
+        "reference",
+        "operator",
+        "threshold",
+        "expression"
+      ],
+      "properties": {
+        "name": { "type": "string" },
+        "source_field": { "type": "string" },
+        "source_path": { "type": "string" },
+        "type": { "type": "string" },
+        "reference": { "type": "string" },
+        "operator": { "type": "string" },
+        "threshold": { "type": "string" },
+        "expression": { "type": "string" }
+      }
+    },
+    "stateConstraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field", "operator", "value", "reason", "observable_via"],
+      "properties": {
+        "field": { "type": "string" },
+        "operator": { "type": "string" },
+        "value": {},
+        "reason": { "type": "string" },
+        "observable_via": { "type": "string" }
+      }
+    }
+  }
+}

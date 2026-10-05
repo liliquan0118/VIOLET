@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.then-atom-set/v0.1",
+  "title": "Audited GWT Then Atom Set",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "spec_id",
+    "branch_id",
+    "packet_fingerprint",
+    "source_then",
+    "source_alignment",
+    "decomposition_status",
+    "atoms",
+    "relations",
+    "audit",
+    "oracle_classification_performed",
+    "tool_binding_performed",
+    "coverage_model_used",
+    "model_task_accounting",
+    "then_atom_set_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {"const": "agentspectesting.then-atom-set/v0.1"},
+    "spec_id": {"type": "string", "minLength": 1},
+    "branch_id": {"type": "string", "minLength": 1},
+    "packet_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_then": {"type": "string", "minLength": 1},
+    "source_alignment": {"type": "object"},
+    "decomposition_status": {
+      "enum": ["resolved", "source_partial", "needs_review", "blocked_source_alignment"]
+    },
+    "atoms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["atom_id", "source_atom_id", "modality", "claim", "evidence_spans"],
+        "properties": {
+          "atom_id": {"type": "string", "minLength": 1},
+          "source_atom_id": {"type": "string", "pattern": "^T[0-9]{2}$"},
+          "modality": {"enum": ["required", "prohibited", "permitted"]},
+          "claim": {"type": "string", "minLength": 1},
+          "evidence_spans": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+        }
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["relation_id", "source_relation_id", "relation", "left_atom_id", "right_atom_id", "evidence_spans"],
+        "properties": {
+          "relation_id": {"type": "string", "minLength": 1},
+          "source_relation_id": {"type": "string", "pattern": "^R[0-9]{2}$"},
+          "relation": {"enum": ["before", "after", "same_turn", "mutually_exclusive", "requires"]},
+          "left_atom_id": {"type": "string", "minLength": 1},
+          "right_atom_id": {"type": "string", "minLength": 1},
+          "evidence_spans": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+        }
+      }
+    },
+    "audit": {"type": "object"},
+    "oracle_classification_performed": {"const": false},
+    "tool_binding_performed": {"const": false},
+    "coverage_model_used": {"const": false},
+    "model_task_accounting": {"type": "object"},
+    "then_atom_set_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

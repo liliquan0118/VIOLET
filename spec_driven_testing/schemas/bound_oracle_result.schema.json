@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.bound-oracle-result/v0.1",
+  "title": "AgentSpecTesting Bound Correctness Oracle Result",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "oracle_version",
+    "bound_driver_plan_identity",
+    "fixture_instance_id",
+    "coverage_cell_id",
+    "oracle_binding",
+    "artifact_checks",
+    "fixture_check",
+    "reachability_gate",
+    "actual_outcome",
+    "correctness_assessed",
+    "policy_decision_correct",
+    "strict_execution_passed",
+    "classification",
+    "analysis_axis",
+    "failure_record",
+    "oracle_result_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.bound-oracle-result/v0.1"
+    },
+    "oracle_version": {
+      "const": "bound-correctness-oracle/v0.1"
+    },
+    "bound_driver_plan_identity": {"type": "object"},
+    "fixture_instance_id": {"type": "string", "minLength": 1},
+    "coverage_cell_id": {"type": "string", "minLength": 1},
+    "oracle_binding": {"type": "object"},
+    "artifact_checks": {"type": "object"},
+    "fixture_check": {"type": "object"},
+    "reachability_gate": {"type": "object"},
+    "actual_outcome": {"type": "object"},
+    "correctness_assessed": {"type": "boolean"},
+    "policy_decision_correct": {"type": ["boolean", "null"]},
+    "strict_execution_passed": {"type": ["boolean", "null"]},
+    "classification": {"type": "string", "minLength": 1},
+    "analysis_axis": {"type": "string", "minLength": 1},
+    "failure_record": {"type": ["object", "null"]},
+    "oracle_result_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+# tau2-bench (install separately, see README): provides `tau2` and `litellm`
+jsonschema>=4.21
+referencing>=0.35
+matplotlib>=3.8      # figures (rq2_budget_curves_v0_1.py, rq2_venn_v0_1.py)
+# business_rule_mining_and_refinement/ (stage 1)
+openai>=1.40
+anthropic>=0.34
+# optional: pandas (only scripts/export_intellagent_dialogs_v0_1.py, run inside the IntellAgent environment)

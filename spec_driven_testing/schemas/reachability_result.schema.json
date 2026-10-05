@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agentspectesting.reachability-result/v0.1",
+  "title": "AgentSpecTesting ReachabilityResult",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "fixture_instance_id",
+    "reached",
+    "decision_opportunity_reached",
+    "target_action_observed",
+    "stop_reason",
+    "earliest_unresolved_milestone",
+    "milestones",
+    "target_action_evidence",
+    "explicit_decision_evidence",
+    "turn_count",
+    "llm_calls"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "agentspectesting.reachability-result/v0.1"
+    },
+    "fixture_instance_id": {"type": "string", "minLength": 1},
+    "reached": {"type": "boolean"},
+    "decision_opportunity_reached": {"type": "boolean"},
+    "target_action_observed": {"type": "boolean"},
+    "stop_reason": {"type": ["string", "null"]},
+    "earliest_unresolved_milestone": {"type": ["string", "null"]},
+    "milestones": {"type": "object"},
+    "target_action_evidence": {"type": ["object", "null"]},
+    "explicit_decision_evidence": {"type": ["object", "null"]},
+    "turn_count": {"type": "integer", "minimum": 0},
+    "llm_calls": {"const": 0}
+  }
+}
